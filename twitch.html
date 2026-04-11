@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Negan Lab Live</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: black;
+      display: flex;
+      justify-content: center;
+      color: white;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 1200px;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a1a2e, #050510);
+      box-shadow: 0 0 40px rgba(199,125,255,0.18);
+      overflow: hidden;
+    }
+
+    .banner {
+      width: 100%;
+      height: 220px;
+      background: url("banner.png") center/cover no-repeat;
+    }
+
+    .container {
+      padding: 24px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .back {
+      color: #00f5ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .title-wrap h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #c77dff, #00f5ff, #ff4dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-wrap p {
+      color: rgba(255,255,255,0.8);
+      font-size: 15px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot.live {
+      background: #ff2d55;
+      box-shadow: 0 0 14px rgba(255,45,85,0.8);
+    }
+
+    .dot.offline {
+      background: #7a7a7a;
+      box-shadow: 0 0 10px rgba(122,122,122,0.4);
+    }
+
+    .panel {
+      background: rgba(10,10,26,0.88);
+      border: 1px solid rgba(199,125,255,0.12);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 0 30px rgba(199,125,255,0.12);
+    }
+
+    #liveWrapper,
+    #offlineWrapper,
+    #loadingWrapper {
+      display: none;
+    }
+
+    #twitch-embed {
+      width: 100%;
+      min-height: 700px;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .offline-image {
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0 0 24px rgba(199,125,255,0.22);
+    }
+
+    .offline-caption,
+    .loading-caption {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .offline-caption h2,
+    .loading-caption h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .offline-caption p,
+    .loading-caption p {
+      color: rgba(255,255,255,0.78);
+      font-size: 15px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: #050510;
+      border: 2px solid #9146ff;
+      box-shadow: 0 0 14px rgba(145,70,255,0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(145,70,255,0.55);
+    }
+
+    .replays-section {
+      margin-top: 24px;
+    }
+
+    .replays-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .replay-card {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .replay-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 24px rgba(145,70,255,0.22);
+    }
+
+    .replay-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .replay-content {
+      padding: 14px;
+    }
+
+    .replay-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .replay-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+    }
+
+    @media (max-width: 900px) {
+      #twitch-embed {
+        min-height: 780px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 18px;
+      }
+
+      .title-wrap h1 {
+        font-size: 28px;
+      }
+
+      #twitch-embed {
+        min-height: 900px;
+      }
+
+      .offline-caption h2,
+      .loading-caption h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="banner"></div>
+
+    <div class="container">
+      <div class="topbar">
+        <a href="index.html" class="back"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+
+        <div class="title-wrap">
+          <h1>Negan Lab Live</h1>
+          <p>Regarde le live Twitch directement sur le site.</p>
+          <div class="status">
+            <span id="statusDot" class="dot offline"></span>
+            <span id="statusText">Vérification du live...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div id="loadingWrapper">
+          <div class="loading-caption">
+            <h2>Chargement...</h2>
+            <p>On vérifie si Negan Lab est actuellement en live.</p>
+          </div>
+        </div>
+
+        <div id="liveWrapper">
+          <div id="twitch-embed"></div>
+        </div>
+
+        <div id="offlineWrapper">
+          <img src="offline.png" alt="Negan Lab hors ligne" class="offline-image">
+          <div class="offline-caption">
+            <h2>HORS LIGNE</h2>
+            <p>Negan Lab n'est pas en live pour le moment.</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="button" href="https://www.twitch.tv/neganlab" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-twitch"></i>
+            Voir la chaîne Twitch
+          </a>
+        </div>
+      </div>
+
+      <div class="panel replays-section">
+        <div class="title-wrap">
+          <h1 style="font-size: 28px;">Derniers replays</h1>
+          <p>Retrouve les derniers lives rediffusés sur Twitch.</p>
+        </div>
+
+        <div id="replaysGrid" class="replays-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://embed.twitch.tv/embed/v1.js"></script>
+  <script>
+    const workerUrl = "https://neganlab-twitch-status.negan20.workers.dev";
+
+    const liveWrapper = document.getElementById("liveWrapper");
+    const offlineWrapper = document.getElementById("offlineWrapper");
+    const loadingWrapper = document.getElementById("loadingWrapper");
+    const statusDot = document.getElementById("statusDot");
+    const statusText = document.getElementById("statusText");
+    const replaysGrid = document.getElementById("replaysGrid");
+
+    function showLoading() {
+      loadingWrapper.style.display = "block";
+      liveWrapper.style.display = "none";
+      offlineWrapper.style.display = "none";
+      statusDot.className = "dot offline";
+      statusText.textContent = "Vérification du live...";
+    }
+
+    function showOffline() {
+      loadingWrapper.style.display = "none";
+      liveWrapper.style.display = "none";
+      offlineWrapper.style.display = "block";
+      statusDot.className = "dot offline";
+      statusText.textContent = "Hors ligne";
+    }
+
+    function showLive() {
+      loadingWrapper.style.display = "none";
+      offlineWrapper.style.display = "none";
+      liveWrapper.style.display = "block";
+      statusDot.className = "dot live";
+      statusText.textContent = "En live";
+
+      if (!document.querySelector("#twitch-embed iframe")) {
+        new Twitch.Embed("twitch-embed", {
+          width: "100%",
+          height: 700,
+          channel: "neganlab",
+          layout: "video-with-chat",
+          autoplay: false,
+          theme: "dark",
+          parent: ["www.neganlab.be", "neganlab.be", "localhost", "127.0.0.1"]
+        });
+      }
+    }
+
+    function renderReplays(replays) {
+      if (!replays || !replays.length) {
+        replaysGrid.innerHTML = `
+          <div class="offline-caption">
+            <p>Aucun replay disponible pour le moment.</p>
+          </div>
+        `;
+        return;
+      }
+
+      replaysGrid.innerHTML = replays.map((replay) => `
+        <a class="replay-card" href="${replay.url}" target="_blank" rel="noopener noreferrer">
+          <img class="replay-thumb" src="${replay.thumbnail_url}" alt="${replay.title}">
+          <div class="replay-content">
+            <div class="replay-title">${replay.title}</div>
+            <div class="replay-meta">${replay.duration} • ${replay.view_count} vues</div>
+          </div>
+        </a>
+      `).join("");
+    }
+
+    async function checkLiveStatus() {
+      showLoading();
+
+      try {
+        const response = await fetch(workerUrl);
+        if (!response.ok) {
+          throw new Error("Erreur API");
+        }
+
+        const data = await response.json();
+
+        renderReplays(data.replays || []);
+
+        if (data.live) {
+          showLive();
+        } else {
+          showOffline();
+        }
+      } catch (error) {
+        renderReplays([]);
+        showOffline();
+      }
+    }
+
+    checkLiveStatus();
+  </script>
+</body>
+</html>
