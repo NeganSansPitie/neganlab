@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negan Lab</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<style>
+
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; font-family:Arial; }
+
+body {
+    background:black;
+    display:flex;
+    justify-content:center;
+}
+
+/* APP */
+.app {
+    width:100%;
+    max-width:420px;
+    min-height:100vh;
+    background: radial-gradient(circle at top, #1a1a2e, #050510);
+    color:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 0 40px rgba(199,125,255,0.2);
+}
+
+/* INTRO */
+#intro {
+    position:fixed;
+    inset:0;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+#intro h1 {
+    font-size:40px;
+    color:red;
+    letter-spacing:5px;
+    animation: netflix 2s ease forwards;
+}
+
+@keyframes netflix {
+    0% { transform:scale(0.5); opacity:0 }
+    100% { transform:scale(1); opacity:1 }
+}
+
+/* BANNER */
+.banner {
+    width:100%;
+    height:180px;
+    background:url("banner.png") center/cover no-repeat;
+}
+
+/* CONTENT */
+.container {
+    text-align:center;
+    padding:20px;
+    margin-top:-60px;
+}
+
+/* PROFILE */
+.profile {
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    border:3px solid #c77dff;
+    box-shadow:0 0 25px #c77dff;
+    margin-bottom:15px;
+}
+
+/* TITLE */
+h1 {
+    margin-bottom:20px;
+    background:linear-gradient(90deg,#c77dff,#00f5ff,#ff4dff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* 🔥 BOUTONS */
+.link {
+    position:relative;
+    margin:15px auto;
+    width:90%;
+    padding:15px;
+    border-radius:30px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    text-decoration:none;
+    color:white;
+    cursor:pointer;
+    background:#050510;
+    border:3px solid #00f5ff;
+    box-shadow:0 0 10px #00f5ff, 0 0 20px rgba(0,245,255,0.3);
+    transition:0.2s;
+}
+
+/* TITRE */
+.link-title {
+    font-size:16px;
+    font-weight:bold;
+    text-align:center;
+}
+
+/* DESCRIPTION */
+.link-desc {
+    font-size:13px;
+    opacity:0.75;
+    text-align:center;
+}
+
+/* 🔥 MAUVE (DA RESPECTÉE) */
+.desc-highlight-purple {
+    margin-top:4px;
+    font-weight:bold;
+    color:#c77dff;
+    text-shadow:0 0 10px rgba(199,125,255,0.7);
+}
+
+/* BLEU */
+.desc-highlight {
+    margin-top:4px;
+    font-weight:bold;
+    color:#00f5ff;
+}
+
+/* CLICK */
+.link:active {
+    transform:scale(0.92);
+    box-shadow:0 0 20px #00f5ff, 0 0 40px #c77dff;
+}
+
+/* POPUP */
+.popup {
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#111;
+    padding:15px 25px;
+    border-radius:20px;
+    display:none;
+    box-shadow:0 0 20px #c77dff;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+    <h1>NEGAN LAB</h1>
+</div>
+
+<div class="app">
+
+<div class="banner"></div>
+
+<div class="container">
+
+<audio id="clickSound" src="click.mp3"></audio>
+
+<img src="profil.png" class="profile">
+<h1>Negan Lab</h1>
+
+<!-- TIKTOK PRINCIPAL -->
+<a href="https://www.tiktok.com/@negansanspitie20" class="link" onclick="handleClick(event, 'TikTok1')">
+<div class="link-title"><i class="fa-brands fa-tiktok"></i> TikTok Negan</div>
+<div class="link-desc">
+    <div>Compte principal</div>
+    <div class="desc-highlight-purple">Rejoins la Team Negan</div>
+</div>
+</a>
+
+<!-- TIKTOK SECONDAIRE -->
+<a href="https://www.tiktok.com/@negan.lab" class="link" onclick="handleClick(event, 'TikTok2')">
+<div class="link-title"><i class="fa-brands fa-tiktok"></i> TikTok Negan Lab</div>
+<div class="link-desc">
+    <div>Compte secondaire • Deviens un pro en</div>
+    <div class="desc-highlight">Tech • Création • Stream</div>
+</div>
+</a>
+
+<a href="https://www.twitch.tv/neganlab" class="link" onclick="handleClick(event, 'Twitch')">
+<div class="link-title"><i class="fa-brands fa-twitch"></i> Twitch</div>
+</a>
+
+<a href="https://www.youtube.com/@NeganLab" class="link" onclick="handleClick(event, 'YouTube')">
+<div class="link-title"><i class="fa-brands fa-youtube"></i> YouTube</div>
+</a>
+
+<a href="paypal.html" class="link" onclick="handleClick(event, 'PayPalPage')">
+<div class="link-title">💰 PayPal</div>
+</a>
+
+<a href="https://fr.tipeee.com/negansanspitie" class="link" onclick="handleDon(event, 'Tipeee')">
+<div class="link-title">🎁 Tipeee</div>
+</a>
+
+</div>
+
+</div>
+
+<div class="popup" id="popup">Merci pour ton soutien 🙏</div>
+
+<script>
+
+setTimeout(() => {
+    document.getElementById("intro").style.display = "none";
+}, 2500);
+
+function handleClick(event, name){
+    event.preventDefault();
+    gtag('event','click',{event_label:name});
+
+    const url = event.currentTarget.href;
+
+    document.getElementById("clickSound").play();
+
+    if (navigator.vibrate) navigator.vibrate(50);
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 120);
+}
+
+function handleDon(event, name){
+    event.preventDefault();
+
+    document.getElementById("popup").style.display = "block";
+
+    setTimeout(()=>{
+        document.getElementById("popup").style.display = "none";
+    },2000);
+
+    gtag('event','don',{event_label:name});
+
+    const url = event.currentTarget.href;
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 250);
+}
+
+</script>
+
+</body>
+</html>
