@@ -1,560 +1,537 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Negan Lab - Soutien Tipee</title>
-  <meta name="description" content="Soutenir Negan Lab sur Tipee." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Negan Lab</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-XXXXXXXXXX");
+  </script>
 
   <style>
-    :root {
-      --bg: #070b14;
-      --panel: #17182c;
-      --panel-soft: #1d2340;
-      --panel-glass: rgba(24, 28, 50, 0.88);
-      --line: rgba(255,255,255,0.08);
-      --text: #f4f7ff;
-      --muted: #a6acc0;
-      --cyan: #12e7ff;
-      --pink: #fe2c55;
-      --violet: #a970ff;
-      --gold: #ffcc59;
-      --shadow: 0 24px 70px rgba(0,0,0,0.35);
-      --radius: 28px;
-    }
-
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      color: var(--text);
+      background: #000;
+      display: flex;
+      justify-content: center;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 520px;
       min-height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 18%),
-        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 16%),
-        radial-gradient(circle at bottom right, rgba(255,204,89,0.06), transparent 18%),
-        linear-gradient(180deg, #05070d 0%, #080b14 100%);
-    }
-
-    .page {
-      max-width: 1520px;
-      margin: 0 auto;
-      padding: 8px 18px 32px;
-    }
-
-    .hero {
-      overflow: hidden;
-      background: linear-gradient(180deg, #1b1832 0%, #19192d 100%);
-      border-radius: 0 0 22px 22px;
-      box-shadow: var(--shadow);
-      margin-bottom: 28px;
-    }
-
-    .hero-banner {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-body {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 36px;
-      min-height: 210px;
-      padding: 34px 32px 38px;
-    }
-
-    .hero-left {
-      min-width: 180px;
-    }
-
-    .back-link {
-      color: var(--cyan);
-      text-decoration: none;
-      font-size: 1.05rem;
-      font-weight: 700;
-      transition: opacity 0.18s ease, transform 0.18s ease;
-    }
-
-    .back-link:hover {
-      opacity: 0.92;
-      transform: translateX(-2px);
-    }
-
-    .hero-right {
-      margin-left: auto;
-      max-width: 560px;
-    }
-
-    .hero-title {
-      font-size: 2.8rem;
-      font-weight: 800;
-      line-height: 1.02;
-      margin-bottom: 12px;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-title .violet {
-      color: #b184ff;
-    }
-
-    .hero-title .cyan {
-      color: var(--cyan);
-    }
-
-    .hero-text {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: var(--text);
-      margin-bottom: 16px;
-      max-width: 520px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
-      color: white;
-      font-size: 0.98rem;
-    }
-
-    .hero-badge-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--pink));
-      box-shadow: 0 0 16px rgba(255,204,89,0.35);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-
-    .card {
-      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow);
+        radial-gradient(circle at top, rgba(88, 28, 135, 0.55), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(0, 245, 255, 0.14), transparent 30%),
+        linear-gradient(180deg, #13071f 0%, #090510 45%, #040308 100%);
+      box-shadow: 0 0 50px rgba(199, 125, 255, 0.16);
       overflow: hidden;
       position: relative;
     }
 
-    .card::before {
+    .app::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at top right, rgba(169,112,255,0.08), transparent 26%),
-        radial-gradient(circle at bottom left, rgba(18,231,255,0.06), transparent 24%);
+        linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.035) 50%, transparent 80%);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #16071f 0%, #020202 75%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease;
+    }
+
+    #intro h1 {
+      font-size: 42px;
+      letter-spacing: 6px;
+      font-weight: 900;
+      color: white;
+      text-shadow:
+        0 0 12px rgba(199,125,255,0.7),
+        0 0 30px rgba(0,245,255,0.25);
+      animation: introReveal 2.2s ease forwards;
+    }
+
+    @keyframes introReveal {
+      0% {
+        transform: scale(0.65);
+        opacity: 0;
+        letter-spacing: 18px;
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+        letter-spacing: 6px;
+      }
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 230px;
+      background: url("banner.png") center/cover no-repeat;
+      position: relative;
+    }
+
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(4,3,8,0.72));
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 0 22px 28px;
+      margin-top: -58px;
+    }
+
+    .identity {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .profile-wrap {
+      display: inline-block;
+      position: relative;
+    }
+
+    .profile-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(199,125,255,0.32), rgba(0,245,255,0.08), transparent 70%);
+      filter: blur(8px);
+      z-index: 0;
+    }
+
+    .profile {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #c77dff;
+      box-shadow:
+        0 0 24px rgba(199,125,255,0.8),
+        0 0 40px rgba(0,245,255,0.14);
+      position: relative;
+      z-index: 1;
+      background: #111;
+    }
+
+    .identity h1 {
+      margin-top: 18px;
+      margin-bottom: 10px;
+      font-size: 34px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #c77dff, #00f5ff, #ff4dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .identity p {
+      color: rgba(255,255,255,0.8);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(199,125,255,0.4), rgba(0,245,255,0.1));
+    }
+
+    .link-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .link-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      text-decoration: none;
+      color: white;
+      padding: 18px 18px;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)),
+        rgba(10,10,26,0.9);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 0 rgba(0,0,0,0),
+        0 0 18px rgba(199,125,255,0.08);
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%);
+      transform: translateX(-120%);
+      transition: transform 0.55s ease;
       pointer-events: none;
     }
 
-    .card > * {
-      position: relative;
-      z-index: 1;
+    .link-card:hover::before {
+      transform: translateX(120%);
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-      font-weight: 700;
+    .link-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(199,125,255,0.35);
+      box-shadow:
+        0 0 26px rgba(199,125,255,0.18),
+        0 0 14px rgba(0,245,255,0.08);
     }
 
-    .eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--pink));
-      box-shadow: 0 0 14px rgba(255,204,89,0.35);
+    .link-card:active {
+      transform: scale(0.97);
+      box-shadow:
+        0 0 22px rgba(0,245,255,0.24),
+        0 0 30px rgba(199,125,255,0.18);
     }
 
-    .main-title {
-      font-size: 2.2rem;
-      line-height: 1.05;
-      margin-bottom: 14px;
-      letter-spacing: -0.03em;
-    }
-
-    .main-text {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.65;
-      margin-bottom: 20px;
-      max-width: 720px;
-    }
-
-    .quote-box {
-      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 22px;
-      margin-bottom: 20px;
-    }
-
-    .quote-box p {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--text);
-    }
-
-    .quote-box strong {
-      color: white;
-    }
-
-    .tipee-widget-shell {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 26px;
-      padding: 18px;
-      min-height: 130px;
+    .icon-box {
+      width: 54px;
+      height: 54px;
+      min-width: 54px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 8px;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .stat-box {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    .stat-box strong {
-      display: block;
-      font-size: 1.4rem;
-      margin-bottom: 6px;
+      font-size: 24px;
       color: white;
+      box-shadow: inset 0 0 12px rgba(255,255,255,0.08);
     }
 
-    .stat-box span {
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.4;
+    .icon-twitch {
+      background: linear-gradient(135deg, rgba(145,70,255,0.95), rgba(86,30,180,0.95));
     }
 
-    .info-stack {
-      display: grid;
-      gap: 16px;
+    .icon-youtube {
+      background: linear-gradient(135deg, rgba(255,55,95,0.95), rgba(255,0,0,0.95));
     }
 
-    .mini-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
-      padding: 18px;
+    .icon-tiktok {
+      background: linear-gradient(135deg, rgba(37,244,238,0.92), rgba(254,44,85,0.92));
+    }
+    
+    .icon-music {
+  background: linear-gradient(135deg, rgba(169,112,255,0.95), rgba(18,231,255,0.95));
+}
+
+    .icon-paypal {
+      background: linear-gradient(135deg, rgba(0,112,186,0.95), rgba(0,48,135,0.95));
     }
 
-    .mini-card h3 {
-      font-size: 1.08rem;
-      margin-bottom: 8px;
-    }
-
-    .mini-card p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 0.96rem;
-    }
-
-    .big-section {
-      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .big-section h2 {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .big-section p.lead {
-      font-size: 1.05rem;
-      line-height: 1.65;
-      color: var(--muted);
-      max-width: 760px;
-      margin: 0 auto 26px;
-      text-align: center;
-    }
-
-    .reasons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .reason {
-      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
-      padding: 20px;
-      text-align: left;
-    }
-
-    .reason-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 14px;
-      font-size: 1.2rem;
-      background: linear-gradient(135deg, rgba(255,204,89,0.95), rgba(254,44,85,0.95));
+    .icon-tipeee {
+      background: linear-gradient(135deg, rgba(255,196,0,0.95), rgba(255,121,0,0.95));
       color: #111;
-      box-shadow: 0 10px 22px rgba(255,204,89,0.12);
     }
 
-    .reason h3 {
-      font-size: 1.08rem;
-      margin-bottom: 8px;
+    .link-content {
+      flex: 1;
+      min-width: 0;
     }
 
-    .reason p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 0.95rem;
+    .link-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 4px;
     }
 
-    .thanks {
+    .link-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+    }
+
+    .arrow {
+      font-size: 18px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer-note {
       margin-top: 24px;
       text-align: center;
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.6;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
     }
 
-    @media (max-width: 1080px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .reasons,
-      .stats-row {
-        grid-template-columns: 1fr;
-      }
+    .popup {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(12,12,22,0.95);
+      color: white;
+      padding: 14px 22px;
+      border-radius: 999px;
+      display: none;
+      box-shadow: 0 0 20px rgba(199,125,255,0.28);
+      border: 1px solid rgba(255,255,255,0.08);
+      z-index: 999;
+      font-size: 14px;
     }
 
-    @media (max-width: 980px) {
-      .hero-body {
-        flex-direction: column;
-        align-items: flex-start;
-        min-height: unset;
-      }
-
-      .hero-right {
-        margin-left: 0;
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .page {
-        padding: 8px 10px 24px;
-      }
-
+    @media (max-width: 560px) {
       .hero-banner {
-        height: 170px;
+        height: 200px;
       }
 
-      .hero-body {
-        padding: 24px 18px 26px;
+      .container {
+        padding: 0 16px 22px;
       }
 
-      .hero-title {
-        font-size: 2rem;
+      .identity h1 {
+        font-size: 30px;
       }
 
-      .main-title {
-        font-size: 1.65rem;
+      .profile {
+        width: 118px;
+        height: 118px;
       }
 
-      .big-section h2 {
-        font-size: 1.5rem;
+      .link-card {
+        padding: 16px;
       }
 
-      .card,
-      .big-section {
-        padding: 20px 16px;
+      .icon-box {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        font-size: 22px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-
-    <section class="hero">
-      <img class="hero-banner" src="banner.png" alt="Bannière Negan Lab">
-
-      <div class="hero-body">
-        <div class="hero-left">
-          <a class="back-link" href="index.html">← Retour</a>
-        </div>
-
-        <div class="hero-right">
-          <h1 class="hero-title">
-            <span class="violet">Negan</span> <span class="cyan">Lab Tipee</span>
-          </h1>
-          <p class="hero-text">
-            Soutiens un créateur belge passionné qui partage son univers entre gaming, humour, émotions fortes et moments vrais avec sa communauté.
-          </p>
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            Team de Couillons en construction
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="grid">
-      <article class="card">
-        <div class="eyebrow">Pourquoi soutenir</div>
-        <h2 class="main-title">Une vraie famille de couillons autour du gaming, du fun et des émotions fortes</h2>
-        <p class="main-text">
-          Moi, c’est Negan. Créateur de contenu belge passionné, je partage mon univers entre gaming, humour et moments vrais avec ma commu.
-          Sur TikTok, Twitch ou encore YouTube, tu me retrouves dans des jeux narratifs, d’horreur ou en just chatting où on se marre,
-          on débat et surtout… on vit le moment à fond.
-        </p>
-
-        <div class="quote-box">
-          <p>
-            <strong>Pourquoi je suis sur Tipee ?</strong><br>
-            Parce que créer du contenu, ça demande du temps, du matos et de la passion.
-            Grâce à votre soutien, je peux améliorer la qualité des lives, sortir plus de vidéos
-            et faire évoluer l’univers Negan encore plus loin.
-          </p>
-        </div>
-
-        <div class="tipee-widget-shell">
-          <a href="https://fr.tipeee.com/negansanspitie"
-             class="tipeee-project-card">
-            Soutenez NEGAN sur Tipeee
-          </a>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-box">
-            <strong>10 €</strong>
-            <span>Tip mis en avant</span>
-          </div>
-          <div class="stat-box">
-            <strong>0 €</strong>
-            <span>Collectés par mois actuellement</span>
-          </div>
-          <div class="stat-box">
-            <strong>0</strong>
-            <span>Tipeur pour le moment</span>
-          </div>
-        </div>
-      </article>
-
-      <aside class="card">
-        <div class="eyebrow">À quoi ça sert</div>
-
-        <div class="info-stack">
-          <div class="mini-card">
-            <h3>Améliorer le matos</h3>
-            <p>
-              Chaque soutien aide à préparer des lives de folie avec une meilleure qualité technique, plus de confort et une expérience plus propre pour la commu.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>Récompenser la commu</h3>
-            <p>
-              Mon objectif est aussi de remercier les plus fidèles avec des sorties abonné(e)s, restos, parcs d’attractions et d’autres surprises.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>Bâtir un vrai lien</h3>
-            <p>
-              Ici, on ne parle pas juste de contenu. Je veux créer une vraie Team de Couillons soudée, bienveillante et proche, pas juste virtuelle.
-            </p>
-          </div>
-
-          <div class="mini-card">
-            <h3>Contrepartie actuelle</h3>
-            <p>
-              <strong>1 € - Merci :)</strong><br>
-              Grâce à votre tip, vous avez accès à mes news privées postées sur Tipeee.
-            </p>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <section class="big-section">
-      <h2>Quels sont mes objectifs ?</h2>
-      <p class="lead">
-        Construire avec vous un futur plus grand, plus fort et plus vivant autour du gaming, de la musique et du fun.
-      </p>
-
-      <div class="reasons">
-        <div class="reason">
-          <div class="reason-icon">🎮</div>
-          <h3>Des lives encore plus forts</h3>
-          <p>
-            Améliorer le matériel et la qualité globale pour proposer des streams plus immersifs, plus fluides et encore plus marquants.
-          </p>
-        </div>
-
-        <div class="reason">
-          <div class="reason-icon">🎁</div>
-          <h3>Des vraies récompenses</h3>
-          <p>
-            Prévoir des cadeaux exclusifs, des sorties abonné(e)s IRL, restos, événements, parcs d’attractions et plus encore.
-          </p>
-        </div>
-
-        <div class="reason">
-          <div class="reason-icon">❤️</div>
-          <h3>Un lien réel avec la commu</h3>
-          <p>
-            Faire en sorte que chaque soutien soit un pas vers une communauté plus soudée, plus humaine et construite ensemble.
-          </p>
-        </div>
-      </div>
-
-      <p class="thanks">
-        Merci à toutes les personnes qui soutiennent déjà le projet.<br>
-        Chaque don, petit ou grand, aide à continuer à divertir, à faire grandir la commu et à préparer des projets exclusifs pour les vrais survivants.
-      </p>
-    </section>
-
+  <div id="intro">
+    <h1>NEGAN LAB</h1>
   </div>
 
-  <script async src="https://plugin.tipeee.com/widget.js" charset="utf-8"></script>
+  <div class="app">
+    <div class="hero-banner"></div>
+
+    <div class="container">
+      <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+      <div class="identity">
+        <div class="profile-wrap">
+          <img src="profil.png" alt="Profil Negan Lab" class="profile">
+        </div>
+        <h1>Negan Lab</h1>
+        <p>
+          Tech, création, live et contenu. Retrouve tout mon univers sur une seule base,
+          avec un accès direct à Twitch, YouTube, TikTok et aux liens de soutien.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <span>Mes univers</span>
+        </div>
+
+        <div class="link-grid">
+          <a href="twitch.html" class="link-card" onclick="handleClick(event, 'TwitchPage')">
+            <div class="icon-box icon-twitch">
+              <i class="fa-brands fa-twitch"></i>
+            </div>
+            <div class="link-content">
+              <div class="link-title">Twitch</div>
+              <div class="link-desc">Accède à la page live Negan Lab avec le stream, le chat et les replays.</div>
+            </div>
+            <div class="arrow">
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="youtube.html" class="link-card" onclick="handleClick(event, 'YouTubePage')">
+            <div class="icon-box icon-youtube">
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+            <div class="link-content">
+              <div class="link-title">YouTube</div>
+              <div class="link-desc">Découvre ma future page vidéo avec la dernière sortie et toutes mes publications.</div>
+            </div>
+            <div class="arrow">
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="tiktok.html" class="link-card" onclick="handleClick(event, 'TikTokPage')">
+            <div class="icon-box icon-tiktok">
+              <i class="fa-brands fa-tiktok"></i>
+            </div>
+            <div class="link-content">
+              <div class="link-title">TikTok</div>
+              <div class="link-desc">Entre dans mon univers TikTok avec mes dernières vidéos, lives et formats courts.</div>
+            </div>
+            <div class="arrow">
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="music.html" class="link-card" onclick="handleClick(event, 'MusicPage')">
+  <div class="icon-box icon-music">
+    <i class="fa-solid fa-music"></i>
+  </div>
+  <div class="link-content">
+    <div class="link-title">Music</div>
+    <div class="link-desc">Découvre mes morceaux et écoute directement.</div>
+  </div>
+  <div class="arrow">
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+</a>
+
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <span>Soutiens</span>
+        </div>
+
+        <div class="link-grid">
+          <a href="paypal.html" class="link-card" onclick="handleClick(event, 'PayPalPage')">
+            <div class="icon-box icon-paypal">
+              <i class="fa-brands fa-paypal"></i>
+            </div>
+            <div class="link-content">
+              <div class="link-title">PayPal</div>
+              <div class="link-desc">Soutiens directement Negan Lab avec un don rapide via PayPal.</div>
+            </div>
+            <div class="arrow">
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="tipee.html" class="link-card" onclick="handleClick(event, 'TipeeePage')">
+  <div class="icon-box icon-tipeee">
+    <i class="fa-solid fa-gift"></i>
+  </div>
+  <div class="link-content">
+    <div class="link-title">Tipee</div>
+    <div class="link-desc">Soutiens le projet et aide l’univers Negan Lab à évoluer au quotidien.</div>
+  </div>
+  <div class="arrow">
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+</a>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <p>© 2026 Negan Lab. Tous droits réservés.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="popup">Ouverture...</div>
+
+  <script>
+    const intro = document.getElementById("intro");
+    const clickSound = document.getElementById("clickSound");
+    const popup = document.getElementById("popup");
+
+    setTimeout(() => {
+      intro.style.opacity = "0";
+      setTimeout(() => {
+        intro.style.display = "none";
+      }, 600);
+    }, 2400);
+
+    function showPopup(text) {
+      popup.textContent = text;
+      popup.style.display = "block";
+
+      clearTimeout(window.popupTimer);
+      window.popupTimer = setTimeout(() => {
+        popup.style.display = "none";
+      }, 1200);
+    }
+
+    function handleClick(event, name) {
+      event.preventDefault();
+
+      const url = event.currentTarget.href;
+
+      gtag("event", "click", { event_label: name });
+
+      if (navigator.vibrate) {
+        navigator.vibrate(45);
+      }
+
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {});
+
+      showPopup("Ouverture...");
+
+      let redirected = false;
+
+      const redirect = () => {
+        if (!redirected) {
+          redirected = true;
+          window.location.href = url;
+        }
+      };
+
+      clickSound.onended = redirect;
+      setTimeout(redirect, 260);
+    }
+  </script>
 </body>
 </html>
