@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Negan Lab Music</title>
+  <meta name="description" content="Les chansons de Negan Lab." />
+
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #1a1a2f;
+      --panel-soft: #18233a;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --blue: #63b3ff;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 20%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    .page {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 8px 18px 32px;
+    }
+
+    .hero {
+      overflow: hidden;
+      background: linear-gradient(180deg, #1b1832 0%, #19192d 100%);
+      border-radius: 0 0 22px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 36px;
+      min-height: 210px;
+      padding: 34px 32px 38px;
+    }
+
+    .hero-left {
+      min-width: 180px;
+    }
+
+    .back-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+    }
+
+    .hero-right {
+      margin-left: auto;
+      max-width: 520px;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.02;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title .violet {
+      color: #b184ff;
+    }
+
+    .hero-title .cyan {
+      color: var(--cyan);
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 520px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 0.98rem;
+    }
+
+    .hero-badge-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      box-shadow: 0 0 16px rgba(18,231,255,0.35);
+    }
+
+    .intro-card {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .intro-card h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .intro-card p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 920px;
+    }
+
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .music-card {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .music-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(169,112,255,0.28);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.4);
+    }
+
+    .music-cover-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(18,231,255,0.08), transparent 22%),
+        #101523;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .music-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .music-cover-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,11,20,0.62), rgba(8,11,20,0.02));
+      pointer-events: none;
+    }
+
+    .music-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(12,16,28,0.76);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .music-badge::before {
+      content: "♪";
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .music-content {
+      padding: 22px;
+    }
+
+    .music-content h3 {
+      font-size: 1.55rem;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .music-content p {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      min-height: 72px;
+    }
+
+    .player-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .player-label {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 10px;
+    }
+
+    audio {
+      width: 100%;
+      filter: hue-rotate(210deg) saturate(1.2);
+    }
+
+    .music-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .music-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 185px;
+      padding: 14px 20px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .music-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.98;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 12px 28px rgba(254,44,85,0.18);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--violet), var(--blue));
+      box-shadow: 0 12px 28px rgba(99,179,255,0.16);
+    }
+
+    @media (max-width: 980px) {
+      .hero-body {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: unset;
+      }
+
+      .hero-right {
+        margin-left: 0;
+        max-width: 100%;
+      }
+
+      .music-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 8px 10px 24px;
+      }
+
+      .hero-banner {
+        height: 170px;
+      }
+
+      .hero-body {
+        padding: 24px 18px 26px;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .intro-card,
+      .music-content {
+        padding: 20px 16px;
+      }
+
+      .intro-card h2 {
+        font-size: 1.55rem;
+      }
+
+      .music-content h3 {
+        font-size: 1.35rem;
+      }
+
+      .music-btn {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .music-cover-wrap {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <section class="hero">
+      <img class="hero-banner" src="banner.png" alt="Bannière Negan Lab">
+
+      <div class="hero-body">
+        <div class="hero-left">
+          <a class="back-link" href="index.html">← Retour</a>
+        </div>
+
+        <div class="hero-right">
+          <h1 class="hero-title">
+            <span class="violet">Negan</span> <span class="cyan">Lab Music</span>
+          </h1>
+          <p class="hero-text">
+            Des morceaux personnels qui racontent une partie de ma vie, de mes émotions et de mon univers.
+          </p>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Mes chansons
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-card">
+      <h2>Mes morceaux</h2>
+      <p>
+        Ici tu retrouves mes chansons. Elles représentent des morceaux de ma vie, des émotions, des messages
+        et des choses que j’ai envie de transmettre à travers la musique. Les textes sont écrits par mes soins,
+        et la mélodie est réalisée pour donner vie à cette vision. Le but est de faire passer un message
+        à travers chaque morceau.
+      </p>
+    </section>
+
+    <section class="music-grid">
+      <article class="music-card">
+        <div class="music-cover-wrap">
+          <img class="music-cover" src="https://cdn2.suno.ai/12446db1-1969-41f8-afc9-c37c28d9e53d_afb51b9f.jpeg" alt="Negan ne meurt jamais">
+          <div class="music-badge">Morceau</div>
+        </div>
+        <div class="music-content">
+          <h3>Negan ne meurt jamais</h3>
+          <p>Un titre fort, porté par l’intensité, la survie et la détermination.</p>
+          <div class="player-box">
+            <div class="player-label">Écoute directe sur le site</div>
+            <audio controls preload="none">
+              <source src="https://cdn1.suno.ai/12446db1-1969-41f8-afc9-c37c28d9e53d.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+          <div class="music-actions">
+            <a class="music-btn btn-primary" href="https://suno.com/s/R3xOvAXL68pIZtRM" target="_blank" rel="noopener noreferrer">Voir sur Suno</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="music-card">
+        <div class="music-cover-wrap">
+          <img class="music-cover" src="https://cdn2.suno.ai/image_large_41afa145-5832-41ea-8a7d-7dd881445266.jpeg" alt="Ma reine">
+          <div class="music-badge">Morceau</div>
+        </div>
+        <div class="music-content">
+          <h3>Ma reine</h3>
+          <p>Un morceau plus intime et émotionnel, pensé pour transmettre quelque chose de vrai.</p>
+          <div class="player-box">
+            <div class="player-label">Écoute directe sur le site</div>
+            <audio controls preload="none">
+              <source src="https://cdn1.suno.ai/41afa145-5832-41ea-8a7d-7dd881445266.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+          <div class="music-actions">
+            <a class="music-btn btn-secondary" href="https://suno.com/s/QPBdIZMDAzSXPwFU" target="_blank" rel="noopener noreferrer">Voir sur Suno</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="music-card">
+        <div class="music-cover-wrap">
+          <img class="music-cover" src="https://cdn2.suno.ai/image_large_cefce6a1-5acb-454d-94eb-28d71e66d3d1.jpeg" alt="Survivant, père avant tout">
+          <div class="music-badge">Morceau</div>
+        </div>
+        <div class="music-content">
+          <h3>Survivant, père avant tout</h3>
+          <p>Un titre plus personnel, centré sur la force, la famille et l’instinct de protection.</p>
+          <div class="player-box">
+            <div class="player-label">Écoute directe sur le site</div>
+            <audio controls preload="none">
+              <source src="https://cdn1.suno.ai/cefce6a1-5acb-454d-94eb-28d71e66d3d1.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+          <div class="music-actions">
+            <a class="music-btn btn-primary" href="https://suno.com/s/GGfIKSYbd1cvjmB1" target="_blank" rel="noopener noreferrer">Voir sur Suno</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="music-card">
+        <div class="music-cover-wrap">
+          <img class="music-cover" src="https://cdn2.suno.ai/b29d7baa-ee65-4894-acba-c710059ae83b_d47cb9d5.jpeg" alt="NÉGAN – Suavemente (j’ai ken ta mère)">
+          <div class="music-badge">Morceau</div>
+        </div>
+        <div class="music-content">
+          <h3>NÉGAN – Suavemente (j’ai ken ta mère)</h3>
+          <p>Un morceau plus provocateur et décalé, assumé dans l’énergie et le ton.</p>
+          <div class="player-box">
+            <div class="player-label">Écoute directe sur le site</div>
+            <audio controls preload="none">
+              <source src="https://cdn1.suno.ai/b29d7baa-ee65-4894-acba-c710059ae83b.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+          <div class="music-actions">
+            <a class="music-btn btn-secondary" href="https://suno.com/s/wg7bAVUBoXt5HNYD" target="_blank" rel="noopener noreferrer">Voir sur Suno</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="music-card">
+        <div class="music-cover-wrap">
+          <img class="music-cover" src="https://cdn2.suno.ai/7063c8d8-442e-4725-b5e0-c591115f996c_467c7749.jpeg" alt="LES HYPOCRITES">
+          <div class="music-badge">Morceau</div>
+        </div>
+        <div class="music-content">
+          <h3>LES HYPOCRITES</h3>
+          <p>Un titre plus frontal, plus brut, pensé pour faire passer un message sans détour.</p>
+          <div class="player-box">
+            <div class="player-label">Écoute directe sur le site</div>
+            <audio controls preload="none">
+              <source src="https://cdn1.suno.ai/7063c8d8-442e-4725-b5e0-c591115f996c.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+          <div class="music-actions">
+            <a class="music-btn btn-primary" href="https://suno.com/s/wu2eWumGyXF6zDBh" target="_blank" rel="noopener noreferrer">Voir sur Suno</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="music-card">
+        <div class="music-cover-wrap">
+          <img class="music-cover" src="https://cdn2.suno.ai/image_large_6de65187-7874-4c18-9ef1-46c2f3e237da.jpeg" alt="MBOA YA KUMBA – LE PRINCE LOLO">
+          <div class="music-badge">Morceau</div>
+        </div>
+        <div class="music-content">
+          <h3>MBOA YA KUMBA – LE PRINCE LOLO</h3>
+          <p>Un morceau à l’identité forte, avec une ambiance marquée et une vraie personnalité musicale.</p>
+          <div class="player-box">
+            <div class="player-label">Écoute directe sur le site</div>
+            <audio controls preload="none">
+              <source src="https://cdn1.suno.ai/6de65187-7874-4c18-9ef1-46c2f3e237da.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+          <div class="music-actions">
+            <a class="music-btn btn-secondary" href="https://suno.com/s/HId95kok1nTpQLlS" target="_blank" rel="noopener noreferrer">Voir sur Suno</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+  </div>
+</body>
+</html>
