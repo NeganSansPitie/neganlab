@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Negan Lab YouTube</title>
+  <style>
+    :root {
+      --bg: #070b14;
+      --bg-soft: #101726;
+      --card: rgba(18, 27, 45, 0.88);
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #f4f7fb;
+      --muted: #9aa7bd;
+      --accent: #ff2d55;
+      --accent-2: #ff6a3d;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(255, 45, 85, 0.16), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(255, 106, 61, 0.14), transparent 25%),
+        linear-gradient(180deg, #08101c 0%, #05070d 100%);
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .hero img.banner {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.55;
+    }
+
+    .hero-content {
+      padding: 24px;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      margin-top: -48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255,255,255,0.14);
+      background: #111;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    .hero-text h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .top-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-weight: 700;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+      border: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: white;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      font-size: 0.95rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #6b7280;
+    }
+
+    .dot.live {
+      background: #ff2d55;
+      box-shadow: 0 0 14px rgba(255, 45, 85, 0.9);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      border-radius: 18px;
+      background: #000;
+      display: block;
+    }
+
+    .video-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 18px;
+      display: block;
+      background: #111;
+    }
+
+    .video-meta {
+      margin-top: 16px;
+    }
+
+    .video-meta h3 {
+      font-size: 1.15rem;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .video-meta p {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.96rem;
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+      background: rgba(255,255,255,0.025);
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .item:hover {
+      transform: translateY(-2px);
+      border-color: var(--line);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .item img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 14px;
+      background: #111;
+    }
+
+    .item h4 {
+      font-size: 1rem;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+
+    .item p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .loading,
+    .empty {
+      color: var(--muted);
+      font-size: 0.98rem;
+      padding: 14px 0;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: -34px;
+      }
+
+      .top-actions {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+
+      .hero img.banner {
+        height: 170px;
+      }
+
+      .hero-text h1 {
+        font-size: 1.6rem;
+      }
+
+      .item {
+        grid-template-columns: 1fr;
+      }
+
+      .avatar {
+        width: 78px;
+        height: 78px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <img class="banner" src="../assets/images/banner.png" alt="Bannière Negan Lab">
+      <div class="hero-content">
+        <img class="avatar" src="../assets/images/profil.png" alt="Profil Negan Lab">
+        <div class="hero-text">
+          <h1>YouTube Negan Lab</h1>
+          <p>Retrouve ici les lives YouTube en priorité, puis la dernière vidéo publiée et les contenus récents de la chaîne.</p>
+          <div class="status" id="statusBadge">
+            <span class="dot" id="statusDot"></span>
+            <span id="statusText">Chargement du statut YouTube...</span>
+          </div>
+        </div>
+        <div class="top-actions">
+          <a class="btn btn-primary" href="https://www.youtube.com/@neganlabtv" target="_blank" rel="noopener noreferrer">Voir la chaîne</a>
+          <a class="btn btn-secondary" href="../index.html">Retour</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2 class="section-title" id="mainTitle">Vidéo principale</h2>
+        <div id="mainContent" class="loading">Chargement...</div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Vidéos récentes</h2>
+        <div id="videosList" class="loading">Chargement...</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const workerUrl = "https://neganlab-youtube-status.negan20.workers.dev/";
+
+    const statusDot = document.getElementById("statusDot");
+    const statusText = document.getElementById("statusText");
+    const mainTitle = document.getElementById("mainTitle");
+    const mainContent = document.getElementById("mainContent");
+    const videosList = document.getElementById("videosList");
+
+    function truncate(text, max = 130) {
+      if (!text) return "";
+      return text.length > max ? text.slice(0, max) + "..." : text;
+    }
+
+    function setLiveStatus(isLive) {
+      if (isLive) {
+        statusDot.classList.add("live");
+        statusText.textContent = "Live YouTube en cours";
+      } else {
+        statusDot.classList.remove("live");
+        statusText.textContent = "Pas de live en cours";
+      }
+    }
+
+    function renderMainLive(video) {
+      mainTitle.textContent = "Live en cours";
+      mainContent.innerHTML = `
+        <iframe
+          class="video-frame"
+          src="https://www.youtube.com/embed/${video.videoId}?autoplay=0"
+          title="${escapeHtml(video.title)}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+        <div class="video-meta">
+          <h3>${escapeHtml(video.title)}</h3>
+          <p>${escapeHtml(video.description || "Live YouTube en cours sur la chaîne.")}</p>
+        </div>
+      `;
+    }
+
+    function renderMainLatest(video) {
+      mainTitle.textContent = "Dernière vidéo publiée";
+      mainContent.innerHTML = `
+        <a href="${video.url}" target="_blank" rel="noopener noreferrer">
+          <img class="video-thumb" src="${video.thumbnail}" alt="${escapeHtml(video.title)}">
+        </a>
+        <div class="video-meta">
+          <h3>${escapeHtml(video.title)}</h3>
+          <p>${escapeHtml(video.description || "Dernière vidéo de la chaîne.")}</p>
+        </div>
+      `;
+    }
+
+    function renderVideos(videos) {
+      if (!videos || !videos.length) {
+        videosList.innerHTML = `<div class="empty">Aucune vidéo trouvée.</div>`;
+        return;
+      }
+
+      videosList.innerHTML = `<div class="list">${
+        videos.map(video => `
+          <a class="item" href="${video.url}" target="_blank" rel="noopener noreferrer">
+            <img src="${video.thumbnail}" alt="${escapeHtml(video.title)}">
+            <div>
+              <h4>${escapeHtml(video.title)}</h4>
+              <p>${escapeHtml(truncate(video.description || ""))}</p>
+            </div>
+          </a>
+        `).join("")
+      }</div>`;
+    }
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    async function loadYoutubeData() {
+      try {
+        const res = await fetch(workerUrl);
+        const data = await res.json();
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        setLiveStatus(!!data.live);
+
+        if (data.live && data.liveVideo) {
+          renderMainLive(data.liveVideo);
+        } else if (data.latestVideo) {
+          renderMainLatest(data.latestVideo);
+        } else {
+          mainContent.innerHTML = `<div class="empty">Aucune vidéo disponible pour le moment.</div>`;
+        }
+
+        renderVideos(data.videos || []);
+      } catch (error) {
+        statusDot.classList.remove("live");
+        statusText.textContent = "Erreur de chargement";
+        mainContent.innerHTML = `<div class="empty">Impossible de charger YouTube.</div>`;
+        videosList.innerHTML = `<div class="empty">Impossible de charger les vidéos.</div>`;
+      }
+    }
+
+    loadYoutubeData();
+    setInterval(loadYoutubeData, 300000);
+  </script>
+</body>
+</html>

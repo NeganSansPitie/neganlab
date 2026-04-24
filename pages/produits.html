@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Negan Lab Produits</title>
+  <meta name="description" content="Selection de produits recommandes avec liens d'affiliation." />
+  <style>
+    :root {
+      --bg: #070b14;
+      --panel: rgba(19, 26, 44, 0.9);
+      --panel-soft: rgba(255, 255, 255, 0.03);
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --accent: #ff9f1a;
+      --accent-2: #ff5a1f;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,159,26,0.14), transparent 20%),
+        radial-gradient(circle at bottom right, rgba(255,90,31,0.12), transparent 24%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+      padding: 24px;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #12e7ff;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 760px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-image-link {
+      display: block;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      display: block;
+      background: #fff;
+    }
+
+    .product-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .product-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .product-text {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.98rem;
+      flex: 1;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 13px 18px;
+      border-radius: 16px;
+      font-weight: 700;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.98;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 28px rgba(255,90,31,0.22);
+    }
+
+    .btn-secondary {
+      color: white;
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+    }
+
+    @media (max-width: 820px) {
+      body {
+        padding: 16px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero,
+      .product-body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="hero">
+      <a href="../index.html" class="back-link">← Retour</a>
+      <h1>Mes produits recommandes</h1>
+      <p>
+        Voici une selection de materiel que j'utilise ou que je recommande.
+        Clique sur une image ou sur le bouton pour ouvrir le lien d'affiliation.
+      </p>
+    </div>
+
+    <div class="products-grid">
+      <article class="product-card">
+        <a class="product-image-link" href="https://amzn.to/3Q2nTtz" target="_blank" rel="noopener noreferrer">
+          <img class="product-image" src="../assets/images/camera.jpg" alt="Camera Sony" />
+        </a>
+        <div class="product-body">
+          <h2 class="product-title">Camera</h2>
+          <p class="product-text">Une camera propre pour un rendu net, ideal pour le streaming, la video et la creation de contenu.</p>
+          <div class="product-actions">
+            <a class="btn btn-primary" href="https://amzn.to/3Q2nTtz" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a class="product-image-link" href="https://amzn.to/4ty71ty" target="_blank" rel="noopener noreferrer">
+          <img class="product-image" src="../assets/images/objectif.jpg" alt="Objectif photo" />
+        </a>
+        <div class="product-body">
+          <h2 class="product-title">Objectif</h2>
+          <p class="product-text">Un objectif qui aide a obtenir une image plus belle, plus lumineuse et plus propre face camera.</p>
+          <div class="product-actions">
+            <a class="btn btn-primary" href="https://amzn.to/4ty71ty" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a class="product-image-link" href="https://amzn.to/47Scl27" target="_blank" rel="noopener noreferrer">
+          <img class="product-image" src="../assets/images/micro.jpg" alt="Micro Shure" />
+        </a>
+        <div class="product-body">
+          <h2 class="product-title">Micro</h2>
+          <p class="product-text">Un micro de qualite pour une voix plus claire, plus chaleureuse et plus agreable en live comme en enregistrement.</p>
+          <div class="product-actions">
+            <a class="btn btn-primary" href="https://amzn.to/47Scl27" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a class="product-image-link" href="https://amzn.to/3Qkinm5" target="_blank" rel="noopener noreferrer">
+          <img class="product-image" src="../assets/images/casque.jpg" alt="Casque Beyerdynamic" />
+        </a>
+        <div class="product-body">
+          <h2 class="product-title">Casque</h2>
+          <p class="product-text">Un casque confortable et precis pour ecouter, monter, jouer ou verifier son son dans de bonnes conditions.</p>
+          <div class="product-actions">
+            <a class="btn btn-primary" href="https://amzn.to/3Qkinm5" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a class="product-image-link" href="https://amzn.to/3QAbAVm" target="_blank" rel="noopener noreferrer">
+          <img class="product-image" src="../assets/images/bras-micro.jpg" alt="Bras micro" />
+        </a>
+        <div class="product-body">
+          <h2 class="product-title">Bras micro</h2>
+          <p class="product-text">Pratique pour bien positionner le micro, liberer de la place sur le bureau et garder une installation plus propre.</p>
+          <div class="product-actions">
+            <a class="btn btn-primary" href="https://amzn.to/3QAbAVm" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</body>
+</html>

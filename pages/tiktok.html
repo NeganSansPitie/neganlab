@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Negan Lab TikTok</title>
+  <meta name="description" content="Regarde les profils TikTok principal et secondaire directement sur le site." />
+
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #1a1a2f;
+      --panel-soft: #18233a;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --blue: #63b3ff;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 20%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    .page {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 8px 18px 32px;
+    }
+
+    .hero {
+      overflow: hidden;
+      background: linear-gradient(180deg, #1b1832 0%, #19192d 100%);
+      border-radius: 0 0 22px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 36px;
+      min-height: 200px;
+      padding: 34px 32px 38px;
+    }
+
+    .hero-left {
+      min-width: 180px;
+    }
+
+    .back-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+    }
+
+    .hero-right {
+      margin-left: auto;
+      max-width: 430px;
+    }
+
+    .hero-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title .violet {
+      color: #b184ff;
+    }
+
+    .hero-title .cyan {
+      color: var(--cyan);
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      line-height: 1.45;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 0.98rem;
+    }
+
+    .hero-badge-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.55);
+    }
+
+    .section {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 860px;
+    }
+
+    .section-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 210px;
+      padding: 14px 22px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: white;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .section-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.98;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 12px 28px rgba(254,44,85,0.18);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--pink), var(--cyan));
+      box-shadow: 0 12px 28px rgba(18,231,255,0.14);
+    }
+
+    .embed-shell {
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      padding: 12px;
+      min-height: 760px;
+    }
+
+    .embed-shell.small {
+      min-height: 720px;
+    }
+
+    .helper {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 980px) {
+      .hero-body {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: unset;
+      }
+
+      .hero-right {
+        margin-left: 0;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 8px 10px 24px;
+      }
+
+      .hero-banner {
+        height: 170px;
+      }
+
+      .hero-body {
+        padding: 24px 18px 26px;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.45rem;
+      }
+
+      .section-btn {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .embed-shell,
+      .embed-shell.small {
+        min-height: 680px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/banner.png" alt="Bannière Negan Lab">
+
+      <div class="hero-body">
+        <div class="hero-left">
+          <a class="back-link" href="../index.html">← Retour</a>
+        </div>
+
+        <div class="hero-right">
+          <h1 class="hero-title">
+            <span class="violet">Negan</span> <span class="cyan">Lab TikTok</span>
+          </h1>
+          <p class="hero-text">
+            Regarde les profils TikTok principal et secondaire directement sur le site.
+          </p>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Compte principal en vedette
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Negan TikTok Principal</h2>
+          <p class="section-text">
+            C’est ici qu’on met le compte principal en avant. Le profil TikTok embarqué affichera les vidéos récentes directement dans la page.
+          </p>
+        </div>
+
+        <a class="section-btn btn-primary" href="https://www.tiktok.com/@negansanspitie20" target="_blank" rel="noopener noreferrer">
+          Voir sur TikTok
+        </a>
+      </div>
+
+      <div class="embed-shell">
+        <blockquote
+          class="tiktok-embed"
+          cite="https://www.tiktok.com/@negansanspitie20"
+          data-unique-id="negansanspitie20"
+          data-embed-type="creator"
+          style="max-width: 780px; min-width: 288px; margin: 0 auto;">
+          <section>
+            <a target="_blank" href="https://www.tiktok.com/@negansanspitie20">@negansanspitie20</a>
+          </section>
+        </blockquote>
+      </div>
+
+      <p class="helper">
+        Le bouton à droite ouvre directement le compte principal sur TikTok.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Negan TikTok Secondaire</h2>
+          <p class="section-text">
+            Compte secondaire affiché avec la même présentation et un bouton dans la DA, avec couleurs inversées.
+          </p>
+        </div>
+
+        <a class="section-btn btn-secondary" href="https://www.tiktok.com/@negan.lab" target="_blank" rel="noopener noreferrer">
+          Voir sur TikTok
+        </a>
+      </div>
+
+      <div class="embed-shell small">
+        <blockquote
+          class="tiktok-embed"
+          cite="https://www.tiktok.com/@negan.lab"
+          data-unique-id="negan.lab"
+          data-embed-type="creator"
+          style="max-width: 780px; min-width: 288px; margin: 0 auto;">
+          <section>
+            <a target="_blank" href="https://www.tiktok.com/@negan.lab">@negan.lab</a>
+          </section>
+        </blockquote>
+      </div>
+    </section>
+
+  </div>
+
+  <script async src="https://www.tiktok.com/embed.js"></script>
+</body>
+</html>
