@@ -56,38 +56,215 @@
     #intro {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, #16071f 0%, #020202 75%);
+      background:
+        radial-gradient(circle at center, rgba(111, 44, 181, 0.24), transparent 18%),
+        radial-gradient(circle at 50% 42%, rgba(0, 245, 255, 0.16), transparent 22%),
+        linear-gradient(180deg, #12061a 0%, #040307 70%, #010101 100%);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      transition: opacity 0.6s ease;
+      overflow: hidden;
+      transition: opacity 0.7s ease;
+    }
+
+    #intro::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 52%),
+        conic-gradient(from 0deg, rgba(199,125,255,0.10), rgba(0,245,255,0.08), rgba(255,77,255,0.10), rgba(199,125,255,0.10));
+      filter: blur(24px);
+      animation: introAura 5s linear infinite;
+      opacity: 0.9;
+    }
+
+    #intro::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.10) 48%, transparent 55%),
+        repeating-linear-gradient(180deg, rgba(255,255,255,0.028) 0 2px, transparent 2px 6px);
+      mix-blend-mode: screen;
+      opacity: 0.28;
+      animation: introSweep 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .intro-shell {
+      position: relative;
+      width: min(90vw, 760px);
+      aspect-ratio: 1.7 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .intro-ring,
+    .intro-ring::before,
+    .intro-ring::after {
+      position: absolute;
+      inset: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      content: "";
+    }
+
+    .intro-ring {
+      width: min(62vw, 420px);
+      height: min(62vw, 420px);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow:
+        0 0 40px rgba(199,125,255,0.22),
+        inset 0 0 30px rgba(0,245,255,0.06);
+      animation: ringSpin 12s linear infinite;
+    }
+
+    .intro-ring::before {
+      width: 78%;
+      height: 78%;
+      border: 1px solid rgba(0,245,255,0.20);
+      box-shadow: 0 0 26px rgba(0,245,255,0.16);
+      animation: ringPulse 2.4s ease-in-out infinite;
+    }
+
+    .intro-ring::after {
+      width: 112%;
+      height: 112%;
+      border: 1px solid rgba(199,125,255,0.14);
+    }
+
+    .intro-core {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 28px 36px;
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 0 45px rgba(0,0,0,0.24),
+        0 0 35px rgba(199,125,255,0.18);
+      animation: introCoreRise 2.3s ease forwards;
+    }
+
+    .intro-kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 12px;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.64);
+      animation: introFade 1.4s ease forwards;
     }
 
     #intro h1 {
-      font-size: 42px;
-      letter-spacing: 6px;
+      font-size: clamp(42px, 7vw, 88px);
+      letter-spacing: 0.18em;
       font-weight: 900;
       color: white;
+      line-height: 0.95;
+      text-transform: uppercase;
       text-shadow:
-        0 0 12px rgba(199,125,255,0.7),
-        0 0 30px rgba(0,245,255,0.25);
-      animation: introReveal 2.2s ease forwards;
+        0 0 12px rgba(255,255,255,0.22),
+        0 0 24px rgba(199,125,255,0.55),
+        0 0 55px rgba(0,245,255,0.18);
+      animation: introTitleReveal 2.3s cubic-bezier(.18,.88,.26,1) forwards;
     }
 
-    @keyframes introReveal {
-      0% {
-        transform: scale(0.65);
-        opacity: 0;
-        letter-spacing: 18px;
+    .intro-subtitle {
+      margin-top: 14px;
+      font-size: 14px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      animation: introFade 1.8s ease forwards;
+    }
+
+    @keyframes introAura {
+      from {
+        transform: rotate(0deg) scale(1);
       }
-      60% {
+      to {
+        transform: rotate(360deg) scale(1.04);
+      }
+    }
+
+    @keyframes introSweep {
+      0% {
+        transform: translateX(-35%) skewX(-18deg);
+        opacity: 0;
+      }
+      28% {
+        opacity: 0.34;
+      }
+      65% {
+        opacity: 0.18;
+      }
+      100% {
+        transform: translateX(35%) skewX(-18deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes ringSpin {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @keyframes ringPulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(0.94);
+        opacity: 0.55;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes introCoreRise {
+      0% {
+        transform: translateY(28px) scale(0.92);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes introFade {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes introTitleReveal {
+      0% {
+        transform: scale(0.72);
+        opacity: 0;
+        letter-spacing: 0.45em;
+        filter: blur(10px);
+      }
+      55% {
         opacity: 1;
       }
       100% {
         transform: scale(1);
         opacity: 1;
-        letter-spacing: 6px;
+        letter-spacing: 0.18em;
+        filter: blur(0);
       }
     }
 
@@ -372,7 +549,14 @@
 </head>
 <body>
   <div id="intro">
-    <h1>NEGAN LAB</h1>
+    <div class="intro-shell">
+      <div class="intro-ring"></div>
+      <div class="intro-core">
+        <div class="intro-kicker">Welcome</div>
+        <h1>NEGAN LAB</h1>
+        <div class="intro-subtitle">TECH - CRÉATION - STREAMING</div>
+      </div>
+    </div>
   </div>
 
   <div class="app">
