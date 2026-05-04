@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Albums Negan Lab</title>
+  <meta name="description" content="Les albums musicaux de Negan Lab." />
+
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #1a1a2f;
+      --panel-soft: #18233a;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --gold: #ffcc59;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 20%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    .page {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 8px 18px 32px;
+    }
+
+    .hero {
+      overflow: hidden;
+      background: linear-gradient(180deg, #1b1832 0%, #19192d 100%);
+      border-radius: 0 0 22px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 36px;
+      min-height: 210px;
+      padding: 34px 32px 38px;
+    }
+
+    .hero-left {
+      min-width: 180px;
+    }
+
+    .back-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+    }
+
+    .hero-right {
+      margin-left: auto;
+      max-width: 560px;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.02;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title .violet {
+      color: #b184ff;
+    }
+
+    .hero-title .cyan {
+      color: var(--cyan);
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 540px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 0.98rem;
+    }
+
+    .hero-badge-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--gold));
+      box-shadow: 0 0 16px rgba(255,204,89,0.35);
+    }
+
+    .intro-card {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .intro-card h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .intro-card p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 920px;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .album-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .album-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(169,112,255,0.32);
+      box-shadow: 0 30px 75px rgba(0,0,0,0.42);
+    }
+
+    .album-cover-wrap {
+      position: relative;
+      min-height: 520px;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(18,231,255,0.08), transparent 24%),
+        #101523;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+    }
+
+    .album-cover {
+      width: 100%;
+      height: 100%;
+      max-height: 476px;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 22px;
+      display: block;
+    }
+
+    .album-cover-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,11,20,0.72), rgba(8,11,20,0.04));
+      pointer-events: none;
+    }
+
+    .album-flag {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      z-index: 2;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(12,16,28,0.76);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .album-content {
+      padding: 24px;
+    }
+
+    .album-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .album-content p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .album-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .album-pill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.95rem;
+      color: white;
+    }
+
+    .album-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 18px;
+      min-width: 220px;
+      padding: 14px 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 12px 28px rgba(254,44,85,0.18);
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    @media (max-width: 980px) {
+      .hero-body {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: unset;
+      }
+
+      .hero-right {
+        margin-left: 0;
+        max-width: 100%;
+      }
+
+      .album-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 8px 10px 24px;
+      }
+
+      .hero-banner {
+        height: 170px;
+      }
+
+      .hero-body {
+        padding: 24px 18px 26px;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .intro-card,
+      .album-content {
+        padding: 20px 16px;
+      }
+
+      .intro-card h2 {
+        font-size: 1.55rem;
+      }
+
+      .album-cover-wrap {
+        min-height: 360px;
+        padding: 16px;
+      }
+
+      .album-cover {
+        max-height: 328px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/banner.png" alt="Banniere Negan Lab">
+
+      <div class="hero-body">
+        <div class="hero-left">
+          <a class="back-link" href="../index.html">&larr; Retour</a>
+        </div>
+
+        <div class="hero-right">
+          <h1 class="hero-title">
+            <span class="violet">Negan</span> <span class="cyan">Lab Albums</span>
+          </h1>
+          <p class="hero-text">
+            Retrouve ici les projets musicaux presentes comme de vrais albums. Clique sur une cover pour ouvrir sa page complete avec tous les morceaux.
+          </p>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Collection musicale
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-card">
+      <h2>Les albums</h2>
+      <p>
+        Cette page centralise les albums de l'univers Negan Lab. Chaque cover ouvre une page dediee avec toutes les chansons, l'ecoute directe sur le site et une presentation plus complete du projet.
+      </p>
+    </section>
+
+    <section class="album-grid">
+      <a class="album-card" href="album-negan-couillons-pistes.html">
+        <div class="album-cover-wrap">
+          <span class="album-flag">Album disponible</span>
+          <img class="album-cover" src="../assets/images/Album%20negan%20%26%20couillons.png" alt="Album Negan et Couillons">
+        </div>
+        <div class="album-content">
+          <h3>Negan & Couillons</h3>
+          <p>
+            Le premier album rassemble toute l'energie de la team, l'identite du projet et les messages portes a travers les morceaux.
+          </p>
+          <div class="album-meta">
+            <span class="album-pill">11 titres</span>
+            <span class="album-pill">Ecoute directe</span>
+            <span class="album-pill">Page complete</span>
+          </div>
+          <span class="album-cta">Ouvrir l'album</span>
+        </div>
+      </a>
+    </section>
+  </div>
+</body>
+</html>
