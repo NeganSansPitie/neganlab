@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Album Negan & Couillons</title>
+  <meta name="description" content="L'album Negan & Couillons de Negan Lab." />
+
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #1a1a2f;
+      --panel-soft: #18233a;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --blue: #63b3ff;
+      --gold: #ffcc59;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 20%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    .page {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 8px 18px 32px;
+    }
+
+    .hero {
+      overflow: hidden;
+      background: linear-gradient(180deg, #1b1832 0%, #19192d 100%);
+      border-radius: 0 0 22px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 36px;
+      min-height: 210px;
+      padding: 34px 32px 38px;
+    }
+
+    .hero-left {
+      min-width: 180px;
+    }
+
+    .back-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+    }
+
+    .hero-right {
+      margin-left: auto;
+      max-width: 560px;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.02;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title .violet {
+      color: #b184ff;
+    }
+
+    .hero-title .cyan {
+      color: var(--cyan);
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 540px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 0.98rem;
+    }
+
+    .hero-badge-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--gold));
+      box-shadow: 0 0 16px rgba(255,204,89,0.35);
+    }
+
+    .intro-card {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .intro-card h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .intro-card p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 980px;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .song-card {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .song-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(169,112,255,0.28);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.4);
+    }
+
+    .song-cover-wrap {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(18,231,255,0.08), transparent 22%),
+        #101523;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .song-cover {
+      width: 100%;
+      height: 100%;
+      max-height: 390px;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .song-cover-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,11,20,0.62), rgba(8,11,20,0.02));
+      pointer-events: none;
+    }
+
+    .song-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(12,16,28,0.76);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .song-badge::before {
+      content: "♪";
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .song-content {
+      padding: 22px;
+    }
+
+    .song-content h3 {
+      font-size: 1.55rem;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .song-content p {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      min-height: 52px;
+    }
+
+    .player-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .player-label {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 10px;
+    }
+
+    audio {
+      width: 100%;
+      filter: hue-rotate(210deg) saturate(1.2);
+    }
+
+    .song-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .song-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 185px;
+      padding: 14px 20px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .song-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.98;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 12px 28px rgba(254,44,85,0.18);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--violet), var(--blue));
+      box-shadow: 0 12px 28px rgba(99,179,255,0.16);
+    }
+
+    @media (max-width: 980px) {
+      .hero-body {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: unset;
+      }
+
+      .hero-right {
+        margin-left: 0;
+        max-width: 100%;
+      }
+
+      .album-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 8px 10px 24px;
+      }
+
+      .hero-banner {
+        height: 200px;
+      }
+
+      .hero-body {
+        padding: 24px 18px 26px;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .intro-card,
+      .song-content {
+        padding: 20px 16px;
+      }
+
+      .intro-card h2 {
+        font-size: 1.55rem;
+      }
+
+      .song-content h3 {
+        font-size: 1.35rem;
+      }
+
+      .song-btn {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .song-cover-wrap {
+        min-height: 320px;
+        padding: 14px;
+      }
+
+      .song-cover {
+        max-height: 292px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/Album%20negan%20%26%20couillons.png" alt="Album Negan et Couillons">
+
+      <div class="hero-body">
+        <div class="hero-left">
+          <a class="back-link" href="../index.html">&larr; Retour</a>
+        </div>
+
+        <div class="hero-right">
+          <h1 class="hero-title">
+            <span class="violet">Album</span> <span class="cyan">Negan & Couillons</span>
+          </h1>
+          <p class="hero-text">
+            Un album construit autour de mon univers, de ma communaute et de messages portes par chaque morceau. Ici, tout s'ecoute directement sur le site.
+          </p>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Album officiel
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-card">
+      <h2>Negan & Couillons</h2>
+      <p>
+        Cet album rassemble des morceaux qui representent mon univers, ma communaute et des ambiances tres differentes selon les titres.
+        Chaque chanson porte une energie, un message ou un delire qui fait partie de l'identite Negan & Couillons.
+      </p>
+    </section>
+
+    <section class="album-grid">
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/image_large_ff676112-4f96-48b7-86a3-187a70427ef2.jpeg" alt="Negan et Couillons hymne officiel"><div class="song-badge">Titre</div></div><div class="song-content"><h3>Negan &amp; Couillons hymne officiel.</h3><p>L'hymne officiel de l'album, pense pour poser l'identite et l'energie du projet.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/ff676112-4f96-48b7-86a3-187a70427ef2.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-primary" href="https://suno.com/s/xdvmLs8KNb99aVMz" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/dfdd4809-f63b-4a87-92fe-9fe2cdbfeecf_bc3242aa.jpeg" alt="les couillons et couillonnes"><div class="song-badge">Titre</div></div><div class="song-content"><h3>les couillons et couillonnes</h3><p>Un morceau communautaire qui met la team au centre avec un ton direct et assume.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/dfdd4809-f63b-4a87-92fe-9fe2cdbfeecf.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-secondary" href="https://suno.com/s/wFjezxR9GMoLen6O" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/467f5381-d200-4a44-996d-33410254f714_b531922b.jpeg" alt="Couillons, reveillez-vous"><div class="song-badge">Titre</div></div><div class="song-content"><h3>Couillons, reveillez-vous</h3><p>Un titre qui pousse a reagir, se lever et avancer ensemble avec plus de force.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/467f5381-d200-4a44-996d-33410254f714.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-primary" href="https://suno.com/s/DbezLPaXEBu0Nrtf" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/1d25f4cf-7489-4760-a405-ae77a56e1d44_7a20d8a8.jpeg" alt="Liege dans le sang"><div class="song-badge">Titre</div></div><div class="song-content"><h3>Liege dans le sang</h3><p>Un morceau identitaire, plus ancre dans les racines, la fierte et l'appartenance.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/1d25f4cf-7489-4760-a405-ae77a56e1d44.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-secondary" href="https://suno.com/song/1d25f4cf-7489-4760-a405-ae77a56e1d44" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/503f9fe3-74c6-4249-83a2-eb44adb6bf36_ae295749.jpeg" alt="les couillons sans frontieres"><div class="song-badge">Titre</div></div><div class="song-content"><h3>les couillons sans frontieres</h3><p>Une vision plus large de la communaute, sans frontieres, sans limite et sans filtre.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/503f9fe3-74c6-4249-83a2-eb44adb6bf36.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-primary" href="https://suno.com/s/LY6CL16qAjWuDjLG" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/0e4584a3-c350-4973-8107-553816800795_480c7ece.jpeg" alt="Oufti mes couillons"><div class="song-badge">Titre</div></div><div class="song-content"><h3>Oufti mes couillons !</h3><p>Un titre plus regional, plus spontane et tres marque par ton identite et ton ton.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/0e4584a3-c350-4973-8107-553816800795.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-secondary" href="https://suno.com/s/YxOJk0pQmHtkW0IZ" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/f69501c9-f155-4300-845a-b76c82739003_8f01297b.jpeg" alt="Ma reputation"><div class="song-badge">Titre</div></div><div class="song-content"><h3>Ma reputation</h3><p>Un morceau plus personnel qui appuie sur l'image, le regard des autres et le caractere.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/f69501c9-f155-4300-845a-b76c82739003.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-primary" href="https://suno.com/song/f69501c9-f155-4300-845a-b76c82739003" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/d75a953c-d718-47d8-bf4a-3914a63113af_7d66e8af.jpeg" alt="Leve toi"><div class="song-badge">Titre</div></div><div class="song-content"><h3>LEVE TOI</h3><p>Un titre energique qui parle de reaction, de mouvement et de depassement.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/d75a953c-d718-47d8-bf4a-3914a63113af.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-secondary" href="https://suno.com/s/X5Bx2FH5M7bIYi8q" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/1768147f-b3f6-4cb2-919e-d02b10e11d56_5781dfcb.jpeg" alt="On est pas con"><div class="song-badge">Titre</div></div><div class="song-content"><h3>ON EST PAS CON</h3><p>Un morceau plus frontal, plus direct, avec une energie d'affirmation et de reponse.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/1768147f-b3f6-4cb2-919e-d02b10e11d56.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-primary" href="https://suno.com/s/AQ9grP9sX6oRmUDX" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/1240fcbb-8f38-4290-a30e-ee4d6aabdfed_f5aacecd.jpeg" alt="La couillonnerie c'est jamais finie"><div class="song-badge">Titre</div></div><div class="song-content"><h3>La couillonnerie c'est jamais finie</h3><p>Un morceau qui pousse le concept jusqu'au bout avec un ton assume, fun et reconnaissable.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/1240fcbb-8f38-4290-a30e-ee4d6aabdfed.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-secondary" href="https://suno.com/s/WA1hbh2Y0vVlxnfr" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+      <article class="song-card"><div class="song-cover-wrap"><img class="song-cover" src="https://cdn2.suno.ai/d926e077-e01f-4768-bce7-5b1374439a83_aeb03e36.jpeg" alt="Negan le boss des Couillons"><div class="song-badge">Titre</div></div><div class="song-content"><h3>Negan le boss des Couillons</h3><p>Un titre final fort en identite, pense comme une signature dans l'univers de l'album.</p><div class="player-box"><div class="player-label">Ecoute directe sur le site</div><audio controls preload="none"><source src="https://cdn1.suno.ai/d926e077-e01f-4768-bce7-5b1374439a83.mp3" type="audio/mpeg"></audio></div><div class="song-actions"><a class="song-btn btn-primary" href="https://suno.com/s/6WWAXuDVqoM4DnR6" target="_blank" rel="noopener noreferrer">Voir sur Suno</a></div></div></article>
+    </section>
+  </div>
+</body>
+</html>
