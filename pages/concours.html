@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Negan Lab - Concours de Mai</title>
+  <meta name="description" content="Toutes les conditions du concours TikTok de mai de Negan Lab." />
+
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #1a1a2f;
+      --panel-soft: #18233a;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --gold: #ffcc59;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+      --danger: #ff7f96;
+      --success: #72f5c0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 20%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    .page {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 8px 18px 32px;
+    }
+
+    .hero {
+      overflow: hidden;
+      background: linear-gradient(180deg, #1b1832 0%, #19192d 100%);
+      border-radius: 0 0 22px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 36px;
+      min-height: 210px;
+      padding: 34px 32px 38px;
+    }
+
+    .hero-left {
+      min-width: 180px;
+    }
+
+    .back-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+    }
+
+    .hero-right {
+      margin-left: auto;
+      max-width: 560px;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.02;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title .violet {
+      color: #b184ff;
+    }
+
+    .hero-title .cyan {
+      color: var(--cyan);
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 540px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 0.98rem;
+    }
+
+    .hero-badge-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--gold));
+      box-shadow: 0 0 16px rgba(255,204,89,0.35);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .visual-shell {
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(18,231,255,0.08), transparent 22%),
+        #101523;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .visual-shell img {
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--pink));
+      box-shadow: 0 0 14px rgba(255,204,89,0.35);
+    }
+
+    h2 {
+      font-size: 2rem;
+      line-height: 1.08;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .lead {
+      margin-bottom: 18px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .step-number {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, rgba(169,112,255,0.24), rgba(18,231,255,0.16));
+      color: white;
+    }
+
+    .step strong {
+      display: block;
+      font-size: 1.05rem;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      color: white;
+    }
+
+    .notice.alert strong {
+      color: var(--danger);
+    }
+
+    .notice.success strong {
+      color: var(--success);
+    }
+
+    .cta-box {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 220px;
+      padding: 14px 20px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.98;
+    }
+
+    .cta-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 12px 28px rgba(254,44,85,0.18);
+    }
+
+    .cta-secondary {
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      box-shadow: 0 12px 28px rgba(99,179,255,0.16);
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .summary-item {
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: white;
+      font-size: 1.02rem;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-body {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: unset;
+      }
+
+      .hero-right {
+        margin-left: 0;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 8px 10px 24px;
+      }
+
+      .hero-banner {
+        height: 170px;
+      }
+
+      .hero-body {
+        padding: 24px 18px 26px;
+      }
+
+      .hero-title,
+      h2 {
+        font-size: 2rem;
+      }
+
+      .card {
+        padding: 18px 14px;
+      }
+
+      .step {
+        grid-template-columns: 48px 1fr;
+      }
+
+      .step-number {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+      }
+
+      .cta-btn {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/banner.png" alt="Bannière Negan Lab">
+
+      <div class="hero-body">
+        <div class="hero-left">
+          <a class="back-link" href="../index.html">&larr; Retour</a>
+        </div>
+
+        <div class="hero-right">
+          <h1 class="hero-title">
+            <span class="violet">Concours</span> <span class="cyan">de Mai</span>
+          </h1>
+          <p class="hero-text">
+            Toutes les conditions du concours TikTok en cours, expliquées clairement pour que chacun sache exactement quoi faire pour participer.
+          </p>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Concours actuellement en cours
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <article class="card">
+        <div class="eyebrow">Concours TikTok</div>
+        <div class="visual-shell">
+          <img src="../assets/images/concoursmaitiktok.png" alt="Visuel du concours TikTok de mai">
+        </div>
+        <h2>Comment participer au concours ?</h2>
+        <p class="lead">
+          Un tirage au sort sera fait pour sélectionner les grands gagnants du concours. Pour que ta participation soit bien prise en compte, plusieurs conditions doivent être respectées.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">01</div>
+            <div>
+              <strong>Être abonné au compte TikTok</strong>
+              <p>Tu dois être abonné au compte <strong>@negansanspitie20</strong> pour pouvoir participer au tirage au sort.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">02</div>
+            <div>
+              <strong>Interagir avec la vidéo du concours</strong>
+              <p>Tu dois liker, republier et commenter la vidéo du concours en mentionnant 2 amis dans les commentaires.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">03</div>
+            <div>
+              <strong>Atteindre l'objectif des 65 000 diamants</strong>
+              <p>Le concours ne pourra pas être validé tant que la cagnotte des 65 000 diamants sur le mois n'est pas atteinte.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-box">
+          <a class="cta-btn cta-primary" href="https://www.tiktok.com/@negansanspitie20/video/7634315192515431713" target="_blank" rel="noopener noreferrer">
+            Voir la vidéo du concours
+          </a>
+          <a class="cta-btn cta-secondary" href="https://www.tiktok.com/@negansanspitie20" target="_blank" rel="noopener noreferrer">
+            Voir le compte TikTok
+          </a>
+        </div>
+      </article>
+
+      <aside class="card">
+        <div class="eyebrow">Conditions</div>
+        <h2>Ce qu'il faut savoir</h2>
+
+        <div class="summary-list">
+          <div class="summary-item">
+            <strong>Tirage au sort</strong>
+            <p>Les grands gagnants seront choisis uniquement par tirage au sort parmi les participants qui respectent toutes les conditions.</p>
+          </div>
+
+          <div class="summary-item">
+            <strong>Condition obligatoire</strong>
+            <p>Tant que la cagnotte des <strong>65 000 diamants</strong> n'est pas atteinte, le tirage au sort ne sera pas déclenché.</p>
+          </div>
+
+          <div class="summary-item">
+            <strong>Déclenchement du concours</strong>
+            <p>Le tirage au sort sera fait uniquement lorsque cette condition sera atteinte.</p>
+          </div>
+        </div>
+
+        <div class="notice alert">
+          <strong>Important</strong>
+          <p>Si une seule condition manque, la participation ne pourra pas être prise en compte pour le tirage au sort.</p>
+        </div>
+
+        <div class="notice success">
+          <strong>Annonce des gagnants</strong>
+          <p>Le jour du live pour le tirage au sort sera annoncé directement par la suite. Il faudra donc rester attentif aux annonces.</p>
+        </div>
+
+        <p class="footer-note">
+          Lis bien toutes les étapes, respecte chaque condition et garde un œil sur les annonces pour savoir quand le tirage au sort sera lancé.
+        </p>
+      </aside>
+    </section>
+  </div>
+</body>
+</html>

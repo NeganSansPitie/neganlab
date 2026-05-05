@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Negan Lab Produits</title>
-  <meta name="description" content="Selection de produits recommandes avec liens d'affiliation." />
+  <meta name="description" content="Sélection de produits recommandés avec liens d'affiliation." />
   <style>
     :root {
       --bg: #070b14;
       --panel: rgba(19, 26, 44, 0.9);
-      --panel-soft: rgba(255, 255, 255, 0.03);
       --line: rgba(255,255,255,0.08);
       --text: #f4f7ff;
       --muted: #a6acc0;
@@ -122,13 +121,6 @@
       flex: 1;
     }
 
-    .product-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
-
     .btn {
       display: inline-flex;
       align-items: center;
@@ -138,23 +130,15 @@
       border-radius: 16px;
       font-weight: 700;
       transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 28px rgba(255,90,31,0.22);
+      width: fit-content;
     }
 
     .btn:hover {
       transform: translateY(-2px);
       opacity: 0.98;
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 12px 28px rgba(255,90,31,0.22);
-    }
-
-    .btn-secondary {
-      color: white;
-      background: var(--panel-soft);
-      border: 1px solid var(--line);
     }
 
     @media (max-width: 820px) {
@@ -176,10 +160,10 @@
 <body>
   <div class="page">
     <div class="hero">
-      <a href="../index.html" class="back-link">← Retour</a>
-      <h1>Mes produits recommandes</h1>
+      <a href="../index.html" class="back-link">&larr; Retour</a>
+      <h1>Mes produits recommandés</h1>
       <p>
-        Voici une selection de materiel que j'utilise ou que je recommande.
+        Voici une sélection de matériel que j'utilise ou que je recommande.
         Clique sur une image ou sur le bouton pour ouvrir le lien d'affiliation.
       </p>
     </div>
@@ -187,14 +171,12 @@
     <div class="products-grid">
       <article class="product-card">
         <a class="product-image-link" href="https://amzn.to/3Q2nTtz" target="_blank" rel="noopener noreferrer">
-          <img class="product-image" src="../assets/images/camera.jpg" alt="Camera Sony" />
+          <img class="product-image" src="../assets/images/camera.jpg" alt="Caméra Sony" />
         </a>
         <div class="product-body">
-          <h2 class="product-title">Camera</h2>
-          <p class="product-text">Une camera propre pour un rendu net, ideal pour le streaming, la video et la creation de contenu.</p>
-          <div class="product-actions">
-            <a class="btn btn-primary" href="https://amzn.to/3Q2nTtz" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
-          </div>
+          <h2 class="product-title">Caméra</h2>
+          <p class="product-text">Une caméra propre pour un rendu net, idéale pour le streaming, la vidéo et la création de contenu.</p>
+          <a class="btn" href="https://amzn.to/3Q2nTtz" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
 
@@ -204,10 +186,8 @@
         </a>
         <div class="product-body">
           <h2 class="product-title">Objectif</h2>
-          <p class="product-text">Un objectif qui aide a obtenir une image plus belle, plus lumineuse et plus propre face camera.</p>
-          <div class="product-actions">
-            <a class="btn btn-primary" href="https://amzn.to/4ty71ty" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
-          </div>
+          <p class="product-text">Un objectif qui aide à obtenir une image plus belle, plus lumineuse et plus propre face caméra.</p>
+          <a class="btn" href="https://amzn.to/4ty71ty" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
 
@@ -217,10 +197,8 @@
         </a>
         <div class="product-body">
           <h2 class="product-title">Micro</h2>
-          <p class="product-text">Un micro de qualite pour une voix plus claire, plus chaleureuse et plus agreable en live comme en enregistrement.</p>
-          <div class="product-actions">
-            <a class="btn btn-primary" href="https://amzn.to/47Scl27" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
-          </div>
+          <p class="product-text">Un micro de qualité pour une voix plus claire, plus chaleureuse et plus agréable en live comme en enregistrement.</p>
+          <a class="btn" href="https://amzn.to/47Scl27" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
 
@@ -230,10 +208,8 @@
         </a>
         <div class="product-body">
           <h2 class="product-title">Casque</h2>
-          <p class="product-text">Un casque confortable et precis pour ecouter, monter, jouer ou verifier son son dans de bonnes conditions.</p>
-          <div class="product-actions">
-            <a class="btn btn-primary" href="https://amzn.to/3Qkinm5" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
-          </div>
+          <p class="product-text">Un casque confortable et précis pour écouter, monter, jouer ou vérifier son son dans de bonnes conditions.</p>
+          <a class="btn" href="https://amzn.to/3Qkinm5" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
 
@@ -243,10 +219,8 @@
         </a>
         <div class="product-body">
           <h2 class="product-title">Bras micro</h2>
-          <p class="product-text">Pratique pour bien positionner le micro, liberer de la place sur le bureau et garder une installation plus propre.</p>
-          <div class="product-actions">
-            <a class="btn btn-primary" href="https://amzn.to/3QAbAVm" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
-          </div>
+          <p class="product-text">Pratique pour bien positionner le micro, libérer de la place sur le bureau et garder une installation plus propre.</p>
+          <a class="btn" href="https://amzn.to/3QAbAVm" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
 
@@ -256,10 +230,8 @@
         </a>
         <div class="product-body">
           <h2 class="product-title">Clavier GravaStar Mercury V60 Pro - Argent</h2>
-          <p class="product-text">Une version argent avec un design premium, ideale pour un setup propre, original et tres visuel sur le bureau.</p>
-          <div class="product-actions">
-            <a class="btn btn-primary" href="https://amzn.to/4cI6T3v" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
-          </div>
+          <p class="product-text">Une version argent avec un design premium, idéale pour un setup propre, original et très visuel sur le bureau.</p>
+          <a class="btn" href="https://amzn.to/4cI6T3v" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
 
@@ -269,10 +241,8 @@
         </a>
         <div class="product-body">
           <h2 class="product-title">Souris GravaStar Mercury M2</h2>
-          <p class="product-text">Une souris legere et originale, parfaite pour completer un setup GravaStar avec un vrai look futuriste.</p>
-          <div class="product-actions">
-            <a class="btn btn-primary" href="https://amzn.to/3OIMe7d" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
-          </div>
+          <p class="product-text">Une souris légère et originale, parfaite pour compléter un setup GravaStar avec un vrai look futuriste.</p>
+          <a class="btn" href="https://amzn.to/3OIMe7d" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
 
@@ -282,10 +252,8 @@
         </a>
         <div class="product-body">
           <h2 class="product-title">GravaStar Repose-poignet</h2>
-          <p class="product-text">Un repose-poignet pratique et confortable pour accompagner le clavier et rendre les longues sessions plus agreables.</p>
-          <div class="product-actions">
-            <a class="btn btn-primary" href="https://amzn.to/4vNzc9h" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
-          </div>
+          <p class="product-text">Un repose-poignet pratique et confortable pour accompagner le clavier et rendre les longues sessions plus agréables.</p>
+          <a class="btn" href="https://amzn.to/4vNzc9h" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
     </div>

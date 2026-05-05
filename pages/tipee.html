@@ -10,8 +10,6 @@
     :root {
       --bg: #070b14;
       --panel: #17182c;
-      --panel-soft: #1d2340;
-      --panel-glass: rgba(24, 28, 50, 0.88);
       --line: rgba(255,255,255,0.08);
       --text: #f4f7ff;
       --muted: #a6acc0;
@@ -143,12 +141,16 @@
       margin-bottom: 24px;
     }
 
-    .card {
+    .card,
+    .big-section {
       background: linear-gradient(180deg, #18233a 0%, #162238 100%);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 26px;
       box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 26px;
       overflow: hidden;
       position: relative;
     }
@@ -241,10 +243,15 @@
       margin-top: 18px;
     }
 
-    .stat-box {
+    .stat-box,
+    .mini-card,
+    .reason {
       background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
+      border-radius: 22px;
+    }
+
+    .stat-box {
       padding: 16px;
       text-align: center;
     }
@@ -256,10 +263,12 @@
       color: white;
     }
 
-    .stat-box span {
-      font-size: 0.92rem;
+    .stat-box span,
+    .mini-card p,
+    .reason p {
+      font-size: 0.95rem;
       color: var(--muted);
-      line-height: 1.4;
+      line-height: 1.55;
     }
 
     .info-stack {
@@ -268,29 +277,17 @@
     }
 
     .mini-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
       padding: 18px;
     }
 
-    .mini-card h3 {
+    .mini-card h3,
+    .reason h3 {
       font-size: 1.08rem;
       margin-bottom: 8px;
     }
 
-    .mini-card p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 0.96rem;
-    }
-
     .big-section {
-      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
       padding: 28px;
-      box-shadow: var(--shadow);
     }
 
     .big-section h2 {
@@ -315,9 +312,6 @@
     }
 
     .reason {
-      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
       padding: 20px;
       text-align: left;
     }
@@ -336,17 +330,6 @@
       box-shadow: 0 10px 22px rgba(255,204,89,0.12);
     }
 
-    .reason h3 {
-      font-size: 1.08rem;
-      margin-bottom: 8px;
-    }
-
-    .reason p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 0.95rem;
-    }
-
     .thanks {
       margin-top: 24px;
       text-align: center;
@@ -356,10 +339,7 @@
     }
 
     @media (max-width: 1080px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
+      .grid,
       .reasons,
       .stats-row {
         grid-template-columns: 1fr;
@@ -413,13 +393,12 @@
 </head>
 <body>
   <div class="page">
-
     <section class="hero">
       <img class="hero-banner" src="../assets/images/banner.png" alt="Bannière Negan Lab">
 
       <div class="hero-body">
         <div class="hero-left">
-          <a class="back-link" href="../index.html">← Retour</a>
+          <a class="back-link" href="../index.html">&larr; Retour</a>
         </div>
 
         <div class="hero-right">
@@ -442,9 +421,9 @@
         <div class="eyebrow">Pourquoi soutenir</div>
         <h2 class="main-title">Une vraie famille de couillons autour du gaming, du fun et des émotions fortes</h2>
         <p class="main-text">
-          Moi, c’est Negan. Créateur de contenu belge passionné, je partage mon univers entre gaming, humour et moments vrais avec ma commu.
-          Sur TikTok, Twitch ou encore YouTube, tu me retrouves dans des jeux narratifs, d’horreur ou en just chatting où on se marre,
-          on débat et surtout… on vit le moment à fond.
+          Moi, c'est Negan. Créateur de contenu belge passionné, je partage mon univers entre gaming, humour et moments vrais avec ma commu.
+          Sur TikTok, Twitch ou encore YouTube, tu me retrouves dans des jeux narratifs, d'horreur ou en just chatting où on se marre,
+          on débat et surtout... on vit le moment à fond.
         </p>
 
         <div class="quote-box">
@@ -452,18 +431,19 @@
             <strong>Pourquoi je suis sur Tipee ?</strong><br>
             Parce que créer du contenu, ça demande du temps, du matos et de la passion.
             Grâce à votre soutien, je peux améliorer la qualité des lives, sortir plus de vidéos
-            et faire évoluer l’univers Negan encore plus loin.
+            et faire évoluer l'univers Negan encore plus loin.
           </p>
         </div>
 
         <div class="tipee-widget-shell">
-  <a href="https://fr.tipeee.com/negansanspitie"
-     class="tipeee-project-cart-iframe"
-     data-orientation="line"
-     data-rewards="1">
-    Soutenez NEGAN sur Tipeee
-  </a>
-</div>
+          <a href="https://fr.tipeee.com/negansanspitie"
+             class="tipeee-project-cart-iframe"
+             data-orientation="line"
+             data-rewards="1">
+            Soutenez NEGAN sur Tipeee
+          </a>
+        </div>
+
         <div class="stats-row">
           <div class="stat-box">
             <strong>10 €</strong>
@@ -494,7 +474,7 @@
           <div class="mini-card">
             <h3>Récompenser la commu</h3>
             <p>
-              Mon objectif est aussi de remercier les plus fidèles avec des sorties abonné(e)s, restos, parcs d’attractions et d’autres surprises.
+              Mon objectif est aussi de remercier les plus fidèles avec des sorties abonné(e)s, restos, parcs d'attractions et d'autres surprises.
             </p>
           </div>
 
@@ -524,7 +504,7 @@
 
       <div class="reasons">
         <div class="reason">
-          <div class="reason-icon">🎮</div>
+          <div class="reason-icon">★</div>
           <h3>Des lives encore plus forts</h3>
           <p>
             Améliorer le matériel et la qualité globale pour proposer des streams plus immersifs, plus fluides et encore plus marquants.
@@ -532,15 +512,15 @@
         </div>
 
         <div class="reason">
-          <div class="reason-icon">🎁</div>
+          <div class="reason-icon">⚡</div>
           <h3>Des vraies récompenses</h3>
           <p>
-            Prévoir des cadeaux exclusifs, des sorties abonné(e)s IRL, restos, événements, parcs d’attractions et plus encore.
+            Prévoir des cadeaux exclusifs, des sorties abonné(e)s IRL, restos, événements, parcs d'attractions et plus encore.
           </p>
         </div>
 
         <div class="reason">
-          <div class="reason-icon">❤️</div>
+          <div class="reason-icon">❤</div>
           <h3>Un lien réel avec la commu</h3>
           <p>
             Faire en sorte que chaque soutien soit un pas vers une communauté plus soudée, plus humaine et construite ensemble.
@@ -553,7 +533,6 @@
         Chaque don, petit ou grand, aide à continuer à divertir, à faire grandir la commu et à préparer des projets exclusifs pour les vrais survivants.
       </p>
     </section>
-
   </div>
 
   <script async src="https://plugin.tipeee.com/widget.js" charset="utf-8"></script>
