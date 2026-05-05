@@ -57,8 +57,9 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at center, rgba(255, 68, 68, 0.12), transparent 18%),
-        radial-gradient(circle at 50% 58%, rgba(199,125,255,0.16), transparent 24%),
+        radial-gradient(circle at center, rgba(169,112,255,0.18), transparent 18%),
+        radial-gradient(circle at 50% 58%, rgba(199,125,255,0.18), transparent 24%),
+        radial-gradient(circle at 52% 46%, rgba(0, 245, 255, 0.08), transparent 28%),
         linear-gradient(180deg, #07070a 0%, #020204 65%, #000 100%);
       display: flex;
       justify-content: center;
@@ -86,7 +87,7 @@
       inset: 0;
       background:
         linear-gradient(102deg, transparent 0%, rgba(255,255,255,0.18) 48%, transparent 54%),
-        radial-gradient(circle at 50% 50%, rgba(255,0,70,0.10), transparent 42%);
+        radial-gradient(circle at 50% 50%, rgba(169,112,255,0.12), transparent 42%);
       mix-blend-mode: screen;
       opacity: 0.3;
       animation: introSweep 2.2s cubic-bezier(.17,.67,.2,1) infinite;
@@ -117,8 +118,8 @@
       height: min(42vw, 320px);
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow:
-        0 0 40px rgba(255, 60, 120, 0.14),
-        inset 0 0 36px rgba(199,125,255,0.08);
+        0 0 40px rgba(169,112,255,0.18),
+        inset 0 0 36px rgba(199,125,255,0.10);
       animation: ringPulse 2.6s ease-in-out infinite;
     }
 
@@ -131,7 +132,7 @@
     .intro-ring::after {
       width: 102%;
       height: 110%;
-      border: 1px solid rgba(255,0,90,0.10);
+      border: 1px solid rgba(169,112,255,0.16);
       filter: blur(2px);
     }
 
@@ -146,7 +147,7 @@
       backdrop-filter: blur(12px);
       box-shadow:
         0 0 65px rgba(0,0,0,0.38),
-        0 0 42px rgba(255,30,90,0.10);
+        0 0 42px rgba(169,112,255,0.16);
       animation: introCoreRise 1.9s cubic-bezier(.16,.84,.24,1) forwards;
     }
 
@@ -169,8 +170,8 @@
       text-transform: uppercase;
       text-shadow:
         0 0 10px rgba(255,255,255,0.18),
-        0 0 22px rgba(255,70,70,0.20),
-        0 0 60px rgba(255,0,90,0.16);
+        0 0 22px rgba(169,112,255,0.24),
+        0 0 60px rgba(169,112,255,0.18);
       animation: introTitleReveal 2.1s cubic-bezier(.14,.9,.22,1) forwards;
     }
 
@@ -511,6 +512,46 @@
     @media (max-width: 560px) {
       .hero-banner {
         height: 200px;
+      }
+
+      .intro-shell {
+        width: min(94vw, 520px);
+        min-height: 240px;
+      }
+
+      .intro-ring {
+        width: min(92vw, 520px);
+        height: min(54vw, 250px);
+        box-shadow:
+          0 0 26px rgba(169,112,255,0.18),
+          inset 0 0 24px rgba(199,125,255,0.10);
+      }
+
+      .intro-core {
+        width: calc(100% - 24px);
+        padding: 24px 20px;
+        border-radius: 26px;
+      }
+
+      .intro-kicker {
+        font-size: 10px;
+        letter-spacing: 0.42em;
+      }
+
+      #intro h1 {
+        font-size: clamp(38px, 10vw, 58px);
+        letter-spacing: 0.16em;
+        text-shadow:
+          0 0 8px rgba(255,255,255,0.14),
+          0 0 18px rgba(169,112,255,0.22),
+          0 0 36px rgba(169,112,255,0.18);
+      }
+
+      .intro-subtitle {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        line-height: 1.5;
+        padding: 0 6px;
       }
 
       .container {
