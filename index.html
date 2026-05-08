@@ -440,6 +440,10 @@
       background: linear-gradient(135deg, rgba(88,101,242,0.95), rgba(64,78,237,0.95));
     }
 
+    .icon-telegram {
+      background: linear-gradient(135deg, rgba(0, 180, 255, 0.95), rgba(0, 120, 255, 0.95));
+    }
+
     .icon-music {
       background: linear-gradient(135deg, rgba(169,112,255,0.95), rgba(18,231,255,0.95));
     }
@@ -447,6 +451,10 @@
     .icon-contest {
       background: linear-gradient(135deg, rgba(255,204,89,0.95), rgba(254,44,85,0.95));
       color: #111;
+    }
+
+    .icon-planning {
+      background: linear-gradient(135deg, rgba(255, 125, 220, 0.95), rgba(169,112,255,0.95));
     }
 
     .icon-products {
@@ -490,6 +498,31 @@
       font-size: 12px;
       color: rgba(255,255,255,0.45);
       line-height: 1.5;
+    }
+
+    .admin-access {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .admin-access a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 12px;
+      color: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
+    }
+
+    .admin-access a:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+      border-color: rgba(169,112,255,0.32);
     }
 
     .popup {
@@ -610,7 +643,7 @@
         <h1>Negan Lab</h1>
         <p>
           Tech, création, live et contenu. Retrouve tout mon univers sur une seule base,
-          avec un accès direct à Twitch, YouTube, TikTok, Discord, mes chansons et mes liens de soutien.
+          avec un accès direct à Twitch, YouTube, TikTok, Discord, Telegram, mes chansons et mes liens de soutien.
         </p>
       </div>
 
@@ -671,6 +704,19 @@
               <i class="fa-solid fa-chevron-right"></i>
             </div>
           </a>
+
+          <a href="https://t.me/+uvIi7qNloQcyYTNk" class="link-card" onclick="handleClick(event, 'TelegramChannel')">
+            <div class="icon-box icon-telegram">
+              <i class="fa-brands fa-telegram"></i>
+            </div>
+            <div class="link-content">
+              <div class="link-title">LES COUILLONS</div>
+              <div class="link-desc">Rejoins mon canal privé Telegram pour suivre les annonces et les infos de la communauté.</div>
+            </div>
+            <div class="arrow">
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -686,7 +732,7 @@
             </div>
             <div class="link-content">
               <div class="link-title">Album Negan & Couillons</div>
-              <div class="link-desc">Écoute directement les morceaux de l'album et découvre mon univers musical.</div>
+              <div class="link-desc">Écoute directement les morceaux de l'album, les singles et découvre mon univers musical.</div>
             </div>
             <div class="arrow">
               <i class="fa-solid fa-chevron-right"></i>
@@ -700,6 +746,19 @@
             <div class="link-content">
               <div class="link-title">Concours</div>
               <div class="link-desc">Retrouve le concours de mai en cours, les conditions de participation et toutes les infos utiles.</div>
+            </div>
+            <div class="arrow">
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </a>
+
+          <a href="pages/planning-lives.html" class="link-card" onclick="handleClick(event, 'PlanningPage')">
+            <div class="icon-box icon-planning">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <div class="link-content">
+              <div class="link-title">Planning lives</div>
+              <div class="link-desc">Retrouve les prochaines dates de live sur TikTok, Twitch ou les deux selon le planning.</div>
             </div>
             <div class="arrow">
               <i class="fa-solid fa-chevron-right"></i>
@@ -765,6 +824,13 @@
 
       <div class="footer-note">
         <p>&copy; 2026 Negan Lab. Tous droits réservés.</p>
+      </div>
+
+      <div class="admin-access">
+        <a href="pages/planning-lives-admin.html" onclick="handleClick(event, 'AdminPlanningPage')">
+          <i class="fa-solid fa-lock"></i>
+          Accès administrateur
+        </a>
       </div>
     </div>
   </div>

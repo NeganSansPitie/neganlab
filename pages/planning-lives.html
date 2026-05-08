@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planning Lives Negan Lab</title>
+  <meta name="description" content="Planning des lives Negan Lab sur TikTok et Twitch." />
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #1a1a2f;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --gold: #ffcc59;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 20%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    .page {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 8px 18px 32px;
+    }
+
+    .hero,
+    .panel {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 36px;
+      min-height: 210px;
+      padding: 34px 32px 38px;
+    }
+
+    .back-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+    }
+
+    .hero-right {
+      margin-left: auto;
+      max-width: 620px;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.02;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title .violet { color: #b184ff; }
+    .hero-title .cyan { color: var(--cyan); }
+
+    .hero-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 580px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 0.98rem;
+    }
+
+    .hero-badge-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--gold));
+      box-shadow: 0 0 16px rgba(255,204,89,0.35);
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .panel h2 {
+      font-size: 1.9rem;
+      margin-bottom: 12px;
+    }
+
+    .panel p {
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .planning-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .planning-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .planning-image {
+      width: 100%;
+      background: #101523;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .planning-image.vertical {
+      min-height: 420px;
+    }
+
+    .planning-image.horizontal {
+      min-height: 240px;
+    }
+
+    .planning-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 18px;
+      display: block;
+    }
+
+    .planning-body {
+      padding: 18px;
+    }
+
+    .planning-body h3 {
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .planning-body p {
+      margin-bottom: 14px;
+    }
+
+    .chips,
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.92rem;
+      color: white;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 16px;
+      padding: 12px 16px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.98;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      border: none;
+      box-shadow: 0 12px 28px rgba(254,44,85,0.18);
+    }
+
+    .btn.secondary {
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      border: none;
+      box-shadow: 0 12px 28px rgba(99,179,255,0.16);
+    }
+
+    .empty-state {
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(255,255,255,0.14);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 8px 10px 24px;
+      }
+
+      .hero-banner {
+        height: 170px;
+      }
+
+      .hero-body {
+        padding: 24px 18px 26px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .panel {
+        padding: 18px 14px;
+      }
+
+      .planning-image.vertical {
+        min-height: 320px;
+      }
+
+      .planning-image.horizontal {
+        min-height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/banner.png" alt="Bannière Negan Lab">
+      <div class="hero-body">
+        <div class="hero-left">
+          <a class="back-link" href="../index.html">&larr; Retour</a>
+        </div>
+        <div class="hero-right">
+          <h1 class="hero-title"><span class="violet">Planning</span> <span class="cyan">Lives</span></h1>
+          <p class="hero-text">Retrouve ici les prochaines dates de live et les plateformes prévues pour chaque événement.</p>
+          <div class="hero-badge"><span class="hero-badge-dot"></span>Événements à venir</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Prochains événements</h2>
+      <p>Selon le planning publié, tu peux voir ici les lives à venir et accéder directement à TikTok, Twitch ou aux deux.</p>
+      <div class="planning-list" id="planningList"></div>
+    </section>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "negan_live_planning_entries_v2";
+    const TIKTOK_URL = "tiktok.html";
+    const TWITCH_URL = "twitch.html";
+    const planningList = document.getElementById("planningList");
+
+    function getEntries() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    }
+
+    function sortEntries(entries) {
+      return entries.sort((a, b) => String(a.startDate).localeCompare(String(b.startDate)));
+    }
+
+    function formatDateRange(startDate, endDate) {
+      if (!endDate || startDate === endDate) return startDate;
+      return `${startDate} au ${endDate}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function renderEntries() {
+      const entries = sortEntries(getEntries());
+
+      if (!entries.length) {
+        planningList.innerHTML = `<div class="empty-state">Aucun événement publié pour le moment.</div>`;
+        return;
+      }
+
+      planningList.innerHTML = entries.map((entry) => {
+        const actions = [];
+        if (entry.platforms.includes("tiktok")) {
+          actions.push(`<a class="btn primary" href="${TIKTOK_URL}">Voir TikTok</a>`);
+        }
+        if (entry.platforms.includes("twitch")) {
+          actions.push(`<a class="btn secondary" href="${TWITCH_URL}">Voir Twitch</a>`);
+        }
+
+        return `
+          <article class="planning-card">
+            <div class="planning-image ${entry.orientation}">
+              ${entry.image ? `<img src="${entry.image}" alt="${escapeHtml(entry.title)}">` : ""}
+            </div>
+            <div class="planning-body">
+              <h3>${escapeHtml(entry.title)}</h3>
+              <p>${escapeHtml(entry.description || "Événement Negan Lab.")}</p>
+              <div class="chips">
+                <span class="chip">${escapeHtml(formatDateRange(entry.startDate, entry.endDate))}</span>
+                ${entry.platforms.includes("tiktok") ? `<span class="chip">TikTok</span>` : ""}
+                ${entry.platforms.includes("twitch") ? `<span class="chip">Twitch</span>` : ""}
+              </div>
+              <div class="actions" style="margin-top:14px;">
+                ${actions.join("")}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    renderEntries();
+  </script>
+</body>
+</html>

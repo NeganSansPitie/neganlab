@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planning Lives Admin</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #1a1a2f;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --gold: #ffcc59;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 20%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    .page {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    h1, h2 {
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: white;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .checkbox-row,
+    .actions,
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.92rem;
+      color: white;
+    }
+
+    .btn,
+    .file-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 16px;
+      padding: 12px 16px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn:hover,
+    .file-label:hover {
+      transform: translateY(-2px);
+      opacity: 0.98;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      border: none;
+      box-shadow: 0 12px 28px rgba(254,44,85,0.18);
+    }
+
+    .btn.secondary {
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      border: none;
+      box-shadow: 0 12px 28px rgba(99,179,255,0.16);
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .planning-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .planning-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .planning-image {
+      width: 100%;
+      background: #101523;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .planning-image.vertical {
+      min-height: 420px;
+    }
+
+    .planning-image.horizontal {
+      min-height: 240px;
+    }
+
+    .planning-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 18px;
+      display: block;
+    }
+
+    .planning-body {
+      padding: 18px;
+    }
+
+    .planning-body h3 {
+      margin-bottom: 8px;
+    }
+
+    .helper {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .back-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 10px;
+      }
+
+      .panel {
+        padding: 18px 14px;
+      }
+
+      .planning-image.vertical {
+        min-height: 320px;
+      }
+
+      .planning-image.horizontal {
+        min-height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div id="loginPanel" class="panel">
+      <h1>Accès administrateur</h1>
+      <p>Cette page n'est pas liée publiquement. Connecte-toi avec ton identifiant et ton code administrateur pour gérer les événements du planning.</p>
+      <form class="form-grid" id="loginForm">
+        <input id="adminEmail" type="email" placeholder="Identifiant" required>
+        <input id="adminCode" type="password" placeholder="Code administrateur" required>
+        <div class="actions">
+          <button class="btn primary" type="submit">Se connecter</button>
+          <a class="btn" href="../index.html">Retour au site</a>
+        </div>
+      </form>
+    </div>
+
+    <div id="adminPanel" class="hidden">
+      <div class="panel">
+        <div class="actions" style="justify-content:space-between;">
+          <h1>Gestion du planning</h1>
+          <button class="btn" id="logoutBtn" type="button">Déconnexion</button>
+        </div>
+        <p>Ajoute tes événements ici. Ils apparaîtront ensuite sur la page publique du planning pour les visiteurs.</p>
+
+        <form class="form-grid" id="planningForm">
+          <input id="planTitle" type="text" placeholder="Titre du planning ou du live" required>
+          <textarea id="planDescription" placeholder="Description ou infos à afficher"></textarea>
+          <input id="planStart" type="date" required>
+          <input id="planEnd" type="date" placeholder="Date de fin optionnelle">
+          <select id="planOrientation">
+            <option value="horizontal">Image horizontale</option>
+            <option value="vertical">Image verticale</option>
+          </select>
+          <div class="checkbox-row">
+            <label class="chip"><input type="checkbox" id="platformTikTok"> TikTok</label>
+            <label class="chip"><input type="checkbox" id="platformTwitch"> Twitch</label>
+          </div>
+          <label class="file-label" for="planImage">Choisir une image</label>
+          <input class="file-input" id="planImage" type="file" accept="image/*">
+          <div class="helper" id="imageStatus">Aucune image sélectionnée.</div>
+          <div class="actions">
+            <button class="btn primary" type="submit">Enregistrer le planning</button>
+            <button class="btn secondary" type="button" id="clearAllBtn">Tout supprimer</button>
+            <a class="btn" href="planning-lives.html">Voir la page publique</a>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Événements enregistrés</h2>
+        <div class="planning-list" id="planningList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "negan_live_planning_entries_v2";
+    const SESSION_KEY = "negan_live_admin_session_v1";
+    const ADMIN_EMAIL = "negan20@outlook.be";
+    const ADMIN_CODE = "Monopoly5-Unseemly8-Chili9-Subplot0-Proclaim4";
+
+    const loginPanel = document.getElementById("loginPanel");
+    const adminPanel = document.getElementById("adminPanel");
+    const loginForm = document.getElementById("loginForm");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const planningForm = document.getElementById("planningForm");
+    const clearAllBtn = document.getElementById("clearAllBtn");
+    const planningList = document.getElementById("planningList");
+    const imageInput = document.getElementById("planImage");
+    const imageStatus = document.getElementById("imageStatus");
+
+    let pendingImage = "";
+
+    function getEntries() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    }
+
+    function setEntries(entries) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    }
+
+    function sortEntries(entries) {
+      return entries.sort((a, b) => String(a.startDate).localeCompare(String(b.startDate)));
+    }
+
+    function formatDateRange(startDate, endDate) {
+      if (!endDate || startDate === endDate) return startDate;
+      return `${startDate} au ${endDate}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function showAdmin() {
+      loginPanel.classList.add("hidden");
+      adminPanel.classList.remove("hidden");
+      renderEntries();
+    }
+
+    function showLogin() {
+      adminPanel.classList.add("hidden");
+      loginPanel.classList.remove("hidden");
+    }
+
+    function renderEntries() {
+      const entries = sortEntries(getEntries());
+
+      if (!entries.length) {
+        planningList.innerHTML = `<div class="helper">Aucun événement enregistré pour le moment.</div>`;
+        return;
+      }
+
+      planningList.innerHTML = entries.map((entry, index) => `
+        <article class="planning-card">
+          <div class="planning-image ${entry.orientation}">
+            ${entry.image ? `<img src="${entry.image}" alt="${escapeHtml(entry.title)}">` : ""}
+          </div>
+          <div class="planning-body">
+            <h3>${escapeHtml(entry.title)}</h3>
+            <p>${escapeHtml(entry.description || "Événement Negan Lab.")}</p>
+            <div class="chips">
+              <span class="chip">${escapeHtml(formatDateRange(entry.startDate, entry.endDate))}</span>
+              ${entry.platforms.includes("tiktok") ? `<span class="chip">TikTok</span>` : ""}
+              ${entry.platforms.includes("twitch") ? `<span class="chip">Twitch</span>` : ""}
+            </div>
+            <div class="actions" style="margin-top:14px;">
+              <button class="btn" type="button" onclick="removeEntry(${index})">Supprimer</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function removeEntry(index) {
+      const entries = getEntries();
+      entries.splice(index, 1);
+      setEntries(entries);
+      renderEntries();
+    }
+
+    window.removeEntry = removeEntry;
+
+    loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const email = document.getElementById("adminEmail").value.trim();
+      const code = document.getElementById("adminCode").value;
+
+      if (email === ADMIN_EMAIL && code === ADMIN_CODE) {
+        sessionStorage.setItem(SESSION_KEY, "ok");
+        showAdmin();
+        return;
+      }
+
+      alert("Identifiant ou code incorrect.");
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      sessionStorage.removeItem(SESSION_KEY);
+      showLogin();
+    });
+
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0];
+      if (!file) {
+        pendingImage = "";
+        imageStatus.textContent = "Aucune image sélectionnée.";
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        pendingImage = reader.result;
+        imageStatus.textContent = `${file.name} prête à être enregistrée.`;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    planningForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const platforms = [];
+      if (document.getElementById("platformTikTok").checked) platforms.push("tiktok");
+      if (document.getElementById("platformTwitch").checked) platforms.push("twitch");
+
+      if (!platforms.length) {
+        alert("Choisis au moins une plateforme.");
+        return;
+      }
+
+      if (!pendingImage) {
+        alert("Ajoute une image pour le planning.");
+        return;
+      }
+
+      const entry = {
+        title: document.getElementById("planTitle").value.trim(),
+        description: document.getElementById("planDescription").value.trim(),
+        startDate: document.getElementById("planStart").value,
+        endDate: document.getElementById("planEnd").value,
+        orientation: document.getElementById("planOrientation").value,
+        platforms,
+        image: pendingImage
+      };
+
+      const entries = getEntries();
+      entries.push(entry);
+      setEntries(entries);
+
+      planningForm.reset();
+      pendingImage = "";
+      imageStatus.textContent = "Aucune image sélectionnée.";
+      renderEntries();
+    });
+
+    clearAllBtn.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      planningForm.reset();
+      pendingImage = "";
+      imageStatus.textContent = "Aucune image sélectionnée.";
+      renderEntries();
+    });
+
+    if (sessionStorage.getItem(SESSION_KEY) === "ok") {
+      showAdmin();
+    } else {
+      showLogin();
+    }
+  </script>
+</body>
+</html>
