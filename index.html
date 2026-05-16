@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEGAN LAB</title>
+  <meta name="description" content="NEGAN LAB : streaming, musique, produits, concours et liens officiels.">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --panel: rgba(16, 21, 35, 0.84);
+      --panel-strong: #151b2e;
+      --line: rgba(255,255,255,0.1);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --gold: #ffcc59;
+      --shadow: 0 24px 70px rgba(0,0,0,0.36);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.10), transparent 22%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .intro-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at center, rgba(18,231,255,0.22), transparent 24%),
+        radial-gradient(circle at center, rgba(254,44,85,0.14), transparent 38%),
+        #02040a;
+      animation: introFadeOut 2.4s ease forwards;
+      pointer-events: none;
+    }
+
+    .intro-flash span {
+      color: white;
+      font-size: clamp(3rem, 11vw, 8rem);
+      font-weight: 900;
+      line-height: 0.95;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 12px rgba(255,255,255,0.92),
+        0 0 28px rgba(18,231,255,0.62),
+        0 0 54px rgba(254,44,85,0.38);
+      animation: logoFlash 2.1s cubic-bezier(.16,.84,.24,1) forwards;
+    }
+
+    @keyframes introFadeOut {
+      0%, 72% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes logoFlash {
+      0% {
+        opacity: 0;
+        transform: scale(0.82);
+        filter: blur(16px);
+        letter-spacing: 0.22em;
+      }
+      18% {
+        opacity: 1;
+        filter: blur(0);
+      }
+      34% {
+        opacity: 0.35;
+        text-shadow: none;
+      }
+      42% {
+        opacity: 1;
+        text-shadow:
+          0 0 18px rgba(255,255,255,1),
+          0 0 42px rgba(18,231,255,0.9),
+          0 0 70px rgba(254,44,85,0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        letter-spacing: 0;
+      }
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .hero {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 0 0 24px 24px;
+      background: var(--panel-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-banner {
+      min-height: 220px;
+      background:
+        linear-gradient(180deg, rgba(5,7,13,0.02), rgba(5,7,13,0.72)),
+        url("assets/images/banner.png") center/cover no-repeat;
+    }
+
+    .hero-body {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 28px;
+      margin-top: -72px;
+    }
+
+    .profile {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--violet);
+      background: #111827;
+      box-shadow: 0 0 28px rgba(169,112,255,0.48);
+    }
+
+    .brand h1 {
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: 0;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffffff, var(--cyan), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand p {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, rgba(18,231,255,0.28), transparent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 112px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--panel);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.22);
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(18,231,255,0.34);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .social-card {
+      min-height: 154px;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .icon {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      font-size: 1.55rem;
+      color: white;
+    }
+
+    .twitch { background: linear-gradient(135deg, #9146ff, #5620a8); }
+    .youtube { background: linear-gradient(135deg, #ff335f, #ff0000); }
+    .tiktok { background: linear-gradient(135deg, #25f4ee, #fe2c55); }
+    .telegram { background: linear-gradient(135deg, #2aabee, #0077ff); }
+    .music { background: linear-gradient(135deg, var(--violet), var(--cyan)); }
+    .contest { background: linear-gradient(135deg, var(--gold), var(--pink)); color: #111; }
+    .products { background: linear-gradient(135deg, #ff9f1a, #ff5a1f); }
+    .paypal { background: linear-gradient(135deg, #0070ba, #003087); }
+    .tipee { background: linear-gradient(135deg, #ffc400, #ff7900); color: #111; }
+
+    .card h2 {
+      font-size: 1.12rem;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.94rem;
+    }
+
+    .footer {
+      margin: 30px 0 8px;
+      color: rgba(255,255,255,0.48);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 1000px) {
+      .social-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        padding: 10px;
+      }
+
+      .hero-banner {
+        min-height: 170px;
+      }
+
+      .hero-body {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        padding: 18px;
+        margin-top: -58px;
+      }
+
+      .profile {
+        width: 116px;
+        height: 116px;
+      }
+
+      .grid,
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 96px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro-flash" aria-hidden="true">
+    <span>NEGAN LAB</span>
+  </div>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-banner"></div>
+      <div class="hero-body">
+        <img class="profile" src="assets/images/profil.png" alt="Profil NEGAN LAB">
+        <div class="brand">
+          <h1>NEGAN LAB</h1>
+          <p>Streaming, musique, produits et soutien : tous les liens officiels de l'univers NEGAN LAB au même endroit.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="social-title">
+      <div class="section-title" id="social-title">Réseaux officiels</div>
+      <div class="grid social-grid">
+        <a class="card social-card" href="https://www.twitch.tv/neganlab" target="_blank" rel="noopener noreferrer">
+          <span class="icon twitch"><i class="fa-brands fa-twitch"></i></span>
+          <div>
+            <h2>Twitch</h2>
+            <p>Lives et moments en direct.</p>
+          </div>
+        </a>
+
+        <a class="card social-card" href="https://www.youtube.com/@neganlabtv" target="_blank" rel="noopener noreferrer">
+          <span class="icon youtube"><i class="fa-brands fa-youtube"></i></span>
+          <div>
+            <h2>YouTube</h2>
+            <p>Vidéos, replays et sorties.</p>
+          </div>
+        </a>
+
+        <a class="card social-card" href="https://www.tiktok.com/@negansanspitie20" target="_blank" rel="noopener noreferrer">
+          <span class="icon tiktok"><i class="fa-brands fa-tiktok"></i></span>
+          <div>
+            <h2>TikTok des Couillons</h2>
+            <p>Le compte communautaire principal.</p>
+          </div>
+        </a>
+
+        <a class="card social-card" href="https://www.tiktok.com/@neganlabtv" target="_blank" rel="noopener noreferrer">
+          <span class="icon tiktok"><i class="fa-brands fa-tiktok"></i></span>
+          <div>
+            <h2>TikTok LAB</h2>
+            <p>Le compte NEGAN LAB TV.</p>
+          </div>
+        </a>
+
+        <a class="card social-card" href="https://t.me/+uvIi7qNloQcyYTNk" target="_blank" rel="noopener noreferrer">
+          <span class="icon telegram"><i class="fa-brands fa-telegram"></i></span>
+          <div>
+            <h2>Telegram</h2>
+            <p>Canal privé LES COUILLONS.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="pages-title">
+      <div class="section-title" id="pages-title">Pages du site</div>
+      <div class="grid">
+        <a class="card" href="pages/album-negan-couillons.html">
+          <span class="icon music"><i class="fa-solid fa-music"></i></span>
+          <div>
+            <h2>Album Negan & Couillons</h2>
+            <p>Albums, single et lecture directe sur le site.</p>
+          </div>
+        </a>
+
+        <a class="card" href="pages/concours.html">
+          <span class="icon contest"><i class="fa-solid fa-trophy"></i></span>
+          <div>
+            <h2>Concours</h2>
+            <p>Les prochaines annonces de concours seront publiées ici.</p>
+          </div>
+        </a>
+
+        <a class="card" href="pages/produits.html">
+          <span class="icon products"><i class="fa-solid fa-bag-shopping"></i></span>
+          <div>
+            <h2>Produits</h2>
+            <p>La sélection de matériel et liens utiles.</p>
+          </div>
+        </a>
+
+        <a class="card" href="pages/paypal.html">
+          <span class="icon paypal"><i class="fa-brands fa-paypal"></i></span>
+          <div>
+            <h2>PayPal</h2>
+            <p>Soutenir NEGAN LAB avec un don PayPal.</p>
+          </div>
+        </a>
+
+        <a class="card" href="pages/tipee.html">
+          <span class="icon tipee"><i class="fa-solid fa-gift"></i></span>
+          <div>
+            <h2>Tipee</h2>
+            <p>Soutenir le projet et son évolution.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <p class="footer">&copy; 2026 NEGAN LAB. Tous droits réservés.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEGAN LAB - Concours</title>
+  <meta name="description" content="Concours NEGAN LAB." />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #18233a;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --violet: #a970ff;
+      --gold: #ffcc59;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.12), transparent 22%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 8px 18px 32px;
+    }
+
+    .hero,
+    .empty-card {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      overflow: hidden;
+      border-radius: 0 0 22px 22px;
+      margin-bottom: 28px;
+    }
+
+    .hero-banner {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 36px;
+      min-height: 190px;
+      padding: 32px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.92;
+      transform: translateX(-2px);
+    }
+
+    .hero-right {
+      margin-left: auto;
+      max-width: 560px;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.02;
+      margin-bottom: 12px;
+    }
+
+    .hero-title .violet {
+      color: #b184ff;
+    }
+
+    .hero-title .cyan {
+      color: var(--cyan);
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 540px;
+    }
+
+    .empty-card {
+      min-height: 320px;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .empty-icon {
+      width: 70px;
+      height: 70px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 22px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, var(--gold), var(--violet));
+      color: #101523;
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .empty-card h2 {
+      font-size: clamp(1.6rem, 4vw, 2.25rem);
+      margin-bottom: 12px;
+    }
+
+    .empty-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 8px 10px 24px;
+      }
+
+      .hero-banner {
+        height: 170px;
+      }
+
+      .hero-body {
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: unset;
+        padding: 24px 18px 26px;
+      }
+
+      .hero-right {
+        margin-left: 0;
+      }
+
+      .empty-card {
+        min-height: 260px;
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/banner.png" alt="Bannière NEGAN LAB">
+      <div class="hero-body">
+        <a class="back-link" href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <div class="hero-right">
+          <h1 class="hero-title"><span class="violet">Concours</span> <span class="cyan">NEGAN LAB</span></h1>
+          <p class="hero-text">Cette page affichera les prochains concours officiels de la communauté.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="empty-card" aria-labelledby="empty-title">
+      <div>
+        <div class="empty-icon">!</div>
+        <h2 id="empty-title">Aucun concours actif pour le moment.</h2>
+        <p>Revenez bientôt pour les prochaines annonces.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

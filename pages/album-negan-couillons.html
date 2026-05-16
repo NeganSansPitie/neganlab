@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Albums et Singles Negan Lab</title>
+  <meta name="description" content="Les albums et singles musicaux de Negan Lab." />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #1a1a2f;
+      --line: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: #a6acc0;
+      --cyan: #12e7ff;
+      --pink: #fe2c55;
+      --violet: #a970ff;
+      --gold: #ffcc59;
+      --shadow: 0 24px 70px rgba(0,0,0,0.35);
+      --radius: 28px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 20%),
+        radial-gradient(circle at top right, rgba(18,231,255,0.08), transparent 18%),
+        linear-gradient(180deg, #05070d 0%, #080b14 100%);
+    }
+    .page { max-width: 1520px; margin: 0 auto; padding: 8px 18px 32px; }
+    .hero, .intro-card, .section-shell {
+      background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero { overflow: hidden; margin-bottom: 28px; }
+    .hero-banner { width: 100%; height: 250px; object-fit: cover; display: block; }
+    .hero-body {
+      display: flex; justify-content: space-between; align-items: center; gap: 36px;
+      min-height: 210px; padding: 34px 32px 38px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--cyan); text-decoration: none; font-size: 1.05rem; font-weight: 700;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    .back-link:hover { opacity: 0.92; transform: translateX(-2px); }
+    .hero-right { margin-left: auto; max-width: 560px; }
+    .hero-title { font-size: 2.8rem; font-weight: 800; line-height: 1.02; margin-bottom: 12px; letter-spacing: -0.03em; }
+    .hero-title .violet { color: #b184ff; }
+    .hero-title .cyan { color: var(--cyan); }
+    .hero-text { font-size: 1rem; line-height: 1.6; color: var(--text); margin-bottom: 16px; max-width: 540px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); color: white; font-size: 0.98rem;
+    }
+    .hero-badge-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--gold));
+      box-shadow: 0 0 16px rgba(255,204,89,0.35);
+    }
+    .intro-card, .section-shell { padding: 26px; margin-bottom: 24px; }
+    .intro-card h2, .section-shell h2 { font-size: 2rem; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .intro-card p, .section-shell p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 920px; }
+    .music-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 22px; }
+    .music-card {
+      display: block; text-decoration: none; color: inherit; background: linear-gradient(180deg, #18233a 0%, #162238 100%);
+      border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .music-card:hover { transform: translateY(-4px); border-color: rgba(169,112,255,0.32); box-shadow: 0 30px 75px rgba(0,0,0,0.42); }
+    .cover-wrap {
+      position: relative; min-height: 520px;
+      background: radial-gradient(circle at top left, rgba(169,112,255,0.10), transparent 24%), radial-gradient(circle at bottom right, rgba(18,231,255,0.08), transparent 24%), #101523;
+      display: flex; align-items: center; justify-content: center; padding: 22px;
+    }
+    .cover-wrap.single { min-height: 420px; }
+    .cover {
+      width: 100%; height: 100%; max-height: 476px; object-fit: contain; object-position: center;
+      border-radius: 22px; display: block;
+    }
+    .cover-wrap.single .cover { max-height: 380px; }
+    .cover-wrap::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,11,20,0.72), rgba(8,11,20,0.04)); pointer-events: none;
+    }
+    .flag {
+      position: absolute; left: 18px; top: 18px; z-index: 2; padding: 10px 16px; border-radius: 999px;
+      background: rgba(12,16,28,0.76); border: 1px solid rgba(255,255,255,0.08); font-size: 0.92rem; font-weight: 700;
+    }
+    .content { padding: 24px; }
+    .content h3 { font-size: 1.8rem; margin-bottom: 10px; letter-spacing: -0.02em; }
+    .content p { color: var(--muted); line-height: 1.6; margin-bottom: 18px; }
+    .meta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .pill {
+      padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08); font-size: 0.95rem; color: white;
+    }
+    .cta {
+      display: inline-flex; align-items: center; justify-content: center; margin-top: 18px; min-width: 220px;
+      padding: 14px 20px; border-radius: 18px; background: linear-gradient(135deg, var(--cyan), var(--pink));
+      box-shadow: 0 12px 28px rgba(254,44,85,0.18); font-size: 1rem; font-weight: 700; color: white;
+    }
+    @media (max-width: 980px) {
+      .hero-body { flex-direction: column; align-items: flex-start; min-height: unset; }
+      .hero-right { margin-left: 0; max-width: 100%; }
+      .music-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .page { padding: 8px 10px 24px; }
+      .hero-banner { height: 170px; }
+      .hero-body { padding: 24px 18px 26px; }
+      .hero-title { font-size: 2rem; }
+      .intro-card, .section-shell, .content { padding: 20px 16px; }
+      .intro-card h2, .section-shell h2 { font-size: 1.55rem; }
+      .cover-wrap { min-height: 360px; padding: 16px; }
+      .cover-wrap.single { min-height: 320px; }
+      .cover { max-height: 328px; }
+      .cover-wrap.single .cover { max-height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/banner.png" alt="Bannière Negan Lab">
+      <div class="hero-body">
+        <div class="hero-left">
+          <a class="back-link" href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        </div>
+        <div class="hero-right">
+          <h1 class="hero-title"><span class="violet">Negan</span> <span class="cyan">Lab Music</span></h1>
+          <p class="hero-text">Retrouve ici les albums et les singles du projet. Chaque sortie ouvre une page dédiée avec écoute directe sur le site.</p>
+          <div class="hero-badge"><span class="hero-badge-dot"></span>Collection musicale</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro-card">
+      <h2>La musique du projet</h2>
+      <p>Cette page centralise les albums et les singles de l'univers Negan Lab. Les albums sont regroupés en haut, les singles sortis récemment se retrouvent juste en dessous, avec lecture uniquement sur le site.</p>
+    </section>
+
+    <section class="section-shell">
+      <h2>Albums</h2>
+      <p>Les projets complets avec leur univers, leur pochette et leur playlist dédiée.</p>
+      <div class="music-grid">
+        <a class="music-card" href="album-negan-couillons-pistes.html">
+          <div class="cover-wrap">
+            <span class="flag">Album disponible</span>
+            <img class="cover" src="../assets/images/album-negan-couillons.png" alt="Album Negan et Couillons">
+          </div>
+          <div class="content">
+            <h3>Negan & Couillons</h3>
+            <p>Le premier album rassemble toute l'énergie de la team, l'identité du projet et les messages portés à travers les morceaux.</p>
+            <div class="meta">
+              <span class="pill">11 titres</span>
+              <span class="pill">Écoute directe</span>
+              <span class="pill" id="albumCountCard">0 lecture</span>
+            </div>
+            <span class="cta">Ouvrir l'album</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <h2>Singles</h2>
+      <p>Les nouvelles sorties se retrouvent ici pour que tous les singles restent regroupés sous les albums.</p>
+      <div class="music-grid">
+        <a class="music-card" href="single-les-pauvres-menervent.html">
+          <div class="cover-wrap single">
+            <span class="flag">Nouveau single - Mai 2026</span>
+            <img class="cover" src="../assets/images/Les pauvres m'énerve.png" alt="Les Pauvres M’énervent">
+          </div>
+          <div class="content">
+            <h3>Les Pauvres M’énervent</h3>
+            <p>Nouveau single de mai 2026, disponible en écoute directe sur le site avec sa propre page dédiée.</p>
+            <div class="meta">
+              <span class="pill">Single</span>
+              <span class="pill">Mai 2026</span>
+              <span class="pill" id="singleCountCard">0 lecture</span>
+            </div>
+            <span class="cta">Écouter le single</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </div>
+  <script>
+    const albumKey = "negan_album_negancouillons_total_plays";
+    const singleKey = "negan_single_lespauvres_total_plays";
+    function pluralize(count) { return count > 1 ? "lectures" : "lecture"; }
+    function updateCount(id, value) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = `${value} ${pluralize(value)}`;
+    }
+    updateCount("albumCountCard", Number(localStorage.getItem(albumKey) || 0));
+    updateCount("singleCountCard", Number(localStorage.getItem(singleKey) || 0));
+  </script>
+</body>
+</html>
