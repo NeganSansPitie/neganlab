@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planning Lives Admin</title>
+  <title>Gestion locale du planning</title>
   <meta name="robots" content="noindex,nofollow" />
   <style>
     :root {
@@ -61,10 +61,6 @@
       margin-bottom: 18px;
     }
 
-    .hidden {
-      display: none;
-    }
-
     .form-grid {
       display: grid;
       gap: 14px;
@@ -95,12 +91,20 @@
     }
 
     .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 8px 14px;
       border-radius: 999px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
       font-size: 0.92rem;
       color: white;
+    }
+
+    .chip input {
+      width: auto;
+      accent-color: var(--cyan);
     }
 
     .btn,
@@ -163,16 +167,20 @@
     }
 
     .planning-image.vertical {
-      min-height: 420px;
+      min-height: 320px;
+      max-height: 360px;
     }
 
     .planning-image.horizontal {
-      min-height: 240px;
+      min-height: 180px;
+      max-height: 220px;
     }
 
     .planning-image img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 100%;
       object-fit: contain;
       object-position: center;
       border-radius: 18px;
@@ -187,15 +195,17 @@
       margin-bottom: 8px;
     }
 
-    .helper {
+    .notice {
       font-size: 0.92rem;
       color: var(--muted);
     }
 
-    .back-link {
-      color: var(--cyan);
-      text-decoration: none;
-      font-weight: 700;
+    .notice.success {
+      color: #b8ffe7;
+    }
+
+    .notice.error {
+      color: #ffb2c1;
     }
 
     @media (max-width: 760px) {
@@ -208,84 +218,62 @@
       }
 
       .planning-image.vertical {
-        min-height: 320px;
+        min-height: 280px;
+        max-height: none;
       }
 
       .planning-image.horizontal {
-        min-height: 200px;
+        min-height: 180px;
+        max-height: none;
       }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div id="loginPanel" class="panel">
-      <h1>Accès administrateur</h1>
-      <p>Cette page n'est pas liée publiquement. Connecte-toi avec ton identifiant et ton code administrateur pour gérer les événements du planning.</p>
-      <form class="form-grid" id="loginForm">
-        <input id="adminEmail" type="email" placeholder="Identifiant" required>
-        <input id="adminCode" type="password" placeholder="Code administrateur" required>
-        <div class="actions">
-          <button class="btn primary" type="submit">Se connecter</button>
-          <a class="btn" href="../index.html">Retour au site</a>
+    <div class="panel">
+      <h1>Gestion locale du planning</h1>
+      <p>Cette page sert à préparer et tester le planning dans ce navigateur. Sans API ou base commune, les événements restent locaux à cet appareil et ne se publient pas automatiquement pour tous les visiteurs.</p>
+
+      <form class="form-grid" id="planningForm">
+        <input id="planTitle" type="text" placeholder="Titre du planning ou du live" required>
+        <textarea id="planDescription" placeholder="Description ou infos à afficher"></textarea>
+        <input id="planStart" type="date" required>
+        <input id="planEnd" type="date" placeholder="Date de fin optionnelle">
+        <select id="planOrientation">
+          <option value="horizontal">Image horizontale</option>
+          <option value="vertical">Image verticale</option>
+        </select>
+        <div class="checkbox-row">
+          <label class="chip"><input type="checkbox" id="platformYouTube"> YouTube</label>
+          <label class="chip"><input type="checkbox" id="platformTwitch"> Twitch</label>
         </div>
+        <label class="file-label" for="planImage">Choisir une image</label>
+        <input class="file-input" id="planImage" type="file" accept="image/*">
+        <div class="notice" id="imageStatus">Aucune image sélectionnée.</div>
+        <div class="actions">
+          <button class="btn primary" type="submit">Enregistrer le planning</button>
+          <button class="btn secondary" type="button" id="clearAllBtn">Tout supprimer</button>
+          <a class="btn" href="planning-lives.html">Voir la page publique</a>
+        </div>
+        <div class="notice" id="saveStatus"></div>
       </form>
     </div>
 
-    <div id="adminPanel" class="hidden">
-      <div class="panel">
-        <div class="actions" style="justify-content:space-between;">
-          <h1>Gestion du planning</h1>
-          <button class="btn" id="logoutBtn" type="button">Déconnexion</button>
-        </div>
-        <p>Ajoute tes événements ici. Ils apparaîtront ensuite sur la page publique du planning pour les visiteurs.</p>
-
-        <form class="form-grid" id="planningForm">
-          <input id="planTitle" type="text" placeholder="Titre du planning ou du live" required>
-          <textarea id="planDescription" placeholder="Description ou infos à afficher"></textarea>
-          <input id="planStart" type="date" required>
-          <input id="planEnd" type="date" placeholder="Date de fin optionnelle">
-          <select id="planOrientation">
-            <option value="horizontal">Image horizontale</option>
-            <option value="vertical">Image verticale</option>
-          </select>
-          <div class="checkbox-row">
-            <label class="chip"><input type="checkbox" id="platformTikTok"> TikTok</label>
-            <label class="chip"><input type="checkbox" id="platformTwitch"> Twitch</label>
-          </div>
-          <label class="file-label" for="planImage">Choisir une image</label>
-          <input class="file-input" id="planImage" type="file" accept="image/*">
-          <div class="helper" id="imageStatus">Aucune image sélectionnée.</div>
-          <div class="actions">
-            <button class="btn primary" type="submit">Enregistrer le planning</button>
-            <button class="btn secondary" type="button" id="clearAllBtn">Tout supprimer</button>
-            <a class="btn" href="planning-lives.html">Voir la page publique</a>
-          </div>
-        </form>
-      </div>
-
-      <div class="panel">
-        <h2>Événements enregistrés</h2>
-        <div class="planning-list" id="planningList"></div>
-      </div>
+    <div class="panel">
+      <h2>Événements enregistrés</h2>
+      <div class="planning-list" id="planningList"></div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "negan_live_planning_entries_v2";
-    const SESSION_KEY = "negan_live_admin_session_v1";
-    const ADMIN_EMAIL = "negan20@outlook.be";
-    const ADMIN_CODE = "Monopoly5-Unseemly8-Chili9-Subplot0-Proclaim4";
-
-    const loginPanel = document.getElementById("loginPanel");
-    const adminPanel = document.getElementById("adminPanel");
-    const loginForm = document.getElementById("loginForm");
-    const logoutBtn = document.getElementById("logoutBtn");
+    const STORAGE_KEY = "negan_live_planning_entries_v3";
     const planningForm = document.getElementById("planningForm");
     const clearAllBtn = document.getElementById("clearAllBtn");
     const planningList = document.getElementById("planningList");
     const imageInput = document.getElementById("planImage");
     const imageStatus = document.getElementById("imageStatus");
+    const saveStatus = document.getElementById("saveStatus");
 
     let pendingImage = "";
 
@@ -298,7 +286,7 @@
     }
 
     function sortEntries(entries) {
-      return entries.sort((a, b) => String(a.startDate).localeCompare(String(b.startDate)));
+      return [...entries].sort((a, b) => String(a.startDate).localeCompare(String(b.startDate)));
     }
 
     function formatDateRange(startDate, endDate) {
@@ -311,32 +299,26 @@
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
+        .replace(/\"/g, "&quot;")
         .replace(/'/g, "&#039;");
     }
 
-    function showAdmin() {
-      loginPanel.classList.add("hidden");
-      adminPanel.classList.remove("hidden");
-      renderEntries();
-    }
-
-    function showLogin() {
-      adminPanel.classList.add("hidden");
-      loginPanel.classList.remove("hidden");
+    function setNotice(message, tone = "") {
+      saveStatus.textContent = message;
+      saveStatus.className = tone ? `notice ${tone}` : "notice";
     }
 
     function renderEntries() {
       const entries = sortEntries(getEntries());
 
       if (!entries.length) {
-        planningList.innerHTML = `<div class="helper">Aucun événement enregistré pour le moment.</div>`;
+        planningList.innerHTML = `<div class="notice">Aucun événement enregistré pour le moment.</div>`;
         return;
       }
 
       planningList.innerHTML = entries.map((entry, index) => `
         <article class="planning-card">
-          <div class="planning-image ${entry.orientation}">
+          <div class="planning-image ${entry.orientation === "vertical" ? "vertical" : "horizontal"}">
             ${entry.image ? `<img src="${entry.image}" alt="${escapeHtml(entry.title)}">` : ""}
           </div>
           <div class="planning-body">
@@ -344,7 +326,7 @@
             <p>${escapeHtml(entry.description || "Événement Negan Lab.")}</p>
             <div class="chips">
               <span class="chip">${escapeHtml(formatDateRange(entry.startDate, entry.endDate))}</span>
-              ${entry.platforms.includes("tiktok") ? `<span class="chip">TikTok</span>` : ""}
+              ${entry.platforms.includes("youtube") ? `<span class="chip">YouTube</span>` : ""}
               ${entry.platforms.includes("twitch") ? `<span class="chip">Twitch</span>` : ""}
             </div>
             <div class="actions" style="margin-top:14px;">
@@ -360,28 +342,10 @@
       entries.splice(index, 1);
       setEntries(entries);
       renderEntries();
+      setNotice("Événement supprimé.", "success");
     }
 
     window.removeEntry = removeEntry;
-
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const email = document.getElementById("adminEmail").value.trim();
-      const code = document.getElementById("adminCode").value;
-
-      if (email === ADMIN_EMAIL && code === ADMIN_CODE) {
-        sessionStorage.setItem(SESSION_KEY, "ok");
-        showAdmin();
-        return;
-      }
-
-      alert("Identifiant ou code incorrect.");
-    });
-
-    logoutBtn.addEventListener("click", () => {
-      sessionStorage.removeItem(SESSION_KEY);
-      showLogin();
-    });
 
     imageInput.addEventListener("change", () => {
       const file = imageInput.files[0];
@@ -403,16 +367,16 @@
       event.preventDefault();
 
       const platforms = [];
-      if (document.getElementById("platformTikTok").checked) platforms.push("tiktok");
+      if (document.getElementById("platformYouTube").checked) platforms.push("youtube");
       if (document.getElementById("platformTwitch").checked) platforms.push("twitch");
 
       if (!platforms.length) {
-        alert("Choisis au moins une plateforme.");
+        setNotice("Choisis au moins une plateforme.", "error");
         return;
       }
 
       if (!pendingImage) {
-        alert("Ajoute une image pour le planning.");
+        setNotice("Ajoute une image pour le planning.", "error");
         return;
       }
 
@@ -434,21 +398,22 @@
       pendingImage = "";
       imageStatus.textContent = "Aucune image sélectionnée.";
       renderEntries();
+      setNotice("Planning enregistré localement dans ce navigateur.", "success");
     });
 
     clearAllBtn.addEventListener("click", () => {
+      const confirmed = window.confirm("Supprimer tous les événements enregistrés dans ce navigateur ?");
+      if (!confirmed) return;
+
       localStorage.removeItem(STORAGE_KEY);
       planningForm.reset();
       pendingImage = "";
       imageStatus.textContent = "Aucune image sélectionnée.";
       renderEntries();
+      setNotice("Tous les événements ont été supprimés localement.", "success");
     });
 
-    if (sessionStorage.getItem(SESSION_KEY) === "ok") {
-      showAdmin();
-    } else {
-      showLogin();
-    }
+    renderEntries();
   </script>
 </body>
 </html>
