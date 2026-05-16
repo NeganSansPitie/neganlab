@@ -20,11 +20,7 @@
       --radius: 28px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: Arial, sans-serif;
@@ -128,25 +124,11 @@
       box-shadow: 0 0 16px rgba(255,204,89,0.35);
     }
 
-    .panel {
-      padding: 24px;
-    }
+    .panel { padding: 24px; }
+    .panel h2 { font-size: 1.9rem; margin-bottom: 12px; }
+    .panel p { color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
 
-    .panel h2 {
-      font-size: 1.9rem;
-      margin-bottom: 12px;
-    }
-
-    .panel p {
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 18px;
-    }
-
-    .planning-list {
-      display: grid;
-      gap: 18px;
-    }
+    .planning-list { display: grid; gap: 18px; }
 
     .planning-card {
       background: rgba(255,255,255,0.03);
@@ -185,25 +167,11 @@
       display: block;
     }
 
-    .planning-body {
-      padding: 18px;
-    }
+    .planning-body { padding: 18px; }
+    .planning-body h3 { font-size: 1.35rem; margin-bottom: 8px; }
+    .planning-body p { margin-bottom: 14px; }
 
-    .planning-body h3 {
-      font-size: 1.35rem;
-      margin-bottom: 8px;
-    }
-
-    .planning-body p {
-      margin-bottom: 14px;
-    }
-
-    .chips,
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+    .chips, .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .chip {
       padding: 8px 14px;
@@ -229,10 +197,7 @@
       background: rgba(255,255,255,0.04);
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.98;
-    }
+    .btn:hover { transform: translateY(-2px); opacity: 0.98; }
 
     .btn.primary {
       background: linear-gradient(135deg, var(--pink), #ff4d6d);
@@ -255,44 +220,20 @@
       text-align: center;
     }
 
-    .note {
-      margin-top: 14px;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
+    .note { margin-top: 14px; font-size: 0.95rem; color: var(--muted); }
 
     @media (max-width: 760px) {
-      .page {
-        padding: 8px 10px 24px;
-      }
-
-      .hero-banner {
-        height: 170px;
-      }
-
+      .page { padding: 8px 10px 24px; }
+      .hero-banner { height: 170px; }
       .hero-body {
         padding: 24px 18px 26px;
         flex-direction: column;
         align-items: flex-start;
       }
-
-      .hero-title {
-        font-size: 2rem;
-      }
-
-      .panel {
-        padding: 18px 14px;
-      }
-
-      .planning-image.vertical {
-        min-height: 280px;
-        max-height: none;
-      }
-
-      .planning-image.horizontal {
-        min-height: 180px;
-        max-height: none;
-      }
+      .hero-title { font-size: 2rem; }
+      .panel { padding: 18px 14px; }
+      .planning-image.vertical { min-height: 280px; max-height: none; }
+      .planning-image.horizontal { min-height: 180px; max-height: none; }
     }
   </style>
 </head>
@@ -316,17 +257,19 @@
       <h2>Prochains événements</h2>
       <p>Selon le planning publié, tu peux voir ici les lives à venir et accéder directement à YouTube, Twitch ou aux deux.</p>
       <div class="planning-list" id="planningList"></div>
-      <p class="note">Cette version du planning reste locale au navigateur tant qu'elle n'est pas reliée à une API ou à une base commune.</p>
+      <p class="note" id="modeNote">Chargement du planning...</p>
     </section>
   </div>
 
   <script>
+    const API_URL = "/api/planning";
     const STORAGE_KEY = "negan_live_planning_entries_v3";
     const YOUTUBE_URL = "youtube.html";
     const TWITCH_URL = "twitch.html";
     const planningList = document.getElementById("planningList");
+    const modeNote = document.getElementById("modeNote");
 
-    function getEntries() {
+    function getLocalEntries() {
       return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     }
 
@@ -348,15 +291,15 @@
         .replace(/'/g, "&#039;");
     }
 
-    function renderEntries() {
-      const entries = sortEntries(getEntries());
+    function renderEntries(entries) {
+      const sortedEntries = sortEntries(entries);
 
-      if (!entries.length) {
+      if (!sortedEntries.length) {
         planningList.innerHTML = `<div class="empty-state">Aucun événement publié pour le moment.</div>`;
         return;
       }
 
-      planningList.innerHTML = entries.map((entry) => {
+      planningList.innerHTML = sortedEntries.map((entry) => {
         const platforms = Array.isArray(entry.platforms) ? entry.platforms : [];
         const actions = [];
 
@@ -389,7 +332,20 @@
       }).join("");
     }
 
-    renderEntries();
+    async function loadPlanning() {
+      try {
+        const response = await fetch(API_URL, { method: "GET" });
+        if (!response.ok) throw new Error("api-unavailable");
+        const payload = await response.json();
+        renderEntries(Array.isArray(payload.entries) ? payload.entries : []);
+        modeNote.textContent = "Planning chargé depuis Cloudflare.";
+      } catch {
+        renderEntries(getLocalEntries());
+        modeNote.textContent = "API Cloudflare non branchée pour le moment : affichage local navigateur en secours.";
+      }
+    }
+
+    loadPlanning();
   </script>
 </body>
 </html>

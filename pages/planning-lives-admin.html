@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gestion locale du planning</title>
+  <title>Gestion du planning</title>
   <meta name="robots" content="noindex,nofollow" />
   <style>
     :root {
@@ -20,11 +20,7 @@
       --radius: 28px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: Arial, sans-serif;
@@ -51,20 +47,10 @@
       margin-bottom: 24px;
     }
 
-    h1, h2 {
-      margin-bottom: 12px;
-    }
-
-    p {
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 18px;
-    }
-
-    .form-grid {
-      display: grid;
-      gap: 14px;
-    }
+    h1, h2 { margin-bottom: 12px; }
+    p { color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+    .hidden { display: none; }
+    .form-grid { display: grid; gap: 14px; }
 
     input,
     textarea,
@@ -77,18 +63,11 @@
       color: white;
     }
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
+    textarea { min-height: 110px; resize: vertical; }
 
     .checkbox-row,
     .actions,
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .chip {
       display: inline-flex;
@@ -102,10 +81,19 @@
       color: white;
     }
 
-    .chip input {
-      width: auto;
-      accent-color: var(--cyan);
+    .chip.platform-youtube::before {
+      content: "▶";
+      color: #ff5b7f;
+      font-size: 0.9rem;
     }
+
+    .chip.platform-twitch::before {
+      content: "◉";
+      color: #b184ff;
+      font-size: 0.85rem;
+    }
+
+    .chip input { width: auto; accent-color: var(--cyan); }
 
     .btn,
     .file-label {
@@ -124,10 +112,7 @@
     }
 
     .btn:hover,
-    .file-label:hover {
-      transform: translateY(-2px);
-      opacity: 0.98;
-    }
+    .file-label:hover { transform: translateY(-2px); opacity: 0.98; }
 
     .btn.primary {
       background: linear-gradient(135deg, var(--cyan), var(--pink));
@@ -141,14 +126,8 @@
       box-shadow: 0 12px 28px rgba(99,179,255,0.16);
     }
 
-    .file-input {
-      display: none;
-    }
-
-    .planning-list {
-      display: grid;
-      gap: 18px;
-    }
+    .file-input { display: none; }
+    .planning-list { display: grid; gap: 18px; }
 
     .planning-card {
       background: rgba(255,255,255,0.03);
@@ -187,53 +166,47 @@
       display: block;
     }
 
-    .planning-body {
-      padding: 18px;
-    }
-
-    .planning-body h3 {
-      margin-bottom: 8px;
-    }
+    .planning-body { padding: 18px; }
+    .planning-body h3 { margin-bottom: 8px; }
 
     .notice {
       font-size: 0.92rem;
       color: var(--muted);
     }
 
-    .notice.success {
-      color: #b8ffe7;
-    }
-
-    .notice.error {
-      color: #ffb2c1;
-    }
+    .notice.success { color: #b8ffe7; }
+    .notice.error { color: #ffb2c1; }
 
     @media (max-width: 760px) {
-      .page {
-        padding: 10px;
-      }
-
-      .panel {
-        padding: 18px 14px;
-      }
-
-      .planning-image.vertical {
-        min-height: 280px;
-        max-height: none;
-      }
-
-      .planning-image.horizontal {
-        min-height: 180px;
-        max-height: none;
-      }
+      .page { padding: 10px; }
+      .panel { padding: 18px 14px; }
+      .planning-image.vertical { min-height: 280px; max-height: none; }
+      .planning-image.horizontal { min-height: 180px; max-height: none; }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="panel">
-      <h1>Gestion locale du planning</h1>
-      <p>Cette page sert à préparer et tester le planning dans ce navigateur. Sans API ou base commune, les événements restent locaux à cet appareil et ne se publient pas automatiquement pour tous les visiteurs.</p>
+    <div id="loginPanel" class="panel hidden">
+      <h1>Connexion au planning</h1>
+      <p>Quand l'API Cloudflare est active, connecte-toi ici pour gérer un planning partagé entre tous tes appareils.</p>
+      <form class="form-grid" id="loginForm">
+        <input id="adminEmail" type="email" placeholder="Email administrateur" required>
+        <input id="adminPassword" type="password" placeholder="Mot de passe" required>
+        <div class="actions">
+          <button class="btn primary" type="submit">Se connecter</button>
+          <a class="btn" href="../index.html">Retour au site</a>
+        </div>
+        <div class="notice" id="loginStatus"></div>
+      </form>
+    </div>
+
+    <div id="adminPanel" class="panel hidden">
+      <div class="actions" style="justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h1>Gestion du planning</h1>
+        <button class="btn" id="logoutBtn" type="button">Déconnexion</button>
+      </div>
+      <p id="modeDescription">Chargement du mode de gestion...</p>
 
       <form class="form-grid" id="planningForm">
         <input id="planTitle" type="text" placeholder="Titre du planning ou du live" required>
@@ -245,8 +218,8 @@
           <option value="vertical">Image verticale</option>
         </select>
         <div class="checkbox-row">
-          <label class="chip"><input type="checkbox" id="platformYouTube"> YouTube</label>
-          <label class="chip"><input type="checkbox" id="platformTwitch"> Twitch</label>
+          <label class="chip platform-youtube"><input type="checkbox" id="platformYouTube"> YouTube</label>
+          <label class="chip platform-twitch"><input type="checkbox" id="platformTwitch"> Twitch</label>
         </div>
         <label class="file-label" for="planImage">Choisir une image</label>
         <input class="file-input" id="planImage" type="file" accept="image/*">
@@ -267,22 +240,34 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "negan_live_planning_entries_v3";
+    const API_BASE = "/api";
+    const LOCAL_KEY = "negan_live_planning_entries_v3";
+
+    const loginPanel = document.getElementById("loginPanel");
+    const adminPanel = document.getElementById("adminPanel");
+    const loginForm = document.getElementById("loginForm");
+    const adminEmail = document.getElementById("adminEmail");
+    const adminPassword = document.getElementById("adminPassword");
+    const logoutBtn = document.getElementById("logoutBtn");
     const planningForm = document.getElementById("planningForm");
     const clearAllBtn = document.getElementById("clearAllBtn");
     const planningList = document.getElementById("planningList");
     const imageInput = document.getElementById("planImage");
     const imageStatus = document.getElementById("imageStatus");
     const saveStatus = document.getElementById("saveStatus");
+    const loginStatus = document.getElementById("loginStatus");
+    const modeDescription = document.getElementById("modeDescription");
 
+    let mode = "local";
     let pendingImage = "";
+    let apiEntries = [];
 
-    function getEntries() {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    function getLocalEntries() {
+      return JSON.parse(localStorage.getItem(LOCAL_KEY) || "[]");
     }
 
-    function setEntries(entries) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    function setLocalEntries(entries) {
+      localStorage.setItem(LOCAL_KEY, JSON.stringify(entries));
     }
 
     function sortEntries(entries) {
@@ -303,20 +288,20 @@
         .replace(/'/g, "&#039;");
     }
 
-    function setNotice(message, tone = "") {
-      saveStatus.textContent = message;
-      saveStatus.className = tone ? `notice ${tone}` : "notice";
+    function setNotice(node, message, tone = "") {
+      node.textContent = message;
+      node.className = tone ? `notice ${tone}` : "notice";
     }
 
-    function renderEntries() {
-      const entries = sortEntries(getEntries());
+    function renderEntries(entries) {
+      const sorted = sortEntries(entries);
 
-      if (!entries.length) {
+      if (!sorted.length) {
         planningList.innerHTML = `<div class="notice">Aucun événement enregistré pour le moment.</div>`;
         return;
       }
 
-      planningList.innerHTML = entries.map((entry, index) => `
+      planningList.innerHTML = sorted.map((entry, index) => `
         <article class="planning-card">
           <div class="planning-image ${entry.orientation === "vertical" ? "vertical" : "horizontal"}">
             ${entry.image ? `<img src="${entry.image}" alt="${escapeHtml(entry.title)}">` : ""}
@@ -330,22 +315,68 @@
               ${entry.platforms.includes("twitch") ? `<span class="chip">Twitch</span>` : ""}
             </div>
             <div class="actions" style="margin-top:14px;">
-              <button class="btn" type="button" onclick="removeEntry(${index})">Supprimer</button>
+              <button class="btn" type="button" onclick="removeEntry(${index}, '${escapeHtml(entry.id || "")}')">Supprimer</button>
             </div>
           </div>
         </article>
       `).join("");
     }
 
-    function removeEntry(index) {
-      const entries = getEntries();
-      entries.splice(index, 1);
-      setEntries(entries);
-      renderEntries();
-      setNotice("Événement supprimé.", "success");
+    async function apiRequest(path, options = {}) {
+      const response = await fetch(`${API_BASE}${path}`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        ...options
+      });
+      const text = await response.text();
+      let payload = null;
+      try { payload = text ? JSON.parse(text) : null; } catch { payload = null; }
+      return { response, payload };
     }
 
-    window.removeEntry = removeEntry;
+    async function detectMode() {
+      try {
+        const { response } = await apiRequest("/planning", { method: "GET" });
+        if (response.ok) {
+          mode = "api";
+          loginPanel.classList.remove("hidden");
+          adminPanel.classList.add("hidden");
+          modeDescription.textContent = "Mode Cloudflare actif : connecte-toi pour gérer un planning partagé entre tes appareils.";
+          renderEntries([]);
+          return;
+        }
+      } catch {}
+
+      mode = "local";
+      loginPanel.classList.add("hidden");
+      adminPanel.classList.remove("hidden");
+      logoutBtn.classList.add("hidden");
+      modeDescription.textContent = "Mode local navigateur : pratique pour tester, mais non partagé entre appareils tant que l'API Cloudflare n'est pas branchée.";
+      renderEntries(getLocalEntries());
+    }
+
+    async function loadAdminEntries() {
+      if (mode !== "api") {
+        renderEntries(getLocalEntries());
+        return;
+      }
+
+      const { response, payload } = await apiRequest("/admin/planning", { method: "GET" });
+      if (response.status === 401 || response.status === 403) {
+        adminPanel.classList.add("hidden");
+        loginPanel.classList.remove("hidden");
+        setNotice(loginStatus, "Connexion requise pour accéder au planning partagé.", "error");
+        return;
+      }
+
+      apiEntries = Array.isArray(payload?.entries) ? payload.entries : [];
+      adminPanel.classList.remove("hidden");
+      loginPanel.classList.add("hidden");
+      renderEntries(apiEntries);
+      modeDescription.textContent = "Mode Cloudflare actif : chaque changement est partagé sur tous tes appareils et pour les visiteurs.";
+    }
 
     imageInput.addEventListener("change", () => {
       const file = imageInput.files[0];
@@ -363,7 +394,38 @@
       reader.readAsDataURL(file);
     });
 
-    planningForm.addEventListener("submit", (event) => {
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      setNotice(loginStatus, "Connexion en cours...");
+
+      const { response, payload } = await apiRequest("/admin/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: adminEmail.value.trim(),
+          password: adminPassword.value
+        })
+      });
+
+      if (!response.ok) {
+        setNotice(loginStatus, payload?.error || "Connexion refusée.", "error");
+        return;
+      }
+
+      loginForm.reset();
+      setNotice(loginStatus, "Connexion réussie.", "success");
+      await loadAdminEntries();
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      if (mode === "api") {
+        await apiRequest("/admin/logout", { method: "POST" });
+        adminPanel.classList.add("hidden");
+        loginPanel.classList.remove("hidden");
+        setNotice(loginStatus, "Déconnecté.");
+      }
+    });
+
+    planningForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       const platforms = [];
@@ -371,12 +433,12 @@
       if (document.getElementById("platformTwitch").checked) platforms.push("twitch");
 
       if (!platforms.length) {
-        setNotice("Choisis au moins une plateforme.", "error");
+        setNotice(saveStatus, "Choisis au moins une plateforme.", "error");
         return;
       }
 
       if (!pendingImage) {
-        setNotice("Ajoute une image pour le planning.", "error");
+        setNotice(saveStatus, "Ajoute une image pour le planning.", "error");
         return;
       }
 
@@ -390,30 +452,78 @@
         image: pendingImage
       };
 
-      const entries = getEntries();
-      entries.push(entry);
-      setEntries(entries);
+      if (mode === "api") {
+        const { response, payload } = await apiRequest("/admin/planning", {
+          method: "POST",
+          body: JSON.stringify(entry)
+        });
+
+        if (!response.ok) {
+          setNotice(saveStatus, payload?.error || "Enregistrement impossible.", "error");
+          return;
+        }
+
+        apiEntries = Array.isArray(payload?.entries) ? payload.entries : [];
+        renderEntries(apiEntries);
+        setNotice(saveStatus, "Planning enregistré sur Cloudflare.", "success");
+      } else {
+        const entries = getLocalEntries();
+        entries.push({ ...entry, id: crypto.randomUUID() });
+        setLocalEntries(entries);
+        renderEntries(entries);
+        setNotice(saveStatus, "Planning enregistré localement dans ce navigateur.", "success");
+      }
 
       planningForm.reset();
       pendingImage = "";
       imageStatus.textContent = "Aucune image sélectionnée.";
-      renderEntries();
-      setNotice("Planning enregistré localement dans ce navigateur.", "success");
     });
 
-    clearAllBtn.addEventListener("click", () => {
-      const confirmed = window.confirm("Supprimer tous les événements enregistrés dans ce navigateur ?");
+    clearAllBtn.addEventListener("click", async () => {
+      const confirmed = window.confirm("Supprimer tous les événements ?");
       if (!confirmed) return;
 
-      localStorage.removeItem(STORAGE_KEY);
+      if (mode === "api") {
+        const { response, payload } = await apiRequest("/admin/planning?all=1", { method: "DELETE" });
+        if (!response.ok) {
+          setNotice(saveStatus, payload?.error || "Suppression impossible.", "error");
+          return;
+        }
+        apiEntries = [];
+      } else {
+        localStorage.removeItem(LOCAL_KEY);
+      }
+
       planningForm.reset();
       pendingImage = "";
       imageStatus.textContent = "Aucune image sélectionnée.";
-      renderEntries();
-      setNotice("Tous les événements ont été supprimés localement.", "success");
+      renderEntries([]);
+      setNotice(saveStatus, mode === "api" ? "Planning Cloudflare vidé." : "Planning local vidé.", "success");
     });
 
-    renderEntries();
+    async function removeEntry(index, id) {
+      if (mode === "api") {
+        const { response, payload } = await apiRequest(`/admin/planning?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+        if (!response.ok) {
+          setNotice(saveStatus, payload?.error || "Suppression impossible.", "error");
+          return;
+        }
+        apiEntries = Array.isArray(payload?.entries) ? payload.entries : [];
+        renderEntries(apiEntries);
+        setNotice(saveStatus, "Événement supprimé de Cloudflare.", "success");
+        return;
+      }
+
+      const entries = getLocalEntries();
+      entries.splice(index, 1);
+      setLocalEntries(entries);
+      renderEntries(entries);
+      setNotice(saveStatus, "Événement supprimé localement.", "success");
+    }
+
+    window.removeEntry = removeEntry;
+
+    detectMode();
   </script>
 </body>
 </html>

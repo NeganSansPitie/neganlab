@@ -1,0 +1,15 @@
+﻿name = "neganlab-planning-api"
+main = "worker/planning-api-worker.mjs"
+compatibility_date = "2026-05-16"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "PLANNING_KV"
+id = "YOUR_KV_NAMESPACE_ID"
+preview_id = "YOUR_KV_PREVIEW_NAMESPACE_ID"
+
+[vars]
+ADMIN_EMAIL = "ton-email@example.com"
+# Ajoute ensuite les secrets côté Cloudflare :
+# ADMIN_PASSWORD
+# SESSION_SECRET
