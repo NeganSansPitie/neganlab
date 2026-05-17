@@ -196,11 +196,11 @@
           </div>
           <div class="content">
             <h3>Les Michtoneuses</h3>
-            <p>Nouveau single disponible sur Suno, ajouté à la collection musicale NEGAN LAB avec sa page dédiée.</p>
+            <p>Nouveau single ajouté à la collection musicale NEGAN LAB avec écoute directe sur le site.</p>
             <div class="meta">
               <span class="pill">Single</span>
-              <span class="pill">Suno</span>
-              <span class="pill">NEGAN LAB</span>
+              <span class="pill">9 mai 2026</span>
+              <span class="pill" id="michtoneusesCountCard">0 lecture</span>
             </div>
             <span class="cta">Ouvrir le single</span>
           </div>
@@ -213,11 +213,11 @@
           </div>
           <div class="content">
             <h3>J'roule en BM</h3>
-            <p>Nouveau single disponible sur Suno, ajouté à la collection musicale NEGAN LAB avec sa page dédiée.</p>
+            <p>Nouveau single ajouté à la collection musicale NEGAN LAB avec écoute directe sur le site.</p>
             <div class="meta">
               <span class="pill">Single</span>
-              <span class="pill">Suno</span>
-              <span class="pill">NEGAN LAB</span>
+              <span class="pill">7 mai 2026</span>
+              <span class="pill" id="jrouleCountCard">0 lecture</span>
             </div>
             <span class="cta">Ouvrir le single</span>
           </div>
@@ -228,6 +228,8 @@
   <script>
     const albumKey = "negan_album_negancouillons_total_plays";
     const singleKey = "negan_single_lespauvres_total_plays";
+    const michtoneusesKey = "negan_single_lesmichtoneuses_total_plays";
+    const jrouleKey = "negan_single_jrouleenbm_total_plays";
     function pluralize(count) { return count > 1 ? "lectures" : "lecture"; }
     function updateCount(id, value) {
       const el = document.getElementById(id);
@@ -236,6 +238,8 @@
     }
     updateCount("albumCountCard", Number(localStorage.getItem(albumKey) || 0));
     updateCount("singleCountCard", Number(localStorage.getItem(singleKey) || 0));
+    updateCount("michtoneusesCountCard", Number(localStorage.getItem(michtoneusesKey) || 0));
+    updateCount("jrouleCountCard", Number(localStorage.getItem(jrouleKey) || 0));
   </script>
 </body>
 </html>

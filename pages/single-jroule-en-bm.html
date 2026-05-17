@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>J'roule en BM</title>
-  <meta name="description" content="Écoute du single J'roule en BM de Negan Lab." />
+  <meta name="description" content="Écoute directe du single J'roule en BM." />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
@@ -77,15 +77,12 @@
       padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08); font-size: 0.95rem; color: white;
     }
-    .listen-btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      min-width: 220px; padding: 14px 20px; border-radius: 18px;
-      color: white; text-decoration: none; font-weight: 800;
-      background: linear-gradient(135deg, var(--cyan), var(--pink));
-      box-shadow: 0 12px 28px rgba(254,44,85,0.18);
-      transition: transform 0.18s ease, opacity 0.18s ease;
+    .player-box {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px; padding: 16px; margin-top: 10px;
     }
-    .listen-btn:hover { transform: translateY(-2px); opacity: 0.98; }
+    .player-label { color: rgba(255,255,255,0.72); margin-bottom: 10px; font-size: 0.94rem; }
+    audio { width: 100%; filter: hue-rotate(210deg) saturate(1.2); }
     @media (max-width: 980px) {
       .hero-body { flex-direction: column; align-items: flex-start; }
       .hero-right { margin-left: 0; max-width: 100%; }
@@ -98,7 +95,6 @@
       .hero-title { font-size: 2rem; }
       .single-shell { padding: 18px 14px; }
       .single-content h2 { font-size: 1.65rem; }
-      .listen-btn { width: 100%; min-width: 0; }
     }
   </style>
 </head>
@@ -111,8 +107,8 @@
           <a class="back-link" href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
         </div>
         <div class="hero-right">
-          <h1 class="hero-title"><span class="violet">Single</span> <span class="cyan">J'roule en BM</span></h1>
-          <p class="hero-text">Retrouve le single sur Suno avec sa pochette officielle dans l'univers NEGAN LAB.</p>
+          <h1 class="hero-title"><span class="violet">Single</span> <span class="cyan">7 mai 2026</span></h1>
+          <p class="hero-text">Écoute le single directement sur le site, sans redirection externe et avec son compteur de lecture dédié.</p>
           <div class="hero-badge"><span class="hero-badge-dot"></span>Nouveau single</div>
         </div>
       </div>
@@ -124,18 +120,43 @@
       </div>
       <div class="single-content">
         <h2>J'roule en BM</h2>
-        <p>Un nouveau single ajouté à la collection musicale NEGAN LAB. Clique ci-dessous pour l'écouter directement sur Suno.</p>
+        <p>Single sorti le 7 mai 2026. Ici, la lecture reste entièrement sur ton site pour garder les visiteurs dans ton univers.</p>
         <div class="meta">
           <span class="pill">Single</span>
-          <span class="pill">Suno</span>
-          <span class="pill">NEGAN LAB</span>
+          <span class="pill">7 mai 2026</span>
+          <span class="pill" id="singleCounter">0 lecture</span>
         </div>
-        <a class="listen-btn" href="https://suno.com/s/BXBOj4g6hqmLnOIB" target="_blank" rel="noopener noreferrer">
-          <i class="fa-solid fa-play"></i>
-          Écouter sur Suno
-        </a>
+        <div class="player-box">
+          <div class="player-label">Lecture directe sur le site</div>
+          <audio id="singlePlayer" controls preload="none">
+            <source src="https://cdn1.suno.ai/87af9d51-9e27-4d8e-b8c2-c40da6ae3134.mp3" type="audio/mpeg">
+          </audio>
+        </div>
       </div>
     </section>
   </div>
+  <script>
+    const COUNTER_KEY = "negan_single_jrouleenbm_total_plays";
+    const player = document.getElementById("singlePlayer");
+    const counter = document.getElementById("singleCounter");
+    let countedForCurrentPlay = false;
+    function pluralize(value) { return value > 1 ? "lectures" : "lecture"; }
+    function getCount() { return Number(localStorage.getItem(COUNTER_KEY) || 0); }
+    function updateCounter() {
+      const value = getCount();
+      counter.textContent = `${value} ${pluralize(value)}`;
+    }
+    player.addEventListener("play", () => {
+      if (countedForCurrentPlay) return;
+      localStorage.setItem(COUNTER_KEY, String(getCount() + 1));
+      countedForCurrentPlay = true;
+      updateCounter();
+    });
+    player.addEventListener("ended", () => { countedForCurrentPlay = false; });
+    player.addEventListener("pause", () => {
+      if (player.currentTime === 0) countedForCurrentPlay = false;
+    });
+    updateCounter();
+  </script>
 </body>
 </html>
