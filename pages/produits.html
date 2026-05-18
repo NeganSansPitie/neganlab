@@ -37,7 +37,7 @@
     }
 
     .page {
-      max-width: 1200px;
+      max-width: 1680px;
       margin: 0 auto;
     }
 
@@ -74,15 +74,15 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .product-card {
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      border-radius: 18px;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.28);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -95,30 +95,30 @@
 
     .product-image {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 1 / 1;
       object-fit: contain;
       display: block;
       background: #fff;
     }
 
     .product-body {
-      padding: 22px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       flex: 1;
     }
 
     .product-title {
-      font-size: 1.35rem;
+      font-size: 1.02rem;
       font-weight: 800;
       line-height: 1.2;
     }
 
     .product-text {
       color: var(--muted);
-      line-height: 1.6;
-      font-size: 0.98rem;
+      line-height: 1.45;
+      font-size: 0.86rem;
       flex: 1;
     }
 
@@ -127,9 +127,10 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      padding: 13px 18px;
-      border-radius: 16px;
+      padding: 11px 13px;
+      border-radius: 14px;
       font-weight: 700;
+      font-size: 0.9rem;
       transition: transform 0.18s ease, opacity 0.18s ease, box-shadow 0.18s ease;
       color: white;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
@@ -142,18 +143,35 @@
       opacity: 0.98;
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 1280px) {
+      .products-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1040px) {
+      .products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
       body {
         padding: 16px;
       }
 
       .products-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .hero,
-      .product-body {
+      .hero {
         padding: 20px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .products-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -200,6 +218,28 @@
           <h2 class="product-title">Micro</h2>
           <p class="product-text">Un micro de qualité pour une voix plus claire, plus chaleureuse et plus agréable en live comme en enregistrement.</p>
           <a class="btn" href="https://amzn.to/47Scl27" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a class="product-image-link" href="https://amzn.to/4dd3b3i" target="_blank" rel="noopener noreferrer">
+          <img class="product-image" src="../assets/images/Hollyland Lark M2S.jpg" alt="Hollyland Lark M2S" />
+        </a>
+        <div class="product-body">
+          <h2 class="product-title">Hollyland Lark M2S</h2>
+          <p class="product-text">Un micro sans fil compact et pratique pour améliorer la voix en vidéo, live ou création de contenu mobile.</p>
+          <a class="btn" href="https://amzn.to/4dd3b3i" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a class="product-image-link" href="https://amzn.to/4eSWwfQ" target="_blank" rel="noopener noreferrer">
+          <img class="product-image" src="../assets/images/Hollyland LARK MAX 2.jpg" alt="Hollyland LARK MAX 2" />
+        </a>
+        <div class="product-body">
+          <h2 class="product-title">Hollyland LARK MAX 2</h2>
+          <p class="product-text">Un système micro sans fil plus complet pour un son propre, stable et confortable sur les tournages et streams.</p>
+          <a class="btn" href="https://amzn.to/4eSWwfQ" target="_blank" rel="noopener noreferrer">Voir sur Amazon</a>
         </div>
       </article>
 
