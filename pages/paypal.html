@@ -6,8 +6,6 @@
   <title>Soutenir Negan Lab</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-  <script src="https://www.paypal.com/sdk/js?client-id=AR_O9ls48jsRxBPKM9OVlE1o8i6QcVD2hutVxTUjh3TAzOlPxxuHHaOnt8JwvqUftd8L-tKV86pgME2Z&currency=EUR&intent=capture&components=buttons&disable-funding=card,credit,paylater,bancontact,sepa"></script>
-
   <style>
     * {
       margin: 0;
@@ -104,10 +102,6 @@
       text-align: center;
     }
 
-    #paypal-button-container {
-      margin-top: 15px;
-    }
-
     .back {
       display: inline-flex;
       align-items: center;
@@ -125,6 +119,31 @@
       border-radius: 20px;
       box-shadow: 0 0 25px rgba(199,125,255,0.2);
     }
+
+    .paypal-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 15px;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #009cde, #003087);
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 0 18px rgba(0,156,222,0.32);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .paypal-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 26px rgba(0,156,222,0.48);
+    }
   </style>
 </head>
 <body>
@@ -137,13 +156,14 @@
 
     <div class="card">
       <h2>Soutenir Negan Lab</h2>
-      <p class="hint">Choisis ton montant, puis connecte-toi a PayPal pour valider le don.</p>
+      <p class="hint">Choisis ton montant, puis ouvre PayPal pour valider le don.</p>
 
       <input id="amount" type="number" value="1.00" min="1.00" step="0.50" placeholder="Montant EUR">
-      <input id="name" type="text" placeholder="Ton pseudo">
-      <input id="message" type="text" placeholder="Message">
 
-      <div id="paypal-button-container"></div>
+      <button id="paypal-link" class="paypal-button" type="button">
+        <i class="fa-brands fa-paypal"></i>
+        Faire un don avec PayPal
+      </button>
       <p id="paypal-error" class="paypal-error"></p>
     </div>
   </div>
@@ -178,34 +198,13 @@
       return amount.toFixed(2);
     }
 
-    paypal.Buttons({
-      fundingSource: paypal.FUNDING.PAYPAL,
+    document.getElementById("paypal-link").addEventListener("click", () => {
+      const amount = getDonationAmount();
 
-      onClick: function(data, actions) {
-        return getDonationAmount() ? actions.resolve() : actions.reject();
-      },
+      if (!amount) return;
 
-      createOrder: function(data, actions) {
-        const amount = getDonationAmount();
-
-        return actions.order.create({
-          purchase_units: [{
-            amount: { value: amount }
-          }]
-        });
-      },
-
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function() {
-          const name = document.getElementById("name").value || "Anonyme";
-          alert("Merci " + name + " pour ton don !");
-        });
-      },
-
-      onError: function() {
-        showPaypalError("PayPal n'a pas pu ouvrir le paiement. Reessaie dans un nouvel onglet ou avec un autre navigateur.");
-      }
-    }).render("#paypal-button-container");
+      window.open(`https://www.paypal.com/paypalme/darksmike/${amount}EUR`, "_blank", "noopener,noreferrer");
+    });
   </script>
 </body>
 </html>
