@@ -152,7 +152,7 @@
     .cozy::before {
       background:
         linear-gradient(90deg, rgba(5,4,3,0.90), rgba(5,4,3,0.36), rgba(5,4,3,0.84)),
-        url("assets/images/negan-cozy-banner.png") center/cover no-repeat;
+        url("assets/images/negan-cozy-banner-no-tagline.png") center/cover no-repeat;
     }
 
     .universe-inner {
@@ -182,27 +182,6 @@
       font-weight: 900;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-    }
-
-    .brand h1 {
-      margin-top: 18px;
-      font-size: clamp(3rem, 8vw, 7rem);
-      line-height: 0.88;
-      letter-spacing: 0;
-      text-transform: uppercase;
-    }
-
-    .lab h1 {
-      background: linear-gradient(90deg, #fff, var(--lab-cyan), var(--lab-pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .cozy h1 {
-      max-width: 760px;
-      background: linear-gradient(90deg, #fff, var(--cozy-amber), var(--cozy-gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
 
     .brand p {
@@ -403,10 +382,6 @@
         padding: 20px;
       }
 
-      .brand h1 {
-        font-size: clamp(2.8rem, 16vw, 4.3rem);
-      }
-
       .brand p {
         font-size: 1rem;
       }
@@ -442,11 +417,10 @@
 
   <main class="page">
     <section class="split-hero" aria-label="Univers NEGAN LAB et NEGAN & COZY">
-      <article class="universe lab" aria-labelledby="lab-title">
+      <article class="universe lab" aria-label="NEGAN LAB">
         <div class="universe-inner">
           <div class="brand">
             <span class="brand-kicker"><i class="fa-solid fa-bolt"></i> Tech - Création - Streaming</span>
-            <h1 id="lab-title">NEGAN LAB</h1>
             <p>La partie créative : matos, setup, idées, création de contenu et coulisses streaming. Ici, on construit, on teste, on partage et on fait évoluer le projet.</p>
             <div class="actions" aria-label="Liens NEGAN LAB">
               <a class="pill youtube" href="https://www.youtube.com/@negan_lab" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube LAB</a>
@@ -462,11 +436,10 @@
         </div>
       </article>
 
-      <article class="universe cozy" aria-labelledby="cozy-title">
+      <article class="universe cozy" aria-label="NEGAN & COZY">
         <div class="universe-inner">
           <div class="brand">
             <span class="brand-kicker"><i class="fa-solid fa-gamepad"></i> Jeux solo & bonnes vibes</span>
-            <h1 id="cozy-title">NEGAN & COZY</h1>
             <p>La chaîne gaming pure : jeux solo, ambiance posée, commentaires, découvertes et moments fun. On joue, on commente, on rigole.</p>
             <div class="actions" aria-label="Liens NEGAN & COZY">
               <a class="pill youtube" href="https://www.youtube.com/@negancozy" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube Cozy</a>
