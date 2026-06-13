@@ -168,15 +168,6 @@
       min-height: 470px;
     }
 
-    .cozy .brand {
-      order: 2;
-    }
-
-    .cozy .mascot-card {
-      order: 1;
-      justify-self: start;
-    }
-
     .brand-kicker {
       display: inline-flex;
       width: fit-content;
@@ -193,51 +184,73 @@
       text-transform: uppercase;
     }
 
-    .brand p {
-      max-width: 690px;
+    .brand h1 {
       margin-top: 18px;
-      color: rgba(255,255,255,0.78);
-      font-size: clamp(1.12rem, 2.4vw, 1.55rem);
-      line-height: 1.65;
-      font-weight: 800;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.88;
+      letter-spacing: 0;
+      text-transform: uppercase;
     }
 
-    .mascot-card {
+    .lab h1 {
+      background: linear-gradient(90deg, #fff, var(--lab-cyan), var(--lab-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cozy h1 {
+      max-width: 760px;
+      background: linear-gradient(90deg, #fff, var(--cozy-amber), var(--cozy-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand p {
+      max-width: 690px;
+      margin-top: 16px;
+      color: rgba(255,255,255,0.78);
+      font-size: 1.07rem;
+      line-height: 1.65;
+    }
+
+    .profile-card {
       justify-self: end;
-      width: min(100%, 360px);
-      min-height: 320px;
-      display: flex;
-      align-items: end;
-      justify-content: center;
-      padding: 0;
+      width: min(100%, 340px);
+      padding: 18px;
       border: 1px solid rgba(255,255,255,0.14);
       border-radius: 20px;
       background: rgba(6,8,14,0.70);
       backdrop-filter: blur(14px);
       box-shadow: 0 22px 70px rgba(0,0,0,0.34);
-      overflow: hidden;
     }
 
-    .mascot-img {
-      width: 100%;
-      height: 100%;
+    .profile-img {
+      width: 118px;
+      height: 118px;
       display: block;
-      object-fit: contain;
-      object-position: bottom center;
-      filter: drop-shadow(0 24px 34px rgba(0,0,0,0.45));
+      margin-bottom: 16px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #111827;
+      border: 3px solid rgba(255,255,255,0.82);
+      box-shadow: 0 0 26px rgba(255,255,255,0.20);
     }
 
-    .lab .mascot-card {
-      background:
-        radial-gradient(circle at 50% 44%, rgba(169,112,255,0.26), transparent 42%),
-        rgba(6,8,14,0.68);
+    .cozy .profile-img {
+      border-color: var(--cozy-gold);
+      box-shadow: 0 0 28px rgba(214,168,63,0.44);
     }
 
-    .cozy .mascot-card {
-      background:
-        radial-gradient(circle at 46% 48%, rgba(214,168,63,0.22), transparent 44%),
-        rgba(8,7,6,0.70);
-      border-color: rgba(214,168,63,0.28);
+    .profile-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .profile-card p {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
     }
 
     .actions {
@@ -364,13 +377,8 @@
         min-height: auto;
       }
 
-      .mascot-card {
+      .profile-card {
         justify-self: start;
-      }
-
-      .cozy .brand,
-      .cozy .mascot-card {
-        order: initial;
       }
 
       .grid {
@@ -395,13 +403,21 @@
         padding: 20px;
       }
 
+      .brand h1 {
+        font-size: clamp(2.8rem, 16vw, 4.3rem);
+      }
+
       .brand p {
         font-size: 1rem;
       }
 
-      .mascot-card {
+      .profile-card {
         width: 100%;
-        min-height: 280px;
+      }
+
+      .profile-img {
+        width: 96px;
+        height: 96px;
       }
 
       .actions {
@@ -426,10 +442,11 @@
 
   <main class="page">
     <section class="split-hero" aria-label="Univers NEGAN LAB et NEGAN & COZY">
-      <article class="universe lab" aria-label="NEGAN LAB">
+      <article class="universe lab" aria-labelledby="lab-title">
         <div class="universe-inner">
           <div class="brand">
             <span class="brand-kicker"><i class="fa-solid fa-bolt"></i> Tech - Création - Streaming</span>
+            <h1 id="lab-title">NEGAN LAB</h1>
             <p>La partie créative : matos, setup, idées, création de contenu et coulisses streaming. Ici, on construit, on teste, on partage et on fait évoluer le projet.</p>
             <div class="actions" aria-label="Liens NEGAN LAB">
               <a class="pill youtube" href="https://www.youtube.com/@negan_lab" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube LAB</a>
@@ -437,16 +454,19 @@
             </div>
           </div>
 
-          <aside class="mascot-card" aria-label="Mascotte robot NEGAN LAB">
-            <img class="mascot-img lab-mascot" src="assets/images/negan-lab-robot-mascot.png" alt="Mascotte robot NEGAN LAB">
+          <aside class="profile-card" aria-label="Profil NEGAN LAB">
+            <img class="profile-img" src="assets/images/profil.png" alt="Profil NEGAN LAB">
+            <strong>NEGAN LAB</strong>
+            <p>Tech, création, streaming et sélection de matériel pour faire grandir l'univers.</p>
           </aside>
         </div>
       </article>
 
-      <article class="universe cozy" aria-label="NEGAN & COZY">
+      <article class="universe cozy" aria-labelledby="cozy-title">
         <div class="universe-inner">
           <div class="brand">
             <span class="brand-kicker"><i class="fa-solid fa-gamepad"></i> Jeux solo & bonnes vibes</span>
+            <h1 id="cozy-title">NEGAN & COZY</h1>
             <p>La chaîne gaming pure : jeux solo, ambiance posée, commentaires, découvertes et moments fun. On joue, on commente, on rigole.</p>
             <div class="actions" aria-label="Liens NEGAN & COZY">
               <a class="pill youtube" href="https://www.youtube.com/@negancozy" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube Cozy</a>
@@ -455,8 +475,10 @@
             </div>
           </div>
 
-          <aside class="mascot-card" aria-label="Mascotte loup NEGAN & COZY">
-            <img class="mascot-img cozy-mascot" src="assets/images/negan-cozy-wolf-right.png" alt="Mascotte loup NEGAN & COZY pointant vers la droite">
+          <aside class="profile-card" aria-label="Profil NEGAN & COZY">
+            <img class="profile-img" src="assets/images/negan-cozy-profile.png" alt="Profil NEGAN & COZY">
+            <strong>NEGAN & COZY</strong>
+            <p>Gaming solo, bonnes vibes, réactions et sessions tranquilles avec la communauté.</p>
           </aside>
         </div>
       </article>
