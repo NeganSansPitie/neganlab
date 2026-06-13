@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playlist NEGAN & COZY</title>
+  <meta name="description" content="Playlist musicale NEGAN & COZY en écoute directe." />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --panel: rgba(14, 13, 12, 0.90);
+      --line: rgba(255,255,255,0.12);
+      --text: #f7f8ff;
+      --muted: #b7b0a3;
+      --gold: #d6a83f;
+      --amber: #ffbf45;
+      --shadow: 0 24px 70px rgba(0,0,0,0.36);
+      --radius: 24px;
+      --active: rgba(214,168,63,0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(214,168,63,0.20), transparent 25%),
+        linear-gradient(180deg, #050403 0%, #11100d 58%, #060504 100%);
+    }
+
+    .page { max-width: 1480px; margin: 0 auto; padding: 10px 18px 34px; }
+    .hero, .album-panel, .playlist-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero { overflow: hidden; margin-bottom: 24px; }
+    .hero-banner { width: 100%; height: 300px; object-fit: cover; display: block; }
+    .hero-body { display: flex; justify-content: space-between; gap: 24px; padding: 28px; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--amber); font-weight: 800; text-decoration: none; }
+    .hero-title { font-size: clamp(2rem, 6vw, 4rem); line-height: 0.95; margin-bottom: 12px; text-transform: uppercase; }
+    .hero-title span { color: var(--amber); }
+    .hero-text { color: var(--muted); line-height: 1.6; max-width: 620px; }
+
+    .playlist-layout { display: grid; grid-template-columns: 400px 1fr; gap: 22px; }
+    .album-panel { padding: 20px; position: sticky; top: 18px; height: fit-content; }
+    .cover-shell {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      background: radial-gradient(circle at center, rgba(214,168,63,0.16), transparent 34%), #080706;
+    }
+
+    .cover-shell img { width: 100%; height: 100%; object-fit: contain; border-radius: 18px; }
+    h2 { font-size: 1.8rem; margin-bottom: 10px; }
+    .album-panel p, .playlist-panel p { color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+    .album-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .album-pill { padding: 9px 13px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); }
+    .controls-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .control-btn {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 15px;
+      background: rgba(255,255,255,0.06);
+      color: white;
+      cursor: pointer;
+      font-weight: 800;
+      padding: 12px 15px;
+    }
+
+    .control-btn.primary, .control-btn.active {
+      border: none;
+      background: linear-gradient(135deg, var(--amber), var(--gold));
+      color: #111;
+    }
+
+    .player-box { border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 14px; background: rgba(255,255,255,0.04); }
+    .player-label { color: rgba(255,255,255,0.74); margin-bottom: 10px; font-size: 0.92rem; }
+    audio { width: 100%; }
+    .playlist-panel { padding: 22px; }
+    .playlist-panel h3 { font-size: 1.7rem; margin-bottom: 8px; }
+    .track-list { display: grid; gap: 12px; }
+    .track-item {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      color: white;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .track-item.active { background: var(--active); border-color: rgba(214,168,63,0.44); }
+    .track-number { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; background: rgba(214,168,63,0.18); font-weight: 900; }
+    .track-meta strong { display: block; margin-bottom: 6px; }
+    .track-meta span { color: var(--muted); line-height: 1.45; font-size: 0.94rem; }
+    .track-state { white-space: nowrap; color: rgba(255,255,255,0.72); font-size: 0.92rem; }
+
+    @media (max-width: 1050px) {
+      .playlist-layout { grid-template-columns: 1fr; }
+      .album-panel { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 8px 10px 24px; }
+      .hero-banner { height: 190px; }
+      .hero-body { flex-direction: column; padding: 18px; }
+      .album-panel, .playlist-panel { padding: 16px; }
+      .controls-row { display: grid; grid-template-columns: 1fr 1fr; }
+      .track-item { grid-template-columns: 46px 1fr; }
+      .track-state { grid-column: 2; }
+      .track-number { width: 46px; height: 46px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/negan-cozy-banner.png" alt="Bannière NEGAN & COZY">
+      <div class="hero-body">
+        <a class="back-link" href="musique-negan-cozy.html"><i class="fa-solid fa-house"></i> Musique</a>
+        <div>
+          <h1 class="hero-title">Playlist <span>NEGAN & COZY</span></h1>
+          <p class="hero-text">Lance la playlist complète, choisis un titre ou active le mode aléatoire.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="playlist-layout">
+      <aside class="album-panel">
+        <div class="cover-shell">
+          <img src="../assets/images/negan-cozy-profile.png" alt="Pochette NEGAN & COZY">
+        </div>
+        <h2>Playlist NEGAN & COZY</h2>
+        <p>Une collection de morceaux liés à l'univers Cozy, pensée pour rester écoutable directement sur le site.</p>
+        <div class="album-meta">
+          <span class="album-pill">11 titres</span>
+          <span class="album-pill">Lecture continue</span>
+          <span class="album-pill">Mode aléatoire</span>
+          <span class="album-pill" id="playlistCounter">0 lecture</span>
+        </div>
+        <div class="controls-row">
+          <button class="control-btn primary" id="playAlbumBtn" type="button">Lancer</button>
+          <button class="control-btn" id="shuffleBtn" type="button">Aléatoire : non</button>
+        </div>
+        <div class="player-box">
+          <div class="player-label" id="currentTrackLabel">Titre en cours : Hymne NEGAN & COZY.</div>
+          <audio id="albumPlayer" controls preload="none"></audio>
+        </div>
+      </aside>
+
+      <section class="playlist-panel">
+        <h3>Les titres</h3>
+        <p>Clique sur un titre pour l'écouter. Les compteurs se mettent à jour quand la lecture démarre.</p>
+        <div class="track-list" id="trackList"></div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const PLAYLIST_TOTAL_KEY = "negan_cozy_playlist_total_plays";
+    const TRACK_COUNTS_KEY = "negan_cozy_playlist_track_plays";
+    const tracks = [
+      { title: "Hymne NEGAN & COZY", note: "Une ouverture pour poser l'identité et l'énergie du projet.", src: "https://cdn1.suno.ai/ff676112-4f96-48b7-86a3-187a70427ef2.mp3" },
+      { title: "La team en route", note: "Un morceau communautaire avec un ton direct et assumé.", src: "https://cdn1.suno.ai/dfdd4809-f63b-4a87-92fe-9fe2cdbfeecf.mp3" },
+      { title: "Réveillez-vous", note: "Un titre qui pousse à réagir, se lever et avancer ensemble.", src: "https://cdn1.suno.ai/467f5381-d200-4a44-996d-33410254f714.mp3" },
+      { title: "Liège dans le sang", note: "Un morceau ancré dans les racines, la fierté et l'appartenance.", src: "https://cdn1.suno.ai/1d25f4cf-7489-4760-a405-ae77a56e1d44.mp3" },
+      { title: "Sans frontières", note: "Une vision plus large de la communauté, sans limite et sans filtre.", src: "https://cdn1.suno.ai/503f9fe3-74c6-4249-83a2-eb44adb6bf36.mp3" },
+      { title: "Oufti la team !", note: "Un titre régional, spontané et marqué par ton identité.", src: "https://cdn1.suno.ai/0e4584a3-c350-4973-8107-553816800795.mp3" },
+      { title: "Ma réputation", note: "Un morceau plus personnel sur l'image, le regard des autres et le caractère.", src: "https://cdn1.suno.ai/f69501c9-f155-4300-845a-b76c82739003.mp3" },
+      { title: "LÈVE TOI", note: "Un titre énergique sur la réaction, le mouvement et le dépassement.", src: "https://cdn1.suno.ai/d75a953c-d718-47d8-bf4a-3914a63113af.mp3" },
+      { title: "ON EST PAS CON", note: "Un morceau frontal, direct, avec une énergie de réponse.", src: "https://cdn1.suno.ai/1768147f-b3f6-4cb2-919e-d02b10e11d56.mp3" },
+      { title: "La vibe continue", note: "Un morceau fun et reconnaissable pour prolonger l'ambiance.", src: "https://cdn1.suno.ai/1240fcbb-8f38-4290-a30e-ee4d6aabdfed.mp3" },
+      { title: "NEGAN & COZY, la signature", note: "Un titre final pensé comme une signature musicale du projet.", src: "https://cdn1.suno.ai/d926e077-e01f-4768-bce7-5b1374439a83.mp3" }
+    ];
+
+    const player = document.getElementById("albumPlayer");
+    const trackList = document.getElementById("trackList");
+    const currentTrackLabel = document.getElementById("currentTrackLabel");
+    const playAlbumBtn = document.getElementById("playAlbumBtn");
+    const shuffleBtn = document.getElementById("shuffleBtn");
+    const playlistCounter = document.getElementById("playlistCounter");
+    let currentIndex = 0;
+    let shuffleMode = false;
+    let shufflePool = [];
+    let countedForCurrentSource = false;
+
+    function pluralize(value) { return value > 1 ? "lectures" : "lecture"; }
+    function getTrackCounts() { return JSON.parse(localStorage.getItem(TRACK_COUNTS_KEY) || "{}"); }
+    function setTrackCounts(value) { localStorage.setItem(TRACK_COUNTS_KEY, JSON.stringify(value)); }
+    function getPlaylistTotal() { return Number(localStorage.getItem(PLAYLIST_TOTAL_KEY) || 0); }
+    function setPlaylistTotal(value) { localStorage.setItem(PLAYLIST_TOTAL_KEY, String(value)); }
+    function refreshCounters() { playlistCounter.textContent = `${getPlaylistTotal()} ${pluralize(getPlaylistTotal())}`; }
+    function formatNumber(index) { return String(index + 1).padStart(2, "0"); }
+    function escapeHtml(value) {
+      return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+    function renderTracks() {
+      const counts = getTrackCounts();
+      trackList.innerHTML = tracks.map((track, index) => {
+        const plays = Number(counts[index] || 0);
+        return `
+          <button class="track-item${index === currentIndex ? " active" : ""}" data-index="${index}" type="button">
+            <div class="track-number">${formatNumber(index)}</div>
+            <div class="track-meta">
+              <strong>${escapeHtml(track.title)}</strong>
+              <span>${escapeHtml(track.note)}</span>
+            </div>
+            <div class="track-state">${plays} ${pluralize(plays)}</div>
+          </button>
+        `;
+      }).join("");
+      trackList.querySelectorAll(".track-item").forEach((button) => {
+        button.addEventListener("click", () => playTrack(Number(button.dataset.index), true));
+      });
+    }
+    function playTrack(index, autoplay = false) {
+      currentIndex = index;
+      countedForCurrentSource = false;
+      player.src = tracks[index].src;
+      currentTrackLabel.textContent = `Titre en cours : ${tracks[index].title}`;
+      renderTracks();
+      if (autoplay) player.play().catch(() => {});
+    }
+    function registerPlay() {
+      if (countedForCurrentSource) return;
+      const counts = getTrackCounts();
+      counts[currentIndex] = Number(counts[currentIndex] || 0) + 1;
+      setTrackCounts(counts);
+      setPlaylistTotal(getPlaylistTotal() + 1);
+      countedForCurrentSource = true;
+      refreshCounters();
+      renderTracks();
+    }
+    function refillShufflePool() {
+      shufflePool = tracks.map((_, index) => index).filter((index) => index !== currentIndex).sort(() => Math.random() - 0.5);
+    }
+    function nextTrack() {
+      if (shuffleMode) {
+        if (tracks.length === 1) { playTrack(0, true); return; }
+        if (shufflePool.length === 0) refillShufflePool();
+        playTrack(shufflePool.shift(), true);
+        return;
+      }
+      playTrack((currentIndex + 1) % tracks.length, true);
+    }
+    playAlbumBtn.addEventListener("click", () => playTrack(currentIndex, true));
+    shuffleBtn.addEventListener("click", () => {
+      shuffleMode = !shuffleMode;
+      shuffleBtn.textContent = `Aléatoire : ${shuffleMode ? "oui" : "non"}`;
+      shuffleBtn.classList.toggle("active", shuffleMode);
+      if (shuffleMode) refillShufflePool();
+    });
+    player.addEventListener("play", registerPlay);
+    player.addEventListener("ended", nextTrack);
+    refreshCounters();
+    playTrack(0, false);
+  </script>
+</body>
+</html>

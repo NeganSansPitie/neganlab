@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Musique NEGAN & COZY</title>
+  <meta name="description" content="Singles, albums et écoutes directes de l'univers NEGAN & COZY." />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --panel: rgba(14, 13, 12, 0.88);
+      --line: rgba(255,255,255,0.12);
+      --text: #f7f8ff;
+      --muted: #b7b0a3;
+      --gold: #d6a83f;
+      --amber: #ffbf45;
+      --cyan: #12e7ff;
+      --shadow: 0 24px 70px rgba(0,0,0,0.36);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(214,168,63,0.18), transparent 24%),
+        radial-gradient(circle at 80% 20%, rgba(18,231,255,0.10), transparent 22%),
+        linear-gradient(180deg, #050403 0%, #11100d 58%, #060504 100%);
+    }
+
+    .page { max-width: 1480px; margin: 0 auto; padding: 10px 18px 34px; }
+    .hero, .section-shell {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero { margin-bottom: 26px; }
+    .hero-banner { width: 100%; height: 320px; object-fit: cover; display: block; }
+    .hero-body {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 28px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--amber);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 6vw, 4.6rem);
+      line-height: 0.95;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #fff, var(--amber), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text, .section-shell p {
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .section-shell { padding: 24px; margin-bottom: 24px; }
+    .section-shell h2 { font-size: 2rem; margin-bottom: 10px; }
+    .music-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 20px; }
+
+    .music-card {
+      display: block;
+      overflow: hidden;
+      color: inherit;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.045);
+      box-shadow: var(--shadow);
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .music-card:hover { transform: translateY(-4px); border-color: rgba(214,168,63,0.42); }
+    .cover-wrap {
+      position: relative;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(circle at center, rgba(214,168,63,0.16), transparent 35%), #080706;
+    }
+
+    .cover-wrap.single { min-height: 360px; }
+    .cover { width: 100%; height: 100%; max-height: 420px; object-fit: contain; border-radius: 20px; display: block; }
+    .cover-wrap.single .cover { max-height: 320px; }
+
+    .flag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 2;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.62);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .content { padding: 22px; }
+    .content h3 { font-size: 1.55rem; margin-bottom: 10px; }
+    .content p { color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
+    .meta { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pill {
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-size: 0.92rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      margin-top: 18px;
+      padding: 13px 18px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--amber), var(--gold));
+      color: #111;
+      font-weight: 900;
+    }
+
+    @media (max-width: 900px) {
+      .hero-body, .music-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 8px 10px 24px; }
+      .hero-banner { height: 190px; }
+      .hero-body, .section-shell, .content { padding: 18px; }
+      .cover-wrap, .cover-wrap.single { min-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <img class="hero-banner" src="../assets/images/negan-cozy-banner.png" alt="Bannière NEGAN & COZY">
+      <div class="hero-body">
+        <a class="back-link" href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <div>
+          <h1 class="hero-title">Musique NEGAN & COZY</h1>
+          <p class="hero-text">Singles, albums et morceaux du projet, regroupés dans une ambiance gaming, fun et bonne vibe.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <h2>Collection musicale</h2>
+      <p>Les titres restent écoutables directement sur le site, avec les compteurs de lecture locaux.</p>
+      <div class="music-grid">
+        <a class="music-card" href="musique-negan-cozy-playlist.html">
+          <div class="cover-wrap">
+            <span class="flag">Playlist disponible</span>
+            <img class="cover" src="../assets/images/negan-cozy-profile.png" alt="Playlist NEGAN & COZY">
+          </div>
+          <div class="content">
+            <h3>Playlist NEGAN & COZY</h3>
+            <p>Une sélection complète de morceaux dans l'univers Cozy, à lancer en continu ou titre par titre.</p>
+            <div class="meta">
+              <span class="pill">11 titres</span>
+              <span class="pill">Écoute directe</span>
+              <span class="pill" id="playlistCountCard">0 lecture</span>
+            </div>
+            <span class="cta">Ouvrir la playlist</span>
+          </div>
+        </a>
+
+        <a class="music-card" href="single-les-pauvres-menervent.html">
+          <div class="cover-wrap single">
+            <span class="flag">Single</span>
+            <img class="cover" src="../assets/images/Les pauvres m'énerve.png" alt="Les Pauvres M'énervent">
+          </div>
+          <div class="content">
+            <h3>Les Pauvres M'énervent</h3>
+            <p>Single disponible en lecture directe dans la collection musicale NEGAN & COZY.</p>
+            <div class="meta">
+              <span class="pill">7 mai 2026</span>
+              <span class="pill" id="singleCountCard">0 lecture</span>
+            </div>
+            <span class="cta">Écouter le single</span>
+          </div>
+        </a>
+
+        <a class="music-card" href="single-les-michtoneuses.html">
+          <div class="cover-wrap single">
+            <span class="flag">Single</span>
+            <img class="cover" src="../assets/images/Les michtoneuses.jpeg" alt="Les Michtoneuses">
+          </div>
+          <div class="content">
+            <h3>Les Michtoneuses</h3>
+            <p>Single disponible en lecture directe dans la collection musicale NEGAN & COZY.</p>
+            <div class="meta">
+              <span class="pill">9 mai 2026</span>
+              <span class="pill" id="michtoneusesCountCard">0 lecture</span>
+            </div>
+            <span class="cta">Écouter le single</span>
+          </div>
+        </a>
+
+        <a class="music-card" href="single-jroule-en-bm.html">
+          <div class="cover-wrap single">
+            <span class="flag">Single</span>
+            <img class="cover" src="../assets/images/J'roule en BM.jpeg" alt="J'roule en BM">
+          </div>
+          <div class="content">
+            <h3>J'roule en BM</h3>
+            <p>Single disponible en lecture directe dans la collection musicale NEGAN & COZY.</p>
+            <div class="meta">
+              <span class="pill">7 mai 2026</span>
+              <span class="pill" id="jrouleCountCard">0 lecture</span>
+            </div>
+            <span class="cta">Écouter le single</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const playlistKey = "negan_cozy_playlist_total_plays";
+    const singleKey = "negan_single_lespauvres_total_plays";
+    const michtoneusesKey = "negan_single_lesmichtoneuses_total_plays";
+    const jrouleKey = "negan_single_jrouleenbm_total_plays";
+
+    function pluralize(count) { return count > 1 ? "lectures" : "lecture"; }
+    function updateCount(id, value) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = `${value} ${pluralize(value)}`;
+    }
+
+    updateCount("playlistCountCard", Number(localStorage.getItem(playlistKey) || 0));
+    updateCount("singleCountCard", Number(localStorage.getItem(singleKey) || 0));
+    updateCount("michtoneusesCountCard", Number(localStorage.getItem(michtoneusesKey) || 0));
+    updateCount("jrouleCountCard", Number(localStorage.getItem(jrouleKey) || 0));
+  </script>
+</body>
+</html>
