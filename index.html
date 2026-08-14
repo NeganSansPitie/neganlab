@@ -1,492 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEGAN LAB & COZY</title>
-  <meta name="description" content="NEGAN LAB pour la tech, la création et le streaming. NEGAN & COZY pour le gaming solo et les bonnes vibes.">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09070e">
+  <meta name="description" content="Negan & Couillons — gaming, vlog et fun.">
+  <title>Negan & Couillons</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
-    :root {
-      --bg: #05070d;
-      --panel: rgba(10, 14, 24, 0.78);
-      --panel-strong: rgba(13, 18, 31, 0.92);
-      --line: rgba(255,255,255,0.12);
-      --text: #f7f8ff;
-      --muted: #aeb5c8;
-      --lab-cyan: #12e7ff;
-      --lab-violet: #a970ff;
-      --lab-pink: #fe2c55;
-      --cozy-gold: #d6a83f;
-      --cozy-amber: #ffbf45;
-      --cozy-smoke: #17130c;
-      --radius: 22px;
-      --shadow: 0 26px 80px rgba(0,0,0,0.42);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 18% 8%, rgba(18,231,255,0.20), transparent 22%),
-        radial-gradient(circle at 82% 20%, rgba(169,112,255,0.18), transparent 26%),
-        radial-gradient(circle at 50% 76%, rgba(214,168,63,0.26), transparent 30%),
-        linear-gradient(180deg, #05070d 0%, #07101c 38%, #100d08 68%, #050403 100%);
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .intro-flash {
-      position: fixed;
-      inset: 0;
-      z-index: 20;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at 38% 42%, rgba(18,231,255,0.26), transparent 28%),
-        radial-gradient(circle at 62% 58%, rgba(214,168,63,0.24), transparent 32%),
-        #020309;
-      animation: introFadeOut 2.5s ease forwards;
-      pointer-events: none;
-    }
-
-    .intro-flash span {
-      color: white;
-      font-size: clamp(2.5rem, 9vw, 7.4rem);
-      font-weight: 900;
-      line-height: 0.95;
-      text-align: center;
-      text-shadow:
-        0 0 12px rgba(255,255,255,0.92),
-        0 0 34px rgba(18,231,255,0.68),
-        0 0 64px rgba(214,168,63,0.48);
-      animation: logoFlash 2.15s cubic-bezier(.16,.84,.24,1) forwards;
-    }
-
-    @keyframes introFadeOut {
-      0%, 74% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes logoFlash {
-      0% {
-        opacity: 0;
-        transform: scale(0.82);
-        filter: blur(18px);
-        letter-spacing: 0.18em;
-      }
-      18% {
-        opacity: 1;
-        filter: blur(0);
-      }
-      34% {
-        opacity: 0.28;
-        text-shadow: none;
-      }
-      44% {
-        opacity: 1;
-        text-shadow:
-          0 0 18px rgba(255,255,255,1),
-          0 0 42px rgba(18,231,255,0.86),
-          0 0 72px rgba(214,168,63,0.62);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-        letter-spacing: 0;
-      }
-    }
-
-    .page {
-      width: min(1220px, 100%);
-      margin: 0 auto;
-      padding: 18px;
-    }
-
-    .split-hero {
-      min-height: calc(100vh - 36px);
-      display: grid;
-      align-content: center;
-      gap: 22px;
-      padding: 12px 0 34px;
-    }
-
-    .universe {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel-strong);
-      box-shadow: var(--shadow);
-      isolation: isolate;
-    }
-
-    .universe::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      opacity: 0.92;
-    }
-
-    .lab::before {
-      background:
-        linear-gradient(90deg, rgba(5,7,13,0.92), rgba(5,7,13,0.46), rgba(5,7,13,0.82)),
-        url("assets/images/banner.png") center/cover no-repeat;
-    }
-
-    .cozy::before {
-      background:
-        linear-gradient(90deg, rgba(5,4,3,0.90), rgba(5,4,3,0.36), rgba(5,4,3,0.84)),
-        url("assets/images/negan-cozy-banner-no-tagline.png") center/cover no-repeat;
-    }
-
-    .universe-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-      gap: 24px;
-      min-height: 430px;
-      align-items: end;
-      padding: clamp(20px, 4vw, 42px);
-    }
-
-    .cozy .universe-inner {
-      min-height: 470px;
-    }
-
-    .brand-kicker {
-      display: inline-flex;
-      width: fit-content;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 999px;
-      background: rgba(0,0,0,0.28);
-      color: rgba(255,255,255,0.74);
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .brand p {
-      max-width: 690px;
-      margin-top: 16px;
-      color: rgba(255,255,255,0.78);
-      font-size: 1.07rem;
-      line-height: 1.65;
-    }
-
-    .profile-card {
-      justify-self: end;
-      width: min(100%, 340px);
-      padding: 18px;
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 20px;
-      background: rgba(6,8,14,0.70);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 22px 70px rgba(0,0,0,0.34);
-    }
-
-    .profile-img {
-      width: 118px;
-      height: 118px;
-      display: block;
-      margin-bottom: 16px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: #111827;
-      border: 3px solid rgba(255,255,255,0.82);
-      box-shadow: 0 0 26px rgba(255,255,255,0.20);
-    }
-
-    .cozy .profile-img {
-      border-color: var(--cozy-gold);
-      box-shadow: 0 0 28px rgba(214,168,63,0.44);
-    }
-
-    .profile-card strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1.2rem;
-    }
-
-    .profile-card p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 0.95rem;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 46px;
-      padding: 12px 16px;
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      color: white;
-      font-weight: 800;
-      text-decoration: none;
-      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-    }
-
-    .pill:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.34);
-      background: rgba(255,255,255,0.14);
-    }
-
-    .pill.youtube { background: linear-gradient(135deg, rgba(255,0,0,0.94), rgba(254,44,85,0.82)); }
-    .pill.tiktok { background: linear-gradient(135deg, rgba(37,244,238,0.80), rgba(254,44,85,0.82)); }
-    .pill.twitch { background: linear-gradient(135deg, rgba(145,70,255,0.92), rgba(86,32,168,0.86)); }
-
-    .site-links {
-      margin-top: 18px;
-      padding: 34px 0 8px;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      color: rgba(255,255,255,0.78);
-      font-size: 0.86rem;
-      font-weight: 900;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .section-title::after {
-      content: "";
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, rgba(214,168,63,0.38), rgba(18,231,255,0.20), transparent);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .card {
-      display: flex;
-      min-height: 160px;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--panel);
-      color: var(--text);
-      text-decoration: none;
-      box-shadow: 0 18px 44px rgba(0,0,0,0.22);
-      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(214,168,63,0.38);
-      background: rgba(255,255,255,0.07);
-    }
-
-    .icon {
-      width: 52px;
-      height: 52px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 16px;
-      font-size: 1.35rem;
-      color: white;
-    }
-
-    .music { background: linear-gradient(135deg, var(--lab-violet), var(--lab-cyan)); }
-    .products { background: linear-gradient(135deg, #ff9f1a, #ff5a1f); }
-    .paypal { background: linear-gradient(135deg, #0070ba, #003087); }
-
-    .card h2 {
-      font-size: 1.05rem;
-      margin-bottom: 7px;
-    }
-
-    .card p {
-      color: var(--muted);
-      line-height: 1.45;
-      font-size: 0.92rem;
-    }
-
-    .footer {
-      margin: 32px 0 8px;
-      color: rgba(255,255,255,0.52);
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 980px) {
-      .universe-inner {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
-      .profile-card {
-        justify-self: start;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .page {
-        padding: 10px;
-      }
-
-      .split-hero {
-        min-height: auto;
-        padding-top: 4px;
-      }
-
-      .universe-inner,
-      .cozy .universe-inner {
-        min-height: 520px;
-        align-items: end;
-        padding: 20px;
-      }
-
-      .brand p {
-        font-size: 1rem;
-      }
-
-      .profile-card {
-        width: 100%;
-      }
-
-      .profile-img {
-        width: 96px;
-        height: 96px;
-      }
-
-      .actions {
-        display: grid;
-        grid-template-columns: 1fr;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        min-height: 132px;
-      }
-    }
+    :root { --ink:#09070e; --pink:#ff287d; --cyan:#20d9f2; --yellow:#ffc52b; --white:#fff8ef; --line:rgba(255,255,255,.16); }
+    * { box-sizing:border-box; } html { background:var(--ink); }
+    body { min-height:100vh; margin:0; overflow-x:hidden; color:var(--white); font-family:Arial,Helvetica,sans-serif;
+      background:radial-gradient(circle at 12% 20%,rgba(255,40,125,.36),transparent 29rem),radial-gradient(circle at 88% 13%,rgba(32,217,242,.30),transparent 28rem),radial-gradient(circle at 56% 100%,rgba(255,197,43,.22),transparent 28rem),var(--ink); }
+    body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.35; background-image:radial-gradient(rgba(255,255,255,.5) 1px,transparent 1px); background-size:4px 4px; mix-blend-mode:soft-light; }
+    .intro { position:fixed; inset:0; z-index:5; display:grid; place-items:center; pointer-events:none; background:var(--ink); animation:out 2.3s ease forwards; }
+    .intro span { color:var(--white); font-size:clamp(2.4rem,10vw,7rem); font-weight:950; font-style:italic; text-align:center; text-shadow:5px 5px var(--pink),-4px -4px var(--cyan); animation:pop 1.5s cubic-bezier(.2,.8,.2,1); }
+    @keyframes pop { from { opacity:0; transform:scale(.55) rotate(-7deg); filter:blur(15px); } 60% { opacity:1; transform:scale(1.06) rotate(1deg); filter:blur(0); } }
+    @keyframes out { 0%,72% { opacity:1; } 100% { opacity:0; visibility:hidden; } }
+    main { position:relative; width:min(1120px,calc(100% - 32px)); margin:auto; padding:24px 0 42px; }
+    .hero { position:relative; min-height:min(700px,calc(100vh - 66px)); display:flex; align-items:flex-end; overflow:hidden; border:2px solid var(--line); border-radius:34px; box-shadow:0 28px 90px rgba(0,0,0,.56),0 0 0 7px rgba(255,40,125,.09);
+      background:linear-gradient(90deg,rgba(9,7,14,.98) 0%,rgba(9,7,14,.60) 46%,rgba(9,7,14,.16) 100%),url("assets/images/negan-couillons-banner.jpg") center/cover no-repeat; }
+    .hero:after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.72; background:linear-gradient(124deg,transparent 44%,rgba(32,217,242,.18) 44.2%,transparent 44.8%),linear-gradient(20deg,transparent 70%,rgba(255,40,125,.2) 70.2%,transparent 70.8%); mix-blend-mode:screen; }
+    .top { position:absolute; top:22px; left:24px; right:24px; z-index:1; display:flex; justify-content:space-between; align-items:center; }
+    .tag { display:inline-flex; gap:9px; align-items:center; padding:9px 14px; border:1px solid var(--line); border-radius:999px; background:rgba(9,7,14,.6); backdrop-filter:blur(10px); font-size:.73rem; font-weight:900; letter-spacing:.15em; text-transform:uppercase; }
+    .tag i { color:var(--yellow); } .monogram { color:#ff86b3; font-weight:950; letter-spacing:.15em; }
+    .copy { position:relative; z-index:1; width:min(700px,100%); padding:clamp(32px,7vw,72px); }
+    .avatar { width:82px; height:82px; margin-bottom:16px; object-fit:cover; border:3px solid var(--white); border-radius:50%; box-shadow:5px 5px 0 var(--pink),-3px -3px 0 var(--cyan); }
+    h1 { margin:0; font-size:clamp(3.7rem,10vw,7.8rem); line-height:.78; letter-spacing:-.075em; font-weight:950; font-style:italic; text-transform:uppercase; }
+    .negan { display:block; color:#ff84b2; text-shadow:6px 6px #64153e,-3px -3px var(--white); } .and { display:inline-block; margin:.08em .1em .03em; color:var(--cyan); font-size:.45em; vertical-align:middle; text-shadow:3px 3px #004954; } .couillons { display:block; color:var(--yellow); text-shadow:6px 6px #765000,-3px -3px var(--white); }
+    .brush { width:min(410px,100%); height:10px; margin:24px 0; border-radius:100% 18% 100% 18%; background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow)); transform:rotate(-2deg); }
+    .subtitle { max-width:480px; margin:0; font-size:clamp(1rem,2vw,1.2rem); line-height:1.55; font-weight:700; color:rgba(255,248,239,.9); }
+    .links { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:42px; }
+    .link { --accent:var(--cyan); position:relative; display:flex; min-height:174px; flex-direction:column; justify-content:space-between; overflow:hidden; padding:24px; border:1px solid var(--line); border-radius:24px; color:var(--white); text-decoration:none; background:rgba(15,13,24,.78); box-shadow:0 18px 48px rgba(0,0,0,.32); transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+    .link:after { content:""; position:absolute; right:-50px; bottom:-62px; width:130px; height:130px; border-radius:50%; background:var(--accent); opacity:.5; }
+    .link:hover { transform:translateY(-7px) rotate(-.5deg); border-color:var(--accent); box-shadow:0 24px 55px rgba(0,0,0,.45),0 0 28px color-mix(in srgb,var(--accent) 30%,transparent); }
+    .link i,.link div { position:relative; z-index:1; } .link i { color:var(--accent); font-size:2rem; } .link strong { display:block; font-size:1.25rem; } .link small { display:block; margin-top:5px; color:rgba(255,248,239,.7); font-size:.9rem; }
+    .youtube { --accent:var(--pink); } .telegram { --accent:var(--yellow); } footer { padding:28px 6px 0; text-align:center; color:rgba(255,248,239,.48); font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; }
+    @media(max-width:720px) { main { width:calc(100% - 20px); padding-top:10px; } .hero { min-height:630px; border-radius:25px; background-position:62% center; } .top { top:16px; left:16px; right:16px; } .copy { padding:28px 22px 32px; background:linear-gradient(0deg,rgba(9,7,14,.86),transparent); } .avatar { width:66px; height:66px; } .links { grid-template-columns:1fr; margin-top:18px; } .link { min-height:130px; flex-direction:row; align-items:center; gap:20px; } .link small { margin-top:2px; } }
+    @media(prefers-reduced-motion:reduce) { .intro,.intro span { animation:none; visibility:hidden; } .link { transition:none; } }
   </style>
 </head>
 <body>
-  <div class="intro-flash" aria-hidden="true">
-    <span>Negan Lab & Cozy</span>
-  </div>
-
-  <main class="page">
-    <section class="split-hero" aria-label="Univers NEGAN LAB et NEGAN & COZY">
-      <article class="universe lab" aria-label="NEGAN LAB">
-        <div class="universe-inner">
-          <div class="brand">
-            <span class="brand-kicker"><i class="fa-solid fa-bolt"></i> Tech - Création - Streaming</span>
-            <p>La partie créative : matos, setup, idées, création de contenu et coulisses streaming. Ici, on construit, on teste, on partage et on fait évoluer le projet.</p>
-            <div class="actions" aria-label="Liens NEGAN LAB">
-              <a class="pill youtube" href="https://www.youtube.com/@negan_lab" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube LAB</a>
-              <a class="pill tiktok" href="https://www.tiktok.com/@neganlabtv" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i> TikTok LAB</a>
-            </div>
-          </div>
-
-          <aside class="profile-card" aria-label="Profil NEGAN LAB">
-            <img class="profile-img" src="assets/images/profil.png" alt="Profil NEGAN LAB">
-            <strong>NEGAN LAB</strong>
-            <p>Tech, création, streaming et sélection de matériel pour faire grandir l'univers.</p>
-          </aside>
-        </div>
-      </article>
-
-      <article class="universe cozy" aria-label="NEGAN & COZY">
-        <div class="universe-inner">
-          <div class="brand">
-            <span class="brand-kicker"><i class="fa-solid fa-gamepad"></i> Jeux solo & bonnes vibes</span>
-            <p>La chaîne gaming pure : jeux solo, ambiance posée, commentaires, découvertes et moments fun. On joue, on commente, on rigole.</p>
-            <div class="actions" aria-label="Liens NEGAN & COZY">
-              <a class="pill youtube" href="https://www.youtube.com/@negancozy" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube Cozy</a>
-              <a class="pill tiktok" href="https://www.tiktok.com/@negancozy" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i> TikTok Cozy</a>
-              <a class="pill twitch" href="https://www.twitch.tv/negancozy" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch"></i> Twitch Cozy</a>
-            </div>
-          </div>
-
-          <aside class="profile-card" aria-label="Profil NEGAN & COZY">
-            <img class="profile-img" src="assets/images/negan-cozy-profile.png" alt="Profil NEGAN & COZY">
-            <strong>NEGAN & COZY</strong>
-            <p>Gaming solo, bonnes vibes, réactions et sessions tranquilles avec la communauté.</p>
-          </aside>
-        </div>
-      </article>
-    </section>
-
-    <section class="site-links" aria-labelledby="site-title">
-      <div class="section-title" id="site-title">Le site</div>
-      <div class="grid">
-        <a class="card" href="pages/musique-negan-cozy.html">
-          <span class="icon music"><i class="fa-solid fa-music"></i></span>
-          <div>
-            <h2>Musique NEGAN & COZY</h2>
-            <p>Singles, albums et écoute directe dans l'univers Cozy.</p>
-          </div>
-        </a>
-
-        <a class="card" href="pages/produits.html">
-          <span class="icon products"><i class="fa-solid fa-bag-shopping"></i></span>
-          <div>
-            <h2>Produits</h2>
-            <p>La sélection de matériel et les liens utiles.</p>
-          </div>
-        </a>
-
-        <a class="card" href="pages/paypal.html">
-          <span class="icon paypal"><i class="fa-brands fa-paypal"></i></span>
-          <div>
-            <h2>PayPal</h2>
-            <p>Soutenir NEGAN & COZY avec un don PayPal.</p>
-          </div>
-        </a>
+  <div class="intro" aria-hidden="true"><span>Negan &amp; Couillons</span></div>
+  <main>
+    <section class="hero" aria-labelledby="site-title">
+      <div class="top"><span class="tag"><i class="fa-solid fa-crown"></i> Gaming · Vlog · Fun</span><span class="monogram">N&amp;C</span></div>
+      <div class="copy">
+        <img class="avatar" src="assets/images/negan-couillons-profile.jpg" alt="">
+        <h1 id="site-title"><span class="negan">Negan</span><span class="and">&amp;</span><span class="couillons">Couillons</span></h1>
+        <div class="brush"></div><p class="subtitle">Du gaming, du vlog, du fun — et surtout zéro prise de tête. Rejoins la bande là où ça bouge.</p>
       </div>
     </section>
-
-    <p class="footer">&copy; 2026 NEGAN LAB & COZY. Tous droits réservés.</p>
+    <nav class="links" aria-label="Retrouver Negan & Couillons">
+      <a class="link" href="https://www.tiktok.com/@negan.be" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" aria-hidden="true"></i><div><strong>TikTok</strong><small>@negan.be</small></div></a>
+      <a class="link youtube" href="https://www.youtube.com/@neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><div><strong>YouTube</strong><small>Negan & Couillons</small></div></a>
+      <a class="link telegram" href="https://t.me/+OvAFN6fbR44xYTJk" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram" aria-hidden="true"></i><div><strong>Canal Telegram</strong><small>Rejoins la communauté</small></div></a>
+    </nav>
+    <footer>© 2026 Negan & Couillons</footer>
   </main>
 </body>
 </html>
