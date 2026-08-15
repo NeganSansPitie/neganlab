@@ -31,12 +31,12 @@
     .negan { display:block; color:#ff84b2; text-shadow:6px 6px #64153e,-3px -3px var(--white); } .and { display:inline-block; margin:.08em .1em .03em; color:var(--cyan); font-size:.45em; vertical-align:middle; text-shadow:3px 3px #004954; } .couillons { display:block; color:var(--yellow); text-shadow:6px 6px #765000,-3px -3px var(--white); }
     .brush { width:min(410px,100%); height:10px; margin:24px 0; border-radius:100% 18% 100% 18%; background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow)); transform:rotate(-2deg); }
     .subtitle { max-width:480px; margin:0; font-size:clamp(1rem,2vw,1.2rem); line-height:1.55; font-weight:700; color:rgba(255,248,239,.9); }
-    .links { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:42px; }
+    .links { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:42px; }
     .link { --accent:var(--cyan); position:relative; display:flex; min-height:174px; flex-direction:column; justify-content:space-between; overflow:hidden; padding:24px; border:1px solid var(--line); border-radius:24px; color:var(--white); text-decoration:none; background:rgba(15,13,24,.78); box-shadow:0 18px 48px rgba(0,0,0,.32); transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
     .link:after { content:""; position:absolute; right:-50px; bottom:-62px; width:130px; height:130px; border-radius:50%; background:var(--accent); opacity:.5; }
     .link:hover { transform:translateY(-7px) rotate(-.5deg); border-color:var(--accent); box-shadow:0 24px 55px rgba(0,0,0,.45),0 0 28px color-mix(in srgb,var(--accent) 30%,transparent); }
     .link i,.link div { position:relative; z-index:1; } .link i { color:var(--accent); font-size:2rem; } .link strong { display:block; font-size:1.25rem; } .link small { display:block; margin-top:5px; color:rgba(255,248,239,.7); font-size:.9rem; }
-    .youtube { --accent:var(--pink); } .telegram { --accent:var(--yellow); } footer { padding:28px 6px 0; text-align:center; color:rgba(255,248,239,.48); font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; }
+    .youtube { --accent:var(--pink); } .telegram { --accent:var(--yellow); } .tipeee { --accent:#ff7b22; } footer { padding:28px 6px 0; text-align:center; color:rgba(255,248,239,.48); font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; }
     @media(max-width:720px) { main { width:calc(100% - 20px); padding-top:10px; } .hero { min-height:630px; border-radius:25px; background-position:62% center; } .top { top:16px; left:16px; right:16px; } .copy { padding:28px 22px 32px; background:linear-gradient(0deg,rgba(9,7,14,.86),transparent); } .avatar { width:66px; height:66px; } .links { grid-template-columns:1fr; margin-top:18px; } .link { min-height:130px; flex-direction:row; align-items:center; gap:20px; } .link small { margin-top:2px; } }
     @media(prefers-reduced-motion:reduce) { .intro,.intro span { animation:none; visibility:hidden; } .link { transition:none; } }
   </style>
@@ -56,6 +56,7 @@
       <a class="link" href="https://www.tiktok.com/@negan.be" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" aria-hidden="true"></i><div><strong>TikTok</strong><small>@negan.be</small></div></a>
       <a class="link youtube" href="https://www.youtube.com/@neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><div><strong>YouTube</strong><small>Negan & Couillons</small></div></a>
       <a class="link telegram" href="https://t.me/+OvAFN6fbR44xYTJk" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram" aria-hidden="true"></i><div><strong>Canal Telegram</strong><small>Rejoins la communauté</small></div></a>
+      <a class="link tipeee" href="https://fr.tipeee.com/negan-couillons/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-heart" aria-hidden="true"></i><div><strong>Tipeee</strong><small>Soutenir la chaîne</small></div></a>
     </nav>
     <footer>© 2026 Negan & Couillons</footer>
   </main>
