@@ -31,6 +31,20 @@
     .negan { display:block; color:#ff84b2; text-shadow:6px 6px #64153e,-3px -3px var(--white); } .and { display:inline-block; margin:.08em .1em .03em; color:var(--cyan); font-size:.45em; vertical-align:middle; text-shadow:3px 3px #004954; } .couillons { display:block; color:var(--yellow); text-shadow:6px 6px #765000,-3px -3px var(--white); }
     .brush { width:min(410px,100%); height:10px; margin:24px 0; border-radius:100% 18% 100% 18%; background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow)); transform:rotate(-2deg); }
     .subtitle { max-width:480px; margin:0; font-size:clamp(1rem,2vw,1.2rem); line-height:1.55; font-weight:700; color:rgba(255,248,239,.9); }
+
+    .planning { margin-top:42px; padding:clamp(24px,4vw,38px); border:1px solid var(--line); border-radius:28px; background:linear-gradient(135deg,rgba(255,40,125,.14),rgba(32,217,242,.10) 52%,rgba(255,197,43,.12)); box-shadow:0 18px 48px rgba(0,0,0,.25); }
+    .planning-head { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:20px; }
+    .planning h2 { margin:0; font-size:clamp(1.7rem,4vw,2.5rem); font-style:italic; text-transform:uppercase; letter-spacing:-.04em; }
+    .planning h2 i { color:var(--yellow); margin-right:.24em; }
+    .planning-head p { margin:0; color:rgba(255,248,239,.72); font-weight:700; }
+    .schedule { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+    .live-card { min-height:128px; display:flex; flex-direction:column; justify-content:space-between; padding:18px; border:1px solid rgba(255,255,255,.14); border-radius:18px; color:var(--white); text-decoration:none; background:rgba(9,7,14,.62); }
+    a.live-card { transition:transform .18s ease,border-color .18s ease; }
+    a.live-card:hover { transform:translateY(-4px); border-color:var(--cyan); }
+    .live-date { color:var(--yellow); font-size:.79rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .live-title { font-size:1.1rem; font-weight:900; } .live-note { margin-top:5px; color:rgba(255,248,239,.7); font-size:.9rem; }
+    .schedule-empty { grid-column:1 / -1; padding:18px; border:1px dashed rgba(255,255,255,.24); border-radius:16px; color:rgba(255,248,239,.75); text-align:center; }
+
     .links { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-top:42px; }
     .link { --accent:var(--cyan); position:relative; display:flex; min-height:174px; flex-direction:column; justify-content:space-between; overflow:hidden; padding:24px; border:1px solid var(--line); border-radius:24px; color:var(--white); text-decoration:none; background:rgba(15,13,24,.78); box-shadow:0 18px 48px rgba(0,0,0,.32); transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
     .link:after { content:""; position:absolute; right:-50px; bottom:-62px; width:130px; height:130px; border-radius:50%; background:var(--accent); opacity:.5; }
@@ -50,6 +64,15 @@
         <img class="avatar" src="assets/images/negan-couillons-profile.jpg" alt="">
         <h1 id="site-title"><span class="negan">Negan</span><span class="and">&amp;</span><span class="couillons">Couillons</span></h1>
         <div class="brush"></div><p class="subtitle">Du gaming, du vlog, du fun — et surtout zéro prise de tête. Rejoins la bande là où ça bouge.</p>
+      </div>
+    </section>
+    <section class="planning" aria-labelledby="planning-title">
+      <div class="planning-head">
+        <h2 id="planning-title"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i>Planning des lives</h2>
+        <p>À très vite en direct !</p>
+      </div>
+      <div class="schedule" id="live-schedule" aria-live="polite">
+        <div class="schedule-empty">Le prochain planning arrive bientôt.</div>
       </div>
     </section>
     <nav class="links" aria-label="Retrouver Negan & Couillons">
@@ -73,6 +96,39 @@
           }
         })
         .catch(() => {});
+    }());
+  </script>
+  <script>
+    (function () {
+      const schedule = document.getElementById("live-schedule");
+      const dateFormat = new Intl.DateTimeFormat("fr-BE", { weekday: "long", day: "numeric", month: "long" });
+      const empty = message => {
+        schedule.replaceChildren();
+        const item = document.createElement("div");
+        item.className = "schedule-empty";
+        item.textContent = message;
+        schedule.append(item);
+      };
+      fetch("planning.json?v=" + Date.now(), { cache: "no-store" })
+        .then(response => response.ok ? response.json() : Promise.reject())
+        .then(data => {
+          const lives = Array.isArray(data.lives) ? data.lives.filter(live => live.date && live.title) : [];
+          if (!lives.length) return empty("Le prochain planning arrive bientôt.");
+          schedule.replaceChildren();
+          lives.sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).forEach(live => {
+            const card = document.createElement(live.url ? "a" : "article");
+            card.className = "live-card";
+            if (live.url) { card.href = live.url; card.target = "_blank"; card.rel = "noopener noreferrer"; }
+            const when = new Date(live.date + "T12:00:00").toLocaleDateString("fr-BE", { weekday: "long", day: "numeric", month: "long" });
+            const date = document.createElement("div"); date.className = "live-date"; date.textContent = when + (live.time ? " · " + live.time : "");
+            const text = document.createElement("div");
+            const title = document.createElement("div"); title.className = "live-title"; title.textContent = live.title;
+            text.append(title);
+            if (live.note) { const note = document.createElement("div"); note.className = "live-note"; note.textContent = live.note; text.append(note); }
+            card.append(date, text); schedule.append(card);
+          });
+        })
+        .catch(() => empty("Le planning est temporairement indisponible."));
     }());
   </script>
 </body>
