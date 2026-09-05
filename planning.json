@@ -1,5 +1,23 @@
 {
   "updatedAt": "2026-09-06",
-  "lives": [Dimanche 6 Septembre : 20h30 - 23h30 FORTNITE
-  Lundi 7 Septembre : 09h00 - 12h00 PACIFIC DRIVE // 19h - 23h30 RESIDENT EVIL Requiem]
+  "lives": [
+    {
+      "date": "2026-09-06",
+      "time": "20:30",
+      "title": "FORTNITE",
+      "note": "Live jusqu’à 23:30"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "09:00",
+      "title": "PACIFIC DRIVE",
+      "note": "Live jusqu’à 12:00"
+    },
+    {
+      "date": "2026-09-07",
+      "time": "19:00",
+      "title": "RESIDENT EVIL Requiem",
+      "note": "Live jusqu’à 23:30"
+    }
+  ]
 }
