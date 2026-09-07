@@ -63,6 +63,10 @@
     .youtube { --accent:var(--pink); } .telegram { --accent:var(--yellow); } .tipeee { --accent:#ff7b22; } .discord { --accent:#5865f2; } .paypal { --accent:#009cde; } footer { padding:28px 6px 0; text-align:center; color:rgba(255,248,239,.48); font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; }
     @media(max-width:720px) { main { width:calc(100% - 20px); padding-top:10px; } .hero { min-height:630px; border-radius:25px; background-position:62% center; } .top { top:16px; left:16px; right:16px; } .copy { padding:28px 22px 32px; background:linear-gradient(0deg,rgba(9,7,14,.86),transparent); } .avatar { width:66px; height:66px; } .video-grid { grid-template-columns:1fr; } .links { grid-template-columns:1fr; margin-top:18px; } .link { min-height:130px; flex-direction:row; align-items:center; gap:20px; } .link small { margin-top:2px; } }
     @media(prefers-reduced-motion:reduce) { .intro,.intro span { animation:none; visibility:hidden; } .link { transition:none; } }
+      /* Bannière principale */
+    .hero { min-height:0; display:block; background:#000; }
+    .hero::after { display:none; }
+    .hero-banner { display:block; width:100%; height:auto; }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -76,13 +80,8 @@
 <body>
   <div class="intro" aria-hidden="true"><span>Negan &amp; Couillons</span></div>
   <main>
-    <section class="hero" aria-labelledby="site-title">
-      <div class="top"><span class="tag"><i class="fa-solid fa-crown"></i> Gaming · Vlog · Fun</span><span class="monogram">N&amp;C</span></div>
-      <div class="copy">
-        <img class="avatar" src="assets/images/negan-couillons-profile.jpg" alt="">
-        <h1 id="site-title"><span class="negan">Negan</span><span class="and">&amp;</span><span class="couillons">Couillons</span></h1>
-        <div class="brush"></div><p class="subtitle">Du gaming, du vlog, du fun — et surtout zéro prise de tête. Rejoins la bande là où ça bouge.</p>
-      </div>
+    <section class="hero" aria-label="Negan & Couillons">
+      <img class="hero-banner" src="assets/images/negan-couillons-header.jpg" alt="Bannière Negan & Couillons : gaming, vlog et fun">
     </section>
     <section class="videos" aria-labelledby="videos-title">
       <div class="videos-head">
