@@ -1,23 +1,32 @@
-{
-  "updatedAt": "2026-09-06",
-  "lives": [
-    {
-      "date": "2026-09-06",
-      "time": "20:30",
-      "title": "FORTNITE",
-      "note": "Live jusqu’à 23:30"
-    },
-    {
-      "date": "2026-09-07",
-      "time": "09:00",
-      "title": "PACIFIC DRIVE",
-      "note": "Live jusqu’à 12:00"
-    },
-    {
-      "date": "2026-09-07",
-      "time": "19:00",
-      "title": "RESIDENT EVIL Requiem",
-      "note": "Live jusqu’à 23:30"
-    }
-  ]
-}
+"lives": [
+  {
+    "date": "2026-09-08",
+    "time": "14:30",
+    "title": "RESONANCE: A Plague Tale Legacy",
+    "note": "Live jusqu’à 16:30"
+  },
+  {
+    "date": "2026-09-09",
+    "time": "14:30",
+    "title": "RESONANCE: A Plague Tale Legacy",
+    "note": "Live jusqu’à 16:30"
+  },
+  {
+    "date": "2026-09-10",
+    "time": "14:30",
+    "title": "RESONANCE: A Plague Tale Legacy",
+    "note": "Live jusqu’à 16:30"
+  },
+  {
+    "date": "2026-09-11",
+    "time": "19:00",
+    "title": "ROCKET LEAGUE",
+    "note": "Live jusqu’à 21:30"
+  },
+  {
+    "date": "2026-09-11",
+    "time": "22:00",
+    "title": "FORTNITE",
+    "note": "Live jusqu’à 01:00"
+  }
+]
