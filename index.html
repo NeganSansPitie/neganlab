@@ -67,6 +67,9 @@
     .hero { min-height:0; display:block; background:#000; }
     .hero::after { display:none; }
     .hero-banner { display:block; width:100%; height:auto; }
+      .live-card { position:relative; isolation:isolate; background-size:cover; background-position:center; }
+    .live-card.has-art::before { content:""; position:absolute; inset:0; z-index:-1; border-radius:inherit; background:linear-gradient(135deg,rgba(9,7,14,.12),rgba(9,7,14,.82)); }
+    .live-card.is-off { border-style:dashed; background:rgba(255,255,255,.05); opacity:.74; }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -129,7 +132,6 @@
   <script>
     (function () {
       const schedule = document.getElementById("live-schedule");
-      const dateFormat = new Intl.DateTimeFormat("fr-BE", { weekday: "long", day: "numeric", month: "long" });
       const empty = message => {
         schedule.replaceChildren();
         const item = document.createElement("div");
@@ -146,8 +148,13 @@
           lives.sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).forEach(live => {
             const card = document.createElement(live.url ? "a" : "article");
             card.className = "live-card";
+            if (live.status === "off") card.classList.add("is-off");
+            if (live.image) {
+              card.classList.add("has-art");
+              card.style.backgroundImage = "linear-gradient(135deg, rgba(9,7,14,.15), rgba(9,7,14,.88)), url('" + live.image.replace(/'/g, "%27") + "')";
+            }
             if (live.url) { card.href = live.url; card.target = "_blank"; card.rel = "noopener noreferrer"; }
-            const when = new Date(live.date + "T12:00:00").toLocaleDateString("fr-BE", { weekday: "long", day: "numeric", month: "long" });
+            const when = new Date(live.date + "T12:00:00").toLocaleDateString("fr-BE", { weekday: "short", day: "numeric", month: "long" });
             const date = document.createElement("div"); date.className = "live-date"; date.textContent = when + (live.time ? " · " + live.time : "");
             const text = document.createElement("div");
             const title = document.createElement("div"); title.className = "live-title"; title.textContent = live.title;
