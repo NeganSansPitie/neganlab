@@ -2,27 +2,6 @@
   "updatedAt": "2026-09-12",
   "lives": [
     {
-      "date": "2026-09-13",
-      "time": "21:30",
-      "title": "ROCKET LEAGUE",
-      "note": "Live jusqu’à 22:30",
-      "image": "assets/images/schedule-rocket-arena.jpg"
-    },
-    {
-      "date": "2026-09-13",
-      "time": "22:30",
-      "title": "ONCE HUMAN",
-      "note": "Live jusqu’à 01:00",
-      "image": "assets/images/schedule-survival.jpg"
-    },
-    {
-      "date": "2026-09-14",
-      "time": "13:30",
-      "title": "FORTNITE",
-      "note": "Live jusqu’à 16:00",
-      "image": "assets/images/schedule-battle-royale.jpg"
-    },
-    {
       "date": "2026-09-15",
       "title": "PAS DE LIVE",
       "note": "Petite pause pour recharger les batteries — on se retrouve demain !",
