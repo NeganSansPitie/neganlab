@@ -17,6 +17,8 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,B
 .cover{min-height:calc(100vh - 190px);display:flex;align-items:center;justify-content:center}
 .hero{width:100%;background:linear-gradient(150deg,#281012,#111);border:1px solid #4a2528;border-radius:24px;padding:32px 24px;text-align:center;box-shadow:0 18px 50px #0008}
 .badge{display:inline-block;color:var(--gold);font-size:14px;font-weight:800;letter-spacing:2px;margin-bottom:14px}
+.cover-art{display:block;width:min(220px,65vw);height:auto;margin:0 auto 18px;filter:drop-shadow(0 10px 24px #0009)}
+.start{width:100%;margin-top:18px;background:var(--red);border-color:#d24a51;min-height:60px;font-size:18px}
 h1{font-size:clamp(32px,8vw,54px);line-height:1.05;margin:10px 0 20px}
 h2{font-size:clamp(25px,6vw,36px);line-height:1.15;margin:0 0 22px}
 h3{font-size:21px;color:var(--gold);margin:0 0 15px}
@@ -60,6 +62,7 @@ const P=[];
 P.push(`
 <section class="page active cover">
 <div class="hero">
+<img class="cover-art" src="contrat-lock.svg" alt="Cadenas — Confiance • Consentement">
 <div class="badge">◆ CONTRAT DES RÈGLES DU MAÎTRE ◆</div>
 <h1>CONTRAT DES RÈGLES DU MAÎTRE</h1>
 <p>Entre <b>Negan</b>, le Maître, et <b>Lucille</b>, la Soumise</p>
@@ -69,6 +72,7 @@ P.push(`
 <div class="identity"><b>La Soumise</b><span>Lucille</span></div>
 </div>
 <p class="intro">Ce contrat définit les règles de notre jeu BDSM et les engagements que nous choisissons librement d’accepter. Il s’agit d’un jeu basé sur la confiance, le respect, la communication et le consentement mutuel.</p>
+<button class="start" onclick="startContract()">DÉMARRER LE CONTRAT →</button>
 </div>
 </section>`);
 
@@ -146,28 +150,6 @@ P.push(`
 
 P.push(`
 <section class="page">
-<div class="card"><div class="badge">DÉCLARATION DE LA SOUMISE</div><h2>DÉCLARATION DE LA SOUMISE</h2>
-<p>Je, <b>Lucille</b>, reconnais avoir lu et compris les règles de ce contrat. Je confirme participer volontairement à ce jeu et accepter les règles définies avec mon Maître. Je comprends que les limites de chaque séance sont définies avant le début du jeu et constituent le cadre de la séance.</p>
-<p>Signature de la Soumise :</p>
-<canvas class="signature" id="lucille" width="1200" height="480"></canvas><button onclick="clearSig('lucille')">Effacer la signature</button>
-<p>Lucille : _________________________________________________________________</p>
-<p>Date : ____ / ____ / ______</p>
-</div>
-</section>`);
-
-P.push(`
-<section class="page">
-<div class="card"><div class="badge">DÉCLARATION DU MAÎTRE</div><h2>DÉCLARATION DU MAÎTRE</h2>
-<p>Je, <b>Negan</b>, reconnais avoir lu et accepté les règles de ce contrat. Je m’engage à respecter les limites, la sécurité et le consentement de ma Soumise et à appliquer uniquement les conséquences convenues.</p>
-<p>Signature du Maître :</p>
-<canvas class="signature" id="negan" width="1200" height="480"></canvas><button onclick="clearSig('negan')">Effacer la signature</button>
-<p>Negan : __________________________________________________________________</p>
-<p>Date : ____ / ____ / ______</p>
-</div>
-</section>`);
-
-P.push(`
-<section class="page">
 <div class="card"><div class="badge">RÈGLE SUPPLÉMENTAIRE DU MAÎTRE</div><h2>RÈGLE SUPPLÉMENTAIRE DU MAÎTRE</h2>
 <p>Une règle peut être ajoutée uniquement si les deux partenaires l’ont comprise et acceptée.</p>
 <p>Règle n° ____ :</p><textarea class="field" rows="7"></textarea>
@@ -180,12 +162,13 @@ const root=document.getElementById('pages');root.innerHTML=P.join('');
 let current=0;
 const all=[...document.querySelectorAll('.page')];
 const back=document.getElementById('back'),next=document.getElementById('next');
-function render(){all.forEach((p,i)=>p.classList.toggle('active',i===current));back.disabled=current===0;next.textContent=current===all.length-1?'Terminer ✓':'Suivant →';window.scrollTo({top:0,behavior:'smooth'});}
+function render(){all.forEach((p,i)=>p.classList.toggle('active',i===current));back.disabled=current===0;next.textContent=current===all.length-1?'Terminer ✓':'Suivant →';document.querySelector('.footer-nav').style.display=current===0?'none':'block';window.scrollTo({top:0,behavior:'smooth'});}
+function startContract(){current=1;render();}
 back.onclick=()=>{if(current>0){current--;render();}};
 next.onclick=()=>{if(current<all.length-1){current++;render();}else{alert('Le dossier est terminé.');}};
 function setupSig(id){const c=document.getElementById(id),ctx=c.getContext('2d');let draw=false;ctx.lineWidth=5;ctx.lineCap='round';ctx.strokeStyle='#111';c.addEventListener('pointerdown',e=>{draw=true;c.setPointerCapture(e.pointerId);const r=c.getBoundingClientRect();ctx.beginPath();ctx.moveTo((e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height)});c.addEventListener('pointermove',e=>{if(!draw)return;const r=c.getBoundingClientRect();ctx.lineTo((e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height);ctx.stroke()});c.addEventListener('pointerup',()=>draw=false);c.addEventListener('pointercancel',()=>draw=false);}
 function clearSig(id){const c=document.getElementById(id);c.getContext('2d').clearRect(0,0,c.width,c.height);}
-setupSig('lucille');setupSig('negan');render();
+render();
 if('serviceWorker'in navigator)navigator.serviceWorker.register('contrat-sw.js').catch(()=>{});
 </script>
 </body>
