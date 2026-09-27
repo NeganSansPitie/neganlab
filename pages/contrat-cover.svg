@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1400">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#090707"/>
+    <stop offset=".48" stop-color="#260b0f"/>
+    <stop offset="1" stop-color="#080707"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".5" cy=".42" r=".55">
+    <stop offset="0" stop-color="#8f1f2b" stop-opacity=".48"/>
+    <stop offset=".55" stop-color="#3a0c12" stop-opacity=".2"/>
+    <stop offset="1" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fff0a4"/>
+    <stop offset=".45" stop-color="#d8b75d"/>
+    <stop offset="1" stop-color="#8f6a24"/>
+  </linearGradient>
+  <filter id="shadow"><feGaussianBlur stdDeviation="18"/></filter>
+  <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+</defs>
+
+<rect width="900" height="1400" fill="url(#bg)"/>
+<rect width="900" height="1400" fill="url(#glow)"/>
+
+<!-- ornate frame -->
+<rect x="34" y="34" width="832" height="1332" rx="18" fill="none" stroke="#8e702f" stroke-width="3"/>
+<rect x="51" y="51" width="798" height="1298" rx="12" fill="none" stroke="#4b391b" stroke-width="1"/>
+
+<!-- corner ornaments -->
+<g fill="none" stroke="url(#gold)" stroke-width="3" opacity=".9">
+ <path d="M70 180V82h98 M70 82l70 70 M830 180V82h-98 M830 82l-70 70 M70 1220v98h98 M70 1318l70-70 M830 1220v98h-98 M830 1318l-70-70"/>
+</g>
+
+<!-- title -->
+<text x="450" y="150" text-anchor="middle" fill="#d8b75d" font-family="Georgia,serif" font-size="25" letter-spacing="8">NEGAN &amp; LUCILLE</text>
+<text x="450" y="235" text-anchor="middle" fill="#f5f1e5" font-family="Georgia,serif" font-size="54" font-weight="bold" letter-spacing="3">LE CONTRAT</text>
+<text x="450" y="300" text-anchor="middle" fill="#f5f1e5" font-family="Georgia,serif" font-size="54" font-weight="bold" letter-spacing="3">DU MAÎTRE</text>
+<line x1="260" y1="335" x2="640" y2="335" stroke="url(#gold)" stroke-width="2"/>
+<text x="450" y="375" text-anchor="middle" fill="#c7a957" font-family="Arial,sans-serif" font-size="16" letter-spacing="5">CONFIANCE • CONSENTEMENT • RESPECT</text>
+
+<!-- atmospheric shadow -->
+<ellipse cx="450" cy="805" rx="290" ry="320" fill="#000" opacity=".45" filter="url(#shadow)"/>
+
+<!-- two abstract figures, non-explicit -->
+<g opacity=".96">
+  <!-- Maître silhouette -->
+  <circle cx="335" cy="610" r="58" fill="#080808" stroke="#8c6e31" stroke-width="2"/>
+  <path d="M250 890 Q260 690 335 670 Q410 690 420 890Z" fill="#080808" stroke="#8c6e31" stroke-width="3"/>
+  <path d="M287 670 Q335 710 383 670" fill="none" stroke="#a91e27" stroke-width="8"/>
+  <!-- Soumise silhouette -->
+  <circle cx="565" cy="625" r="52" fill="#12090b" stroke="#d8b75d" stroke-width="2"/>
+  <path d="M485 890 Q492 710 565 680 Q638 710 650 890Z" fill="#12090b" stroke="#d8b75d" stroke-width="3"/>
+  <path d="M520 682 Q565 716 610 682" fill="none" stroke="#a91e27" stroke-width="7"/>
+</g>
+
+<!-- central symbolic lock -->
+<g transform="translate(450 805)">
+  <circle r="105" fill="#090707" stroke="#b78e35" stroke-width="4"/>
+  <path d="M-48 -10v-42c0-52 96-52 96 0v42" fill="none" stroke="#d8b75d" stroke-width="18" stroke-linecap="round"/>
+  <rect x="-68" y="-12" width="136" height="105" rx="18" fill="#a91e27" stroke="#e1bf63" stroke-width="4"/>
+  <circle cy="32" r="12" fill="#f5e6aa"/>
+  <path d="M0 43v26" stroke="#f5e6aa" stroke-width="8" stroke-linecap="round"/>
+</g>
+
+<!-- decorative divider -->
+<g stroke="#8d6d2f" stroke-width="2">
+ <line x1="190" y1="1005" x2="380" y2="1005"/>
+ <line x1="520" y1="1005" x2="710" y2="1005"/>
+</g>
+<path d="M450 987l18 18-18 18-18-18z" fill="#d8b75d"/>
+
+<text x="450" y="1080" text-anchor="middle" fill="#eee8d7" font-family="Georgia,serif" font-size="30" letter-spacing="4">MAÎTRE • SOUMISE</text>
+<text x="450" y="1130" text-anchor="middle" fill="#a99b7a" font-family="Arial,sans-serif" font-size="17" letter-spacing="3">UN JEU FONDÉ SUR LA CONFIANCE</text>
+
+<text x="450" y="1250" text-anchor="middle" fill="#d8b75d" font-family="Georgia,serif" font-size="21" letter-spacing="7">NEGAN • LUCILLE</text>
+<text x="450" y="1295" text-anchor="middle" fill="#777" font-family="Arial,sans-serif" font-size="13" letter-spacing="3">RÈGLES • LIMITES • CONSENTEMENT</text>
+</svg>
