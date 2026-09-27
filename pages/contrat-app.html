@@ -1,27 +1,189 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090909"><link rel="manifest" href="contrat-manifest.json"><title>Contrat des règles du Maître — Negan & Lucille</title><style>:root{--b:#090909;--c:#171717;--l:#333;--r:#b51f28;--g:#d7b75a;--t:#f5f5f5;--m:#aaa}*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:720px;margin:auto;padding:18px 14px 30px}.s{display:none}.on{display:block}.hero,.card{background:var(--c);border:1px solid var(--l);border-radius:20px;padding:19px;margin-bottom:12px}.hero{text-align:center;background:linear-gradient(145deg,#281010,#121212)}h1{font-size:30px;line-height:1.05}h2{font-size:23px}.m{color:var(--m)}p,li{font-size:15px;line-height:1.58}li{margin:8px 0}.call{border-left:3px solid var(--g);background:#211d12;padding:12px;border-radius:8px;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}button{width:100%;min-height:48px;border:1px solid #444;border-radius:13px;background:#222;color:#fff;font-weight:800;padding:10px;margin-top:8px}.primary{background:var(--r);border-color:#df4a52}.gold{background:#292310;border-color:var(--g);color:#efd476}.nav{display:flex;gap:8px}.nav button{flex:1}.field{width:100%;background:#0d0d0d;color:#fff;border:1px solid #444;border-radius:11px;padding:11px;margin:5px 0 12px;font:inherit}.check{display:flex;gap:9px;align-items:flex-start}.check input{margin-top:4px;accent-color:var(--r)}.sig{width:100%;height:210px;background:#fff;border-radius:12px;touch-action:none}.ok{color:#8be28b;font-weight:800}.err{color:#ff9c9c;font-weight:800}@media(max-width:430px){.grid{grid-template-columns:1fr}h1{font-size:27px}}</style></head><body><main class="app" id="app"><div class="m" id="count"></div>
-<section class="s on"><div class="hero">🔒<h1>CONTRAT DES RÈGLES DU MAÎTRE</h1><p><b>Maître : Negan</b><br><b>Soumise : Lucille</b></p><p class="m">CONFIANCE • DOMINATION • CONSENTEMENT • RESPECT</p><p>Ce contrat définit les règles de notre jeu BDSM et les engagements que nous choisissons librement d’accepter. Il s’agit d’un jeu basé sur la confiance, le respect, la communication et le consentement mutuel.</p></div><button class="primary" data-go="1">Commencer</button></section>
-<section class="s"><div class="hero"><h2>Sommaire</h2><p class="m">Version détaillée du règlement.</p></div><div class="grid" id="menu"></div><button class="gold" data-go="15">Aller aux engagements</button></section><div id="arts"></div>
-<section class="s"><div class="hero"><h2>Fiche des limites et préférences</h2></div><div class="card"><b>Limites absolues de Lucille</b><textarea class="field" rows="4"></textarea><b>Limites applicables à la séance</b><textarea class="field" rows="4"></textarea><b>Points à discuter avant le début du jeu</b><textarea class="field" rows="4"></textarea></div><div class="card"><b>CONSÉQUENCES AUTORISÉES</b><label class="check"><input type="checkbox">Privation temporaire d’un privilège de jeu</label><label class="check"><input type="checkbox">Défi ou tâche supplémentaire</label><label class="check"><input type="checkbox">Punition symbolique</label><label>Autre : <input class="field"></label></div><button class="primary" data-go="15">Continuer</button></section>
-<section class="s"><div class="hero"><h2>Déclarations & signatures</h2></div><div class="card"><b>DÉCLARATION DE LA SOUMISE</b><p>Je, <b>Lucille</b>, reconnais avoir lu et compris les règles de ce contrat. Je confirme participer volontairement à ce jeu et accepter les règles définies avec mon Maître. Je comprends que les limites de chaque séance sont définies avant le début du jeu et constituent le cadre de la séance.</p><label>Date : <input class="field" type="date"></label><label class="check"><input id="lc" type="checkbox">J’ai lu et compris cette déclaration.</label></div><div class="card"><b>Signature de Lucille</b><canvas class="sig" id="s2" width="1000" height="440"></canvas><button class="gold" data-clear="s2">Effacer</button></div><div class="card"><b>DÉCLARATION DU MAÎTRE</b><p>Je, <b>Negan</b>, reconnais avoir lu et accepté les règles de ce contrat. Je m’engage à respecter les limites, la sécurité et le consentement de ma Soumise et à appliquer uniquement les conséquences convenues.</p><label>Date : <input class="field" type="date"></label><label class="check"><input id="nc" type="checkbox">J’ai lu et compris cette déclaration.</label></div><div class="card"><b>Signature de Negan</b><canvas class="sig" id="s1" width="1000" height="440"></canvas><button class="gold" data-clear="s1">Effacer</button></div><div class="card"><b>RÈGLE SUPPLÉMENTAIRE DU MAÎTRE</b><p>Une règle peut être ajoutée uniquement si les deux partenaires l’ont comprise et acceptée.</p><input class="field" type="number" min="1" placeholder="Règle n°"><textarea class="field" rows="5" placeholder="Règle supplémentaire…"></textarea><label>Date : <input class="field" type="date"></label><label class="check"><input type="checkbox">Acceptée par Negan</label><label class="check"><input type="checkbox">Acceptée par Lucille</label></div><div class="card"><label class="check"><input id="fc" type="checkbox"><span>Je confirme que le consentement peut être retiré à tout moment, que ROUGE/STOP restent prioritaires et que la domination ne donne aucun droit réel sur la vie personnelle de l’autre.</span></label></div><button class="primary" id="val">✓ Valider le contrat</button><p id="msg"></p></section>
-<div class="nav"><button id="prev">← Retour</button><button class="primary" id="next">Suivant →</button></div></main>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909"><link rel="manifest" href="contrat-manifest.json">
+<title>Contrat des règles du Maître — Negan & Lucille</title>
+<style>
+:root{--b:#090909;--c:#171717;--c2:#111;--l:#393939;--r:#b51f28;--g:#d7b75a;--t:#f5f5f5;--m:#aaa}
+*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{max-width:760px;margin:auto;padding:14px 12px 34px}.screen{display:none}.screen.on{display:block}
+.hero,.card{background:var(--c);border:1px solid var(--l);border-radius:18px;padding:18px;margin-bottom:12px}
+.hero{text-align:center;background:linear-gradient(145deg,#2a1012,#111)}.cover{min-height:74vh;display:flex;flex-direction:column;justify-content:center}
+h1{font-size:31px;line-height:1.05;margin:14px 0}h2{font-size:23px;line-height:1.2;margin:4px 0 12px}
+h3{font-size:17px;margin:0 0 12px;color:#efd476}.eyebrow{letter-spacing:2px;color:#efd476;font-size:12px;font-weight:800}
+.m{color:var(--m)}p,li{font-size:15px;line-height:1.62}li{margin:9px 0}.article{border-top:2px solid #5b2528}
+.call{border-left:3px solid var(--g);background:#211d12;padding:12px;border-radius:8px;font-weight:700;color:#eee;margin-top:15px}
+.ident{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.ident div{background:#101010;border:1px solid #333;border-radius:12px;padding:14px}.ident b{display:block;color:#efd476;margin-bottom:4px}
+button{width:100%;min-height:48px;border:1px solid #444;border-radius:12px;background:#222;color:#fff;font-weight:800;padding:10px;margin-top:8px;font-size:15px}
+.primary{background:var(--r);border-color:#df4a52}.gold{background:#292310;border-color:var(--g);color:#efd476}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid button{text-align:left}
+.nav{display:flex;gap:8px;margin-top:10px}.nav button{flex:1}
+.field{width:100%;background:#0d0d0d;color:#fff;border:1px solid #444;border-radius:10px;padding:11px;margin:6px 0 14px;font:inherit}
+.check{display:flex;gap:9px;align-items:flex-start;margin:10px 0}.check input{margin-top:4px;accent-color:var(--r)}
+.sig{width:100%;height:210px;background:#fff;border-radius:12px;touch-action:none}
+.ok{color:#8be28b;font-weight:800}.err{color:#ff9c9c;font-weight:800}.page{font-size:12px;color:#777;text-align:center;margin:5px}
+.rulebox{background:#0e0e0e;border:1px dashed #555;border-radius:12px;padding:14px;margin-top:12px}
+@media(max-width:520px){.ident,.grid{grid-template-columns:1fr}h1{font-size:27px}.cover{min-height:70vh}}
+</style>
+</head>
+<body>
+<main class="app">
+<div id="count" class="page"></div>
+
+<section class="screen on">
+<div class="hero cover">
+<div class="eyebrow">CONFIANCE • DOMINATION • CONSENTEMENT • RESPECT</div>
+<h1>CONTRAT DES RÈGLES DU MAÎTRE</h1>
+<p>Entre <b>Negan</b>, le Maître, et <b>Lucille</b>, la Soumise</p>
+<div class="ident"><div><b>Le Maître</b>Negan</div><div><b>La Soumise</b>Lucille</div></div>
+<p>Ce contrat définit les règles de notre jeu BDSM et les engagements que nous choisissons librement d’accepter. Il s’agit d’un jeu basé sur la confiance, le respect, la communication et le consentement mutuel.</p>
+<button class="primary" data-go="1">Ouvrir le dossier</button>
+</div>
+</section>
+
+<section class="screen">
+<div class="hero"><div class="eyebrow">DOSSIER — NEGan & LUCILLE</div><h2>Sommaire</h2><p class="m">Le règlement complet, présenté article par article comme dans le dossier de référence.</p></div>
+<div class="grid" id="menu"></div>
+<button class="gold" data-go="13">Fiche des limites et préférences →</button>
+</section>
+
+<div id="articles"></div>
+
+<section class="screen">
+<div class="hero"><div class="eyebrow">FICHE DE PRÉPARATION</div><h2>FICHE DES LIMITES ET PRÉFÉRENCES</h2></div>
+<div class="card"><h3>Limites absolues de Lucille :</h3><textarea class="field" rows="4" id="abs"></textarea></div>
+<div class="card"><h3>Limites applicables à la séance :</h3><textarea class="field" rows="4" id="sess"></textarea></div>
+<div class="card"><h3>Points à discuter avant le début du jeu :</h3><textarea class="field" rows="4" id="disc"></textarea></div>
+<div class="card"><h3>CONSÉQUENCES AUTORISÉES</h3>
+<label class="check"><input type="checkbox">Privation temporaire d’un privilège de jeu</label>
+<label class="check"><input type="checkbox">Défi ou tâche supplémentaire</label>
+<label class="check"><input type="checkbox">Punition symbolique</label>
+<label>Autre :<input class="field"></label>
+</div>
+<button class="primary" data-go="14">Passer aux déclarations et signatures →</button>
+</section>
+
+<section class="screen">
+<div class="hero"><div class="eyebrow">ENGAGEMENT DES DEUX PARTENAIRES</div><h2>DÉCLARATIONS & SIGNATURES</h2></div>
+<div class="card"><h3>DÉCLARATION DE LA SOUMISE</h3>
+<p>Je, <b>Lucille</b>, reconnais avoir lu et compris les règles de ce contrat. Je confirme participer volontairement à ce jeu et accepter les règles définies avec mon Maître. Je comprends que les limites de chaque séance sont définies avant le début du jeu et constituent le cadre de la séance.</p>
+<label>Date :<input class="field" type="date"></label>
+<label class="check"><input id="lc" type="checkbox">J’ai lu et compris cette déclaration.</label>
+</div>
+<div class="card"><h3>Signature de la Soumise</h3><p>Lucille :</p><canvas class="sig" id="sigLucille" width="1000" height="440"></canvas><button class="gold" data-clear="sigLucille">Effacer la signature</button></div>
+
+<div class="card"><h3>DÉCLARATION DU MAÎTRE</h3>
+<p>Je, <b>Negan</b>, reconnais avoir lu et accepté les règles de ce contrat. Je m’engage à respecter les limites, la sécurité et le consentement de ma Soumise et à appliquer uniquement les conséquences convenues.</p>
+<label>Date :<input class="field" type="date"></label>
+<label class="check"><input id="nc" type="checkbox">J’ai lu et compris cette déclaration.</label>
+</div>
+<div class="card"><h3>Signature du Maître</h3><p>Negan :</p><canvas class="sig" id="sigNegan" width="1000" height="440"></canvas><button class="gold" data-clear="sigNegan">Effacer la signature</button></div>
+
+<div class="card"><h3>RÈGLE SUPPLÉMENTAIRE DU MAÎTRE</h3>
+<p>Une règle peut être ajoutée uniquement si les deux partenaires l’ont comprise et acceptée.</p>
+<label>Règle n°<input class="field" type="number" min="1"></label>
+<textarea class="field" rows="5" placeholder="________________________________________________________________________________"></textarea>
+<label>Date :<input class="field" type="date"></label>
+<label class="check"><input type="checkbox">Acceptée par : Negan</label>
+<label class="check"><input type="checkbox">Acceptée par : Lucille</label>
+</div>
+
+<div class="card">
+<label class="check"><input id="finalConsent" type="checkbox"><span>Je confirme avoir compris que le consentement peut être retiré à tout moment, qu’aucune règle ne peut empêcher Lucille de dire STOP, et que le mot de sécurité ROUGE et le retrait du consentement restent prioritaires sur toutes les autres règles.</span></label>
+</div>
+<button class="primary" id="validate">✓ Valider le dossier</button><p id="msg"></p>
+</section>
+
+<div class="nav"><button id="prev">← Retour</button><button class="primary" id="next">Suivant →</button></div>
+</main>
+
 <script>
 const D=[
-["ARTICLE 1 — L’ENGAGEMENT",["La Soumise reconnaît entrer volontairement dans ce jeu avec le Maître.","Le Maître s’engage à respecter la personne, les limites et le bien-être de sa Soumise.","La relation de domination n’existe que dans le cadre du jeu et ne donne aucun droit réel de contrôle sur la vie, les choix ou les décisions personnelles de la Soumise."],"Engagement libre et cadre clairement défini."],
-["ARTICLE 2 — LES RÈGLES DE LA SOUMISE",["Respecter les consignes du Maître.","Répondre honnêtement aux questions du Maître.","Prévenir immédiatement le Maître lorsqu’une règle ou une situation devient inconfortable.","Respecter les horaires et rendez-vous convenus.","Conserver une attitude respectueuse envers le Maître.","Ne pas volontairement provoquer ou tester les limites établies sans accord préalable.","Accepter les conséquences prévues lorsqu’une règle est volontairement enfreinte.","Communiquer ses limites avant ou pendant le jeu lorsque nécessaire."],"La participation reste volontaire."],
-["ARTICLE 3 — LES OBLIGATIONS DU MAÎTRE",["Respecter les limites clairement exprimées par la Soumise.","Ne jamais utiliser le jeu pour imposer une situation non consentie.","Rester attentif au bien-être physique et psychologique de sa Soumise.","Respecter immédiatement un signal d’arrêt.","Ne pas utiliser les informations personnelles ou intimes de la Soumise contre elle en dehors du jeu.","Maintenir confiance et respect.","Accepter qu’une règle puisse être discutée ou modifiée d’un commun accord."],"Le rôle de Maître implique une responsabilité."],
-["ARTICLE 4 — LE MOT DE SÉCURITÉ",["VERT : tout va bien, le jeu peut continuer.","JAUNE : ralentissement ou vérification nécessaire. Le Maître doit vérifier la situation.","ROUGE : arrêt immédiat du jeu.","ROUGE met immédiatement fin à toute action en cours."],"ROUGE est prioritaire."],
-["ARTICLE 5 — LES LIMITES",["Avant le début du jeu, Maître et Soumise définissent clairement les limites applicables à la séance.","Les limites sont connues et acceptées avant le commencement.","Une fois la séance commencée et les limites établies, elles constituent le cadre de la séance et ne peuvent pas être modifiées ou annulées en cours de jeu.","Elles doivent donc être définies avec soin avant chaque séance.","Le retrait du consentement et ROUGE restent prioritaires."],"Les limites sont préparées avant chaque séance."],
-["ARTICLE 6 — LES CONSÉQUENCES",["En cas de non-respect volontaire d’une règle, le Maître peut appliquer une conséquence ou une punition prévue et préalablement acceptée.","Les conséquences doivent rester adaptées au jeu.","Elles ne doivent jamais avoir pour objectif de blesser, humilier réellement ou mettre en danger la Soumise."],"Une conséquence reste dans le cadre accepté."],
-["ARTICLE 7 — LE RESPECT DU CONSENTEMENT",["Le consentement peut être retiré à tout moment.","Aucune règle ne peut empêcher Lucille de dire STOP.","Un consentement donné précédemment ne signifie pas automatiquement un consentement pour une nouvelle situation.","Le mot de sécurité et le retrait du consentement restent prioritaires."],"Le consentement peut toujours être retiré."],
-["ARTICLE 8 — APRÈS LE JEU",["Après une séance, Maître et Soumise prennent le temps de communiquer.","Ils peuvent discuter de ce qui a été apprécié ou moins apprécié.","Les éventuelles limites rencontrées peuvent être abordées.","Les ajustements nécessaires pour une prochaine séance peuvent être décidés ensemble."],"Après le jeu : communication et écoute."],
-["ARTICLE 9 — DURÉE",["Ce contrat prend effet à partir de la date choisie.","Il reste valable uniquement dans le cadre du jeu BDSM convenu.","Il peut être suspendu ou annulé à tout moment par l’un ou l’autre.","Des accords spécifiques peuvent être prévus pour une nouvelle séance."],"Ce contrat concerne uniquement le cadre de jeu convenu."],
-["ARTICLE 10 — CARACTÈRE DÉFINITIF DU RÈGLEMENT",["Une fois les règles de base établies, lues et acceptées, elles constituent le règlement de référence.","Aucune modification ne peut être imposée unilatéralement par le Maître.","Toute nouvelle règle ou modification doit être présentée et acceptée par les deux partenaires avant de faire partie du règlement.","La Soumise respecte les règles qu’elle a acceptées pendant les périodes de jeu prévues.","ROUGE et le retrait du consentement restent prioritaires."],"Référence commune, pas pouvoir unilatéral."],
-["ARTICLE 11 — RÈGLE DU RÉVEIL DU MAÎTRE",["Lorsque le Maître est profondément endormi, la Soumise est autorisée, dans le cadre préalablement convenu, à prendre elle-même l’initiative de le réveiller de manière sensuelle, entreprenante et suggestive.","Elle ne doit pas attendre que le Maître lui demande de venir le réveiller : lorsqu’elle choisit d’appliquer cette règle, elle prend spontanément l’initiative afin d’initier le moment intime convenu entre eux.","Le Maître s’engage à accueillir favorablement cette initiative lorsqu’elle correspond à la règle préalablement acceptée.","Cette règle ne constitue pas une obligation pour le Maître de poursuivre le jeu dans toutes les circonstances.","Les limites, le consentement et le mot de sécurité restent applicables."],"Initiative prévue, toujours soumise au cadre convenu."]
+["ARTICLE 1 — L’ENGAGEMENT",[
+"La Soumise reconnaît entrer volontairement dans ce jeu avec le Maître.",
+"Le Maître s’engage à respecter la personne, les limites et le bien-être de sa Soumise.",
+"La relation de domination n’existe que dans le cadre du jeu et ne donne aucun droit réel de contrôle sur la vie, les choix ou les décisions personnelles de la Soumise."
+]],
+["ARTICLE 2 — LES RÈGLES DE LA SOUMISE",[
+"Respecter les consignes du Maître.",
+"Répondre honnêtement aux questions du Maître.",
+"Prévenir immédiatement le Maître lorsqu’une règle ou une situation devient inconfortable.",
+"Respecter les horaires et rendez-vous convenus.",
+"Conserver une attitude respectueuse envers le Maître.",
+"Ne pas volontairement provoquer ou tester les limites établies sans accord préalable.",
+"Accepter les conséquences prévues dans le cadre du jeu lorsqu’une règle est volontairement enfreinte.",
+"Communiquer ses limites avant ou pendant le jeu lorsque cela est nécessaire."
+]],
+["ARTICLE 3 — LES OBLIGATIONS DU MAÎTRE",[
+"Respecter les limites clairement exprimées par la Soumise.",
+"Ne jamais utiliser le jeu pour imposer une situation non consentie.",
+"Rester attentif au bien-être physique et psychologique de sa Soumise.",
+"Respecter immédiatement un signal d’arrêt.",
+"Ne pas utiliser les informations personnelles ou intimes de la Soumise contre elle en dehors du jeu.",
+"Maintenir une relation basée sur la confiance et le respect.",
+"Accepter qu’une règle puisse être discutée ou modifiée d’un commun accord."
+]],
+["ARTICLE 4 — LE MOT DE SÉCURITÉ",[
+"<b>VERT :</b> tout va bien, le jeu peut continuer.",
+"<b>JAUNE :</b> ralentissement ou vérification nécessaire. Le Maître doit vérifier la situation.",
+"<b>ROUGE :</b> arrêt immédiat du jeu.",
+"Le mot <b>ROUGE</b> met immédiatement fin à toute action en cours."
+]],
+["ARTICLE 5 — LES LIMITES",[
+"Avant le début du jeu, le Maître et la Soumise doivent définir clairement les limites applicables à la séance.",
+"Les limites ainsi définies doivent être connues et acceptées par les deux partenaires avant le commencement du jeu.",
+"Une fois la séance commencée et les limites établies, celles-ci constituent le cadre de la séance et ne peuvent pas être modifiées ou annulées en cours de jeu.",
+"Les limites doivent donc être définies avec soin avant le début de chaque séance."
+]],
+["ARTICLE 6 — LES CONSÉQUENCES",[
+"En cas de non-respect volontaire d’une règle, le Maître peut appliquer une conséquence ou une punition prévue dans le cadre du jeu, conformément aux conséquences préalablement acceptées.",
+"Les conséquences doivent rester adaptées au jeu et ne jamais avoir pour objectif de blesser, humilier réellement ou mettre en danger la Soumise."
+]],
+["ARTICLE 7 — LE RESPECT DU CONSENTEMENT",[
+"Le consentement peut être retiré à tout moment.",
+"Aucune règle de ce contrat ne peut empêcher Lucille de dire <b>STOP</b>.",
+"Un consentement donné précédemment ne signifie pas automatiquement un consentement pour une nouvelle situation.",
+"Le mot de sécurité et le retrait du consentement restent prioritaires sur toutes les autres règles."
+]],
+["ARTICLE 8 — APRÈS LE JEU",[
+"Après une séance, le Maître et la Soumise prennent le temps de communiquer.",
+"Ils peuvent notamment discuter de ce qui a été apprécié, de ce qui a été moins apprécié, des éventuelles limites rencontrées et des ajustements nécessaires pour une prochaine séance."
+]],
+["ARTICLE 9 — DURÉE",[
+"Ce contrat prend effet à partir du : <b>____ / ____ / ______</b>",
+"Il reste valable uniquement dans le cadre du jeu BDSM convenu entre les deux partenaires.",
+"Il peut être suspendu ou annulé à tout moment par l’un ou l’autre."
+]],
+["ARTICLE 10 — CARACTÈRE DÉFINITIF DU RÈGLEMENT",[
+"Une fois les règles de base établies, lues et acceptées par la Soumise, celles-ci constituent le règlement de référence du jeu entre le Maître et la Soumise.",
+"La Soumise reconnaît avoir pris connaissance de l’ensemble des règles avant de les accepter.",
+"Une fois le règlement accepté, aucune modification ne pourra être imposée unilatéralement par le Maître. Toute nouvelle règle ou modification devra être clairement présentée et acceptée par les deux partenaires avant de faire partie du règlement.",
+"La Soumise s’engage à respecter les règles qu’elle a acceptées pendant les périodes de jeu prévues.",
+"Le mot de sécurité ROUGE et le retrait du consentement restent prioritaires sur toute autre règle."
+]],
+["ARTICLE 11 — RÈGLE DU RÉVEIL DU MAÎTRE",[
+"Lorsque le Maître est profondément endormi, la Soumise est autorisée, dans le cadre préalablement convenu entre eux, à prendre elle-même l’initiative de le réveiller de manière sensuelle, entreprenante et suggestive.",
+"La Soumise ne doit pas attendre que le Maître lui demande de venir le réveiller : lorsqu’elle choisit d’appliquer cette règle, elle prend spontanément l’initiative et vient réveiller le Maître en adoptant une attitude volontaire et entreprenante afin d’initier le moment intime convenu entre eux.",
+"Le Maître s’engage à accueillir favorablement cette initiative de la Soumise et à ne pas la rejeter simplement par principe lorsqu’elle applique une règle préalablement acceptée.",
+"Cette règle ne constitue toutefois pas une obligation pour le Maître de poursuivre le jeu dans toutes les circonstances : les limites, le consentement et le mot de sécurité définis dans le présent règlement restent applicables."
+]]
 ];
-const screens=[...document.querySelectorAll(".s")],menu=document.getElementById("menu"),arts=document.getElementById("arts");let cur=0;
-D.forEach((a,i)=>{let b=document.createElement("button");b.textContent=a[0];b.dataset.go=i+2;menu.appendChild(b);let s=document.createElement("section");s.className="s";s.innerHTML='<div class="hero"><h2>'+a[0]+'</h2></div><div class="card"><ul>'+a[1].map(x=>"<li>"+x+"</li>").join("")+'</ul><div class="call">'+a[2]+"</div></div>";arts.appendChild(s)});
-const S=[...document.querySelectorAll(".s")];function show(n){cur=Math.max(0,Math.min(S.length-1,n));S.forEach((x,i)=>x.classList.toggle("on",i===cur));count.textContent=cur===0?"Accueil":cur===1?"Sommaire":cur===S.length-1?"Signatures":"Article "+(cur-1)+" / "+D.length;prev.disabled=!cur;next.disabled=cur===S.length-1;next.textContent=cur===S.length-2?"Signer →":"Suivant →";scrollTo(0,0)}
-app.onclick=e=>{let g=e.target.closest("[data-go]");if(g)show(+g.dataset.go);let c=e.target.closest("[data-clear]");if(c)clearSig(c.dataset.clear)};prev.onclick=()=>show(cur-1);next.onclick=()=>show(cur+1);
-function sig(id){let c=document.getElementById(id),x=c.getContext("2d"),d=false,h=false;x.lineWidth=5;x.lineCap="round";x.strokeStyle="#111";function p(e){let r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}c.onpointerdown=e=>{d=true;h=true;let q=p(e);x.beginPath();x.moveTo(q.x,q.y)};c.onpointermove=e=>{if(!d)return;let q=p(e);x.lineTo(q.x,q.y);x.stroke()};c.onpointerup=()=>d=false;c.onpointercancel=()=>d=false;c._h=()=>h;c._c=()=>{x.clearRect(0,0,c.width,c.height);h=false}}function clearSig(id){document.getElementById(id)._c()}sig("s1");sig("s2");
-val.onclick=()=>{let ok=lc.checked&&nc.checked&&fc.checked&&s1._h()&&s2._h();msg.textContent=ok?"✓ Contrat validé avec les deux signatures.":"Complète les deux déclarations, l’accord final et les deux signatures.";msg.className=ok?"ok":"err"};if("serviceWorker"in navigator)navigator.serviceWorker.register("contrat-sw.js").catch(()=>{});show(0);
-</script></body></html>
+
+const screens=[...document.querySelectorAll(".screen")],menu=document.getElementById("menu"),articles=document.getElementById("articles");
+D.forEach((a,i)=>{
+ const b=document.createElement("button");b.textContent=a[0];b.dataset.go=i+2;menu.appendChild(b);
+ const s=document.createElement("section");s.className="screen";
+ s.innerHTML='<div class="hero"><div class="eyebrow">CONTRAT DES RÈGLES DU MAÎTRE</div><h2>'+a[0]+'</h2></div><div class="card article"><ol>'+a[1].map(x=>'<li>'+x+'</li>').join("")+'</ol></div><div class="rulebox"><b>Cadre de l’article</b><p class="m">Cet article fait partie du règlement de référence entre <b>Negan, le Maître</b>, et <b>Lucille, la Soumise</b>.</p></div>';
+ articles.appendChild(s);
+});
+const S=[...document.querySelectorAll(".screen")];
+let cur=0;
+function show(n){cur=Math.max(0,Math.min(S.length-1,n));S.forEach((x,i)=>x.classList.toggle("on",i===cur));document.getElementById("count").textContent=cur===0?"Contrat des règles du Maître":cur===1?"Sommaire":cur===13?"Fiche des limites et préférences":cur===14?"Déclarations & signatures":"Article "+(cur-1)+" / 11";document.getElementById("prev").disabled=!cur;document.getElementById("next").disabled=cur===S.length-1;window.scrollTo(0,0)}
+document.querySelector(".app").addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)show(+g.dataset.go);const c=e.target.closest("[data-clear]");if(c)clearSig(c.dataset.clear)});
+document.getElementById("prev").onclick=()=>show(cur-1);document.getElementById("next").onclick=()=>show(cur+1);
+function sig(id){const c=document.getElementById(id),x=c.getContext("2d");let drawing=false,has=false;x.lineWidth=5;x.lineCap="round";x.strokeStyle="#111";const pos=e=>{const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}};c.onpointerdown=e=>{drawing=true;has=true;const p=pos(e);x.beginPath();x.moveTo(p.x,p.y);c.setPointerCapture(e.pointerId)};c.onpointermove=e=>{if(!drawing)return;const p=pos(e);x.lineTo(p.x,p.y);x.stroke()};c.onpointerup=()=>drawing=false;c.onpointercancel=()=>drawing=false;c._has=()=>has;c._clear=()=>{x.clearRect(0,0,c.width,c.height);has=false}}function clearSig(id){document.getElementById(id)._clear()}sig("sigLucille");sig("sigNegan");
+document.getElementById("validate").onclick=()=>{const ok=document.getElementById("lc").checked&&document.getElementById("nc").checked&&document.getElementById("finalConsent").checked&&document.getElementById("sigLucille")._has()&&document.getElementById("sigNegan")._has();const m=document.getElementById("msg");m.textContent=ok?"✓ Dossier complété avec les deux signatures.":"Pour valider, les deux déclarations, l’accord final et les deux signatures doivent être complétés.";m.className=ok?"ok":"err"};
+if("serviceWorker"in navigator)navigator.serviceWorker.register("contrat-sw.js").catch(()=>{});show(0);
+</script>
+</body></html>
