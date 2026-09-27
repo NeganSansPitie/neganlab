@@ -1,78 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1400">
 <defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#090707"/>
-    <stop offset=".48" stop-color="#260b0f"/>
-    <stop offset="1" stop-color="#080707"/>
-  </linearGradient>
-  <radialGradient id="glow" cx=".5" cy=".42" r=".55">
-    <stop offset="0" stop-color="#8f1f2b" stop-opacity=".48"/>
-    <stop offset=".55" stop-color="#3a0c12" stop-opacity=".2"/>
-    <stop offset="1" stop-color="#000" stop-opacity="0"/>
-  </radialGradient>
-  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#fff0a4"/>
-    <stop offset=".45" stop-color="#d8b75d"/>
-    <stop offset="1" stop-color="#8f6a24"/>
-  </linearGradient>
-  <filter id="shadow"><feGaussianBlur stdDeviation="18"/></filter>
-  <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080707"/><stop offset=".5" stop-color="#300d12"/><stop offset="1" stop-color="#080707"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#8d1d2a" stop-opacity=".6"/><stop offset="1" stop-color="#120609" stop-opacity="0"/></radialGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a0"/><stop offset=".45" stop-color="#d8b75d"/><stop offset="1" stop-color="#79561d"/></linearGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="16"/></filter>
 </defs>
-
 <rect width="900" height="1400" fill="url(#bg)"/>
-<rect width="900" height="1400" fill="url(#glow)"/>
+<ellipse cx="450" cy="590" rx="430" ry="430" fill="url(#light)"/>
+<rect x="28" y="28" width="844" height="1344" rx="18" fill="none" stroke="url(#gold)" stroke-width="3"/>
+<rect x="45" y="45" width="810" height="1310" rx="12" fill="none" stroke="#5b421d" stroke-width="1"/>
 
-<!-- ornate frame -->
-<rect x="34" y="34" width="832" height="1332" rx="18" fill="none" stroke="#8e702f" stroke-width="3"/>
-<rect x="51" y="51" width="798" height="1298" rx="12" fill="none" stroke="#4b391b" stroke-width="1"/>
+<text x="450" y="100" text-anchor="middle" fill="#d8b75d" font-family="Georgia,serif" font-size="24" letter-spacing="7">NEGAN &amp; LUCILLE</text>
+<text x="450" y="165" text-anchor="middle" fill="#f7f1df" font-family="Georgia,serif" font-size="48" font-weight="bold" letter-spacing="3">LE CONTRAT</text>
+<text x="450" y="220" text-anchor="middle" fill="#f7f1df" font-family="Georgia,serif" font-size="48" font-weight="bold" letter-spacing="3">DU MAÎTRE</text>
+<line x1="270" y1="250" x2="630" y2="250" stroke="url(#gold)" stroke-width="2"/>
 
-<!-- corner ornaments -->
-<g fill="none" stroke="url(#gold)" stroke-width="3" opacity=".9">
- <path d="M70 180V82h98 M70 82l70 70 M830 180V82h-98 M830 82l-70 70 M70 1220v98h98 M70 1318l70-70 M830 1220v98h-98 M830 1318l-70-70"/>
+<!-- cinematic room -->
+<rect x="80" y="300" width="740" height="570" rx="25" fill="#090909" opacity=".55" stroke="#6c241f"/>
+<circle cx="130" cy="720" r="70" fill="#a91e27" opacity=".25" filter="url(#shadow)"/>
+<circle cx="770" cy="720" r="70" fill="#a91e27" opacity=".25" filter="url(#shadow)"/>
+
+<!-- Negan: bad-boy look -->
+<g>
+ <!-- shoulders / black jacket -->
+ <path d="M115 850 Q125 650 290 615 Q350 610 400 655 Q445 720 455 850Z" fill="#070707" stroke="#8f6d2d" stroke-width="3"/>
+ <!-- neck -->
+ <path d="M270 595 L270 650 Q310 680 350 650 L350 590" fill="#8f5e43"/>
+ <!-- head -->
+ <ellipse cx="310" cy="510" rx="92" ry="112" fill="#9c684a" stroke="#c09066" stroke-width="2"/>
+ <!-- hair / cap -->
+ <path d="M218 472 Q225 390 310 390 Q395 390 402 472 L380 500 Q365 430 310 430 Q255 430 238 500Z" fill="#090909"/>
+ <path d="M205 455 Q310 405 414 455 L402 493 Q310 465 218 493Z" fill="#0b0b0b"/>
+ <path d="M283 421 L310 408 L337 421 L337 444 L283 444Z" fill="#f2f2f2" opacity=".9"/>
+ <!-- beard -->
+ <path d="M244 535 Q310 595 376 535 Q365 650 310 660 Q255 650 244 535Z" fill="#3a2925"/>
+ <!-- aviators -->
+ <g fill="#111" stroke="#9d9d9d" stroke-width="4">
+  <path d="M235 485 Q265 465 302 485 L295 530 Q250 540 238 515Z"/>
+  <path d="M318 485 Q355 465 385 485 L382 515 Q370 540 325 530Z"/>
+ </g>
+ <line x1="300" y1="493" x2="320" y2="493" stroke="#aaa" stroke-width="5"/>
+ <!-- tattoos -->
+ <path d="M150 700q55-45 100 10M165 750q45-55 85 0M360 690q35-30 65 5M375 735q35-45 65 5" fill="none" stroke="#5c5c5c" stroke-width="7"/>
+ <!-- open shirt -->
+ <path d="M265 655 L310 730 L355 655" fill="none" stroke="#d8b75d" stroke-width="3"/>
+ <path d="M265 655 L310 720 L355 655" fill="#161616" opacity=".75"/>
 </g>
 
-<!-- title -->
-<text x="450" y="150" text-anchor="middle" fill="#d8b75d" font-family="Georgia,serif" font-size="25" letter-spacing="8">NEGAN &amp; LUCILLE</text>
-<text x="450" y="235" text-anchor="middle" fill="#f5f1e5" font-family="Georgia,serif" font-size="54" font-weight="bold" letter-spacing="3">LE CONTRAT</text>
-<text x="450" y="300" text-anchor="middle" fill="#f5f1e5" font-family="Georgia,serif" font-size="54" font-weight="bold" letter-spacing="3">DU MAÎTRE</text>
-<line x1="260" y1="335" x2="640" y2="335" stroke="url(#gold)" stroke-width="2"/>
-<text x="450" y="375" text-anchor="middle" fill="#c7a957" font-family="Arial,sans-serif" font-size="16" letter-spacing="5">CONFIANCE • CONSENTEMENT • RESPECT</text>
-
-<!-- atmospheric shadow -->
-<ellipse cx="450" cy="805" rx="290" ry="320" fill="#000" opacity=".45" filter="url(#shadow)"/>
-
-<!-- two abstract figures, non-explicit -->
-<g opacity=".96">
-  <!-- Maître silhouette -->
-  <circle cx="335" cy="610" r="58" fill="#080808" stroke="#8c6e31" stroke-width="2"/>
-  <path d="M250 890 Q260 690 335 670 Q410 690 420 890Z" fill="#080808" stroke="#8c6e31" stroke-width="3"/>
-  <path d="M287 670 Q335 710 383 670" fill="none" stroke="#a91e27" stroke-width="8"/>
-  <!-- Soumise silhouette -->
-  <circle cx="565" cy="625" r="52" fill="#12090b" stroke="#d8b75d" stroke-width="2"/>
-  <path d="M485 890 Q492 710 565 680 Q638 710 650 890Z" fill="#12090b" stroke="#d8b75d" stroke-width="3"/>
-  <path d="M520 682 Q565 716 610 682" fill="none" stroke="#a91e27" stroke-width="7"/>
+<!-- Lucille: elegant distinguished look -->
+<g>
+ <!-- dress -->
+ <path d="M470 850 Q478 670 555 635 Q630 660 710 850Z" fill="#100b0d" stroke="url(#gold)" stroke-width="3"/>
+ <!-- elegant neckline -->
+ <path d="M515 665 Q555 720 600 665 Q625 695 650 665 L690 850 L490 850Z" fill="#171012" stroke="#b88e42" stroke-width="2"/>
+ <path d="M515 665 Q555 700 600 665" fill="none" stroke="#d8b75d" stroke-width="3"/>
+ <!-- neck -->
+ <path d="M545 610 L545 665 Q575 690 605 665 L605 610" fill="#c48b6d"/>
+ <!-- head -->
+ <ellipse cx="575" cy="520" rx="82" ry="105" fill="#c88d70" stroke="#e1b095" stroke-width="2"/>
+ <!-- blonde hair -->
+ <path d="M495 540 Q475 405 575 385 Q680 405 655 555 L630 590 Q640 465 575 445 Q515 465 515 585Z" fill="#d5a16e"/>
+ <path d="M505 455 Q550 365 640 425 Q675 455 650 500 Q620 440 575 435 Q535 440 505 500Z" fill="#e1b47e"/>
+ <!-- face / makeup -->
+ <path d="M535 500q20-15 40 0M580 500q20-15 40 0" fill="none" stroke="#38221d" stroke-width="5"/>
+ <path d="M555 548 Q575 562 595 548" fill="none" stroke="#9e3341" stroke-width="5"/>
+ <!-- choker -->
+ <rect x="538" y="620" width="74" height="20" rx="7" fill="#080808" stroke="#d8b75d" stroke-width="3"/>
+ <circle cx="575" cy="640" r="8" fill="#a91e27" stroke="#d8b75d" stroke-width="2"/>
+ <!-- necklace -->
+ <path d="M575 641 L575 685" stroke="#d8b75d" stroke-width="3"/>
+ <path d="M563 681 L575 693 L587 681" fill="none" stroke="#d8b75d" stroke-width="3"/>
 </g>
 
-<!-- central symbolic lock -->
-<g transform="translate(450 805)">
-  <circle r="105" fill="#090707" stroke="#b78e35" stroke-width="4"/>
-  <path d="M-48 -10v-42c0-52 96-52 96 0v42" fill="none" stroke="#d8b75d" stroke-width="18" stroke-linecap="round"/>
-  <rect x="-68" y="-12" width="136" height="105" rx="18" fill="#a91e27" stroke="#e1bf63" stroke-width="4"/>
-  <circle cy="32" r="12" fill="#f5e6aa"/>
-  <path d="M0 43v26" stroke="#f5e6aa" stroke-width="8" stroke-linecap="round"/>
+<!-- book + lock foreground -->
+<g>
+ <path d="M120 920 Q450 850 780 920 L760 1135 Q450 1065 140 1135Z" fill="#090909" stroke="url(#gold)" stroke-width="5"/>
+ <path d="M150 945 Q450 885 750 945" fill="none" stroke="#4e391a" stroke-width="2"/>
+ <text x="450" y="975" text-anchor="middle" fill="#d8b75d" font-family="Georgia,serif" font-size="25" letter-spacing="5">LE CONTRAT</text>
+ <text x="450" y="1015" text-anchor="middle" fill="#f5e8c2" font-family="Georgia,serif" font-size="34" font-weight="bold">DU MAÎTRE</text>
+ <!-- chain -->
+ <path d="M155 1080 Q300 1140 450 1080 T745 1080" fill="none" stroke="#b78932" stroke-width="12" stroke-linecap="round" opacity=".9"/>
+ <g transform="translate(450 1080)">
+  <path d="M-45 -8v-35c0-52 90-52 90 0v35" fill="none" stroke="#d8b75d" stroke-width="13" stroke-linecap="round"/>
+  <rect x="-62" y="-8" width="124" height="88" rx="16" fill="#a91e27" stroke="#e3c66d" stroke-width="4"/>
+  <circle cy="31" r="10" fill="#f6e9b5"/>
+  <path d="M0 42v20" stroke="#f6e9b5" stroke-width="7" stroke-linecap="round"/>
+ </g>
 </g>
 
-<!-- decorative divider -->
-<g stroke="#8d6d2f" stroke-width="2">
- <line x1="190" y1="1005" x2="380" y2="1005"/>
- <line x1="520" y1="1005" x2="710" y2="1005"/>
-</g>
-<path d="M450 987l18 18-18 18-18-18z" fill="#d8b75d"/>
-
-<text x="450" y="1080" text-anchor="middle" fill="#eee8d7" font-family="Georgia,serif" font-size="30" letter-spacing="4">MAÎTRE • SOUMISE</text>
-<text x="450" y="1130" text-anchor="middle" fill="#a99b7a" font-family="Arial,sans-serif" font-size="17" letter-spacing="3">UN JEU FONDÉ SUR LA CONFIANCE</text>
-
-<text x="450" y="1250" text-anchor="middle" fill="#d8b75d" font-family="Georgia,serif" font-size="21" letter-spacing="7">NEGAN • LUCILLE</text>
-<text x="450" y="1295" text-anchor="middle" fill="#777" font-family="Arial,sans-serif" font-size="13" letter-spacing="3">RÈGLES • LIMITES • CONSENTEMENT</text>
+<text x="450" y="1195" text-anchor="middle" fill="#d8b75d" font-family="Georgia,serif" font-size="19" letter-spacing="5">LE MAÎTRE • LA SOUMISE</text>
+<text x="450" y="1232" text-anchor="middle" fill="#b9ad91" font-family="Arial,sans-serif" font-size="14" letter-spacing="3">CONFIANCE • DOMINATION • CONSENTEMENT • RESPECT</text>
+<text x="450" y="1295" text-anchor="middle" fill="#f5e8c2" font-family="Georgia,serif" font-size="20" letter-spacing="4">NEGAN ♥ LUCILLE</text>
 </svg>
