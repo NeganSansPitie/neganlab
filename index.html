@@ -364,6 +364,23 @@
       .schedule { grid-template-columns:1fr; }
     }
 
+  
+    /* Planning structuré à partir du calendrier fourni */
+    .planning { background:linear-gradient(145deg,#080808,#17110a 55%,#090909); }
+    .planning-head { align-items:flex-end; }
+    .schedule { grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .live-card { min-height:154px; padding:18px 20px; gap:15px; justify-content:flex-start; border:1px solid rgba(214,166,74,.25); border-radius:10px; background:linear-gradient(130deg,rgba(35,29,20,.97),rgba(11,11,10,.98) 70%); box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 4px 0 #030303,0 10px 20px rgba(0,0,0,.25); }
+    .live-card.live-gaming { border-left:3px solid #d6a64a; }
+    .live-card.live-react { border-left:3px solid #ff4b59; }
+    .live-date { color:#e9c875; font-size:.76rem; letter-spacing:.08em; }
+    .live-title { margin-top:6px; font-size:clamp(1.15rem,2vw,1.5rem); letter-spacing:.01em; }
+    .live-category { display:inline-block; padding:5px 8px; border:1px solid rgba(214,166,74,.35); border-radius:3px; color:#e9c875; font-size:.62rem; font-weight:1000; letter-spacing:.15em; }
+    .live-react .live-category { color:#ff7b83; border-color:rgba(255,75,89,.45); }
+    .live-note { margin-top:10px; color:#c9c0b0; font-size:.82rem; }
+    .live-react .live-note { color:#ffb5b9; }
+    a.live-card:hover { transform:translateY(-3px); }
+    @media(max-width:720px) { .schedule { grid-template-columns:1fr; gap:11px; } .live-card { min-height:130px; padding:16px; } .planning-head { align-items:flex-start; } }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -435,6 +452,7 @@
           lives.sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).forEach(live => {
             const card = document.createElement(live.url ? "a" : "article");
             card.className = "live-card";
+            if (live.category) card.classList.add("live-" + live.category);
             if (live.status === "off") card.classList.add("is-off");
             if (live.image) {
               card.classList.add("has-art");
@@ -444,8 +462,11 @@
             const when = new Date(live.date + "T12:00:00").toLocaleDateString("fr-BE", { weekday: "short", day: "numeric", month: "long" });
             const date = document.createElement("div"); date.className = "live-date"; date.textContent = when + (live.time ? " · " + live.time : "");
             const text = document.createElement("div");
+            const category = document.createElement("span");
+            category.className = "live-category";
+            category.textContent = live.category === "react" ? "RÉACTION · WTF" : "GAMING";
             const title = document.createElement("div"); title.className = "live-title"; title.textContent = live.title;
-            text.append(title);
+            text.append(category, title);
             if (live.note) { const note = document.createElement("div"); note.className = "live-note"; note.textContent = live.note; text.append(note); }
             card.append(date, text); schedule.append(card);
           });
