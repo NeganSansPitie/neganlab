@@ -204,6 +204,71 @@
       .planning { border-radius:18px; }
     }
 
+  
+    /* Refonte inspirée des landing pages illustrées : aplats turquoise, diagonales et sections éditoriales */
+    :root { --ink:#073b43; --pink:#ff5b87; --cyan:#43f0df; --yellow:#fff0b0; --white:#f7f6df; --line:rgba(5,45,52,.24); }
+    html { background:#073b43; scroll-behavior:smooth; }
+    body { color:#083b42; background:#d8f3c0; font-family:Arial,Helvetica,sans-serif; }
+    body:before { position:absolute; inset:0 0 auto; height:100%; opacity:.045; z-index:-1; background-image:radial-gradient(#073b43 .7px,transparent .7px); background-size:4px 4px; }
+    main { width:100%; max-width:none; padding:0 0 0; }
+    .site-nav { min-height:54px; padding:0 max(24px,calc((100% - 1120px)/2)); display:flex; align-items:center; justify-content:space-between; gap:20px; background:#06343a; color:#fff8dc; }
+    .nav-brand { color:#fff8dc; text-decoration:none; font-size:.88rem; font-weight:1000; letter-spacing:.09em; white-space:nowrap; }
+    .nav-brand span { color:#43f0df; }
+    .nav-items { display:flex; gap:26px; align-items:center; }
+    .nav-items a { color:#c5e5d6; font-size:.78rem; font-weight:800; text-decoration:none; }
+    .nav-items a:hover { color:#43f0df; }
+    .nav-cta { padding:10px 14px; border-radius:2px; color:#073b43; background:#43f0df; font-size:.72rem; font-weight:1000; text-decoration:none; text-transform:uppercase; box-shadow:0 3px 0 #168c8b; }
+    .nav-cta:active { transform:translateY(2px); box-shadow:0 1px 0 #168c8b; }
+    .hero { position:relative; margin:0; border:0; border-radius:0; overflow:hidden; background:#0b5057; box-shadow:none; }
+    .hero-banner { width:100%; height:auto; display:block; }
+    .community-section { position:relative; padding:76px max(22px,calc((100% - 1120px)/2)) 66px; background:linear-gradient(145deg,#e3f6bf 0%,#b7e9b8 40%,#69c9b5 100%); }
+    .community-section:before { content:""; position:absolute; top:-24px; left:0; right:0; height:28px; background:#43f0df; clip-path:polygon(0 0,100% 62%,100% 100%,0 38%); }
+    .section-heading { max-width:720px; margin:0 auto 32px; text-align:center; }
+    .section-kicker { color:#1b7779; font-size:.72rem; font-weight:1000; letter-spacing:.22em; }
+    .section-heading h2 { margin:9px 0 10px; color:#063b42; font-size:clamp(2rem,5vw,3.7rem); line-height:.95; letter-spacing:-.06em; font-weight:1000; }
+    .section-heading p { margin:0; color:#245e62; font-size:1rem; line-height:1.6; font-weight:600; }
+    .links { max-width:1120px; margin:0 auto; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    .link { --accent:#fff; min-height:126px; padding:20px; border:1px solid rgba(5,54,60,.14); border-radius:4px; background:rgba(255,255,239,.82); color:#083b42; box-shadow:0 5px 0 rgba(6,62,67,.18); }
+    .link:before { inset:0; height:4px; border-radius:0; background:var(--accent); }
+    .link:after { width:60px; height:60px; right:-20px; bottom:-28px; opacity:.11; }
+    .link i { color:var(--accent); font-size:1.9rem; filter:none; }
+    .link strong { color:#073b43; }
+    .link small { color:#477174; }
+    .link:hover { transform:translateY(-4px); border-color:var(--accent); filter:none; box-shadow:0 9px 0 rgba(6,62,67,.18); }
+    .link:active { transform:translateY(2px); box-shadow:0 1px 0 rgba(6,62,67,.18); }
+    .tiktok { --accent:#111820; } .twitch { --accent:#9146ff; } .youtube { --accent:#ff0033; } .telegram { --accent:#229ed9; } .discord { --accent:#5865f2; } .tipeee { --accent:#ff7b22; } .paypal { --accent:#0070ba; }
+    .planning { position:relative; margin:0; padding:76px max(22px,calc((100% - 1120px)/2)) 78px; border:0; border-radius:0; background:linear-gradient(145deg,#0d5a61,#0a414b 65%,#07353e); box-shadow:none; color:#f7f6df; }
+    .planning:before { content:""; position:absolute; top:0; left:0; right:0; height:8px; background:#43f0df; clip-path:polygon(0 0,100% 0,100% 100%,0 40%); }
+    .planning:after { content:""; position:absolute; bottom:-1px; left:0; right:0; height:24px; background:#d8f3c0; clip-path:polygon(0 0,100% 75%,100% 100%,0 100%); }
+    .planning-head { max-width:1120px; margin:0 auto 26px; }
+    .planning h2 { color:#fff8dc; font-size:clamp(1.8rem,4vw,3rem); font-weight:1000; }
+    .planning h2 .fa-youtube { color:#ff526f; } .planning h2 .fa-twitch { color:#bda2ff; }
+    .planning-head p { color:#b8e7dc; }
+    .schedule { max-width:1120px; margin:0 auto; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+    .live-card { min-height:145px; border:1px solid rgba(190,240,220,.22); border-radius:3px; background:linear-gradient(135deg,rgba(4,37,44,.92),rgba(8,75,80,.96)); color:#fff8dc; box-shadow:0 5px 0 rgba(0,0,0,.17); }
+    .live-date { color:#43f0df; }
+    a.live-card:hover { transform:translateY(-4px); border-color:#43f0df; box-shadow:0 9px 0 rgba(0,0,0,.17); }
+    .videos { display:none; }
+    footer { padding:34px 20px 28px; background:#052e34; color:#b5d5c8; font-size:.72rem; letter-spacing:.12em; }
+    @media(max-width:760px) {
+      .site-nav { min-height:52px; padding:10px 14px; gap:10px; flex-wrap:wrap; }
+      .nav-brand { font-size:.72rem; }
+      .nav-items { order:3; width:100%; justify-content:center; gap:22px; padding-top:5px; }
+      .nav-items a { font-size:.73rem; }
+      .nav-cta { padding:9px 10px; font-size:.62rem; }
+      .hero { border-radius:0; }
+      .community-section { padding:55px 14px 52px; }
+      .section-heading { margin-bottom:25px; }
+      .section-heading p { font-size:.9rem; }
+      .links { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+      .link { min-height:110px; padding:15px 13px; }
+      .link strong { font-size:1rem; }
+      .link small { font-size:.78rem; overflow-wrap:anywhere; }
+      .planning { padding:55px 14px 58px; }
+      .planning-head { flex-direction:column; gap:8px; }
+      .schedule { grid-template-columns:1fr; }
+    }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -217,9 +282,12 @@
 <body>
   <div class="intro" aria-hidden="true"><img src="assets/images/3B3555FA-6755-4576-8D8D-1642F2850C22.png" alt=""></div>
   <main>
+    <nav class="site-nav" aria-label="Navigation principale"><a class="nav-brand" href="#top">NEGAN <span>&amp;</span> COUILLONS</a><div class="nav-items"><a href="#social-links">Communauté</a><a href="#live-planning">Planning des lives</a></div><a class="nav-cta" href="https://www.twitch.tv/neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch"></i> Rejoindre le live</a></nav>
+    <div id="top"></div>
     <section class="hero" aria-label="Negan & Couillons">
       <img class="hero-banner" src="assets/images/negan_site_banner_1920x450.png" alt="Bannière Negan & Couillons : gaming, vlog et fun">
     </section>
+    <section class="community-section" id="social-links" aria-labelledby="community-title"><div class="section-heading"><span class="section-kicker">RESTONS EN CONTACT</span><h2 id="community-title">LA BANDE DES COUILLONS</h2><p>Des lives, du gaming, des réactions improbables et surtout de bons délires.</p></div>
     <nav class="links" aria-label="Retrouver Negan & Couillons">
       <a class="link tiktok" href="https://www.tiktok.com/@neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" aria-hidden="true"></i><div><strong>TikTok</strong><small>@neganetcouillons</small></div></a>
       <a class="link twitch" href="https://www.twitch.tv/neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch" aria-hidden="true"></i><div><strong>Twitch</strong><small>neganetcouillons</small></div></a>
@@ -228,8 +296,8 @@
       <a class="link discord" href="https://discord.gg/KsMAQeCkmP" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord" aria-hidden="true"></i><div><strong>Discord</strong><small id="discord-count">Voici le Discord de la communauté, n’hésitez pas à nous rejoindre.</small></div></a>
       <a class="link tipeee" href="https://fr.tipeee.com/negan-couillons/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-heart" aria-hidden="true"></i><div><strong>Tipeee</strong><small>Soutenir la chaîne</small></div></a>
       <a class="link paypal" href="https://botrix.live/y/@neganetcouillons/tip" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-paypal" aria-hidden="true"></i><div><strong>Faire un don</strong><small>Un petit coup de pouce, un grand merci ❤️</small></div></a>
-    </nav>
-    <section class="planning" aria-labelledby="planning-title">
+    </nav></section>
+    <section class="planning" id="live-planning" aria-labelledby="planning-title">
       <div class="planning-head">
         <h2 id="planning-title"><i class="fa-brands fa-youtube" aria-hidden="true"></i><i class="fa-brands fa-twitch" aria-hidden="true"></i>PLANNING YouTube &amp; Twitch</h2>
         <p>À très vite en direct !</p>
