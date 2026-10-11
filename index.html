@@ -501,6 +501,42 @@
       .links .link i,.links .link i:after { animation:none !important; opacity:.8; }
     }
 
+  
+    /* Halo électrique permanent autour des icônes sociales */
+    @keyframes electric-pulse {
+      0%,100% { opacity:.68; transform:scale(.94) rotate(0deg); filter:drop-shadow(0 0 3px var(--accent)); }
+      25% { opacity:1; transform:scale(1.05) rotate(-4deg); filter:drop-shadow(0 0 8px var(--accent)); }
+      50% { opacity:.82; transform:scale(.98) rotate(3deg); filter:drop-shadow(0 0 4px var(--accent)); }
+      75% { opacity:1; transform:scale(1.04) rotate(-2deg); filter:drop-shadow(0 0 10px var(--accent)); }
+    }
+    @keyframes electric-ring {
+      0%,100% { opacity:.5; transform:scale(.88) rotate(0deg); }
+      30% { opacity:1; transform:scale(1.06) rotate(7deg); }
+      60% { opacity:.65; transform:scale(.96) rotate(-6deg); }
+    }
+    .link i {
+      position:relative;
+      z-index:2;
+      animation:electric-pulse 1.7s ease-in-out infinite;
+    }
+    .link > i:after {
+      content:""; position:absolute; z-index:-1;
+      left:50%; top:50%; width:1.8em; height:1.8em;
+      transform:translate(-50%,-50%);
+      border:1px solid color-mix(in srgb,var(--accent) 65%,transparent);
+      clip-path:polygon(50% 0%,59% 16%,77% 8%,73% 28%,100% 37%,81% 49%,92% 68%,68% 69%,61% 100%,46% 78%,26% 92%,29% 68%,0% 59%,20% 44%,8% 24%,33% 29%);
+      background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 68%);
+      box-shadow:0 0 12px color-mix(in srgb,var(--accent) 45%,transparent);
+      animation:electric-ring 1.15s steps(4,end) infinite;
+      pointer-events:none;
+    }
+    .link:hover i { animation:electric-pulse .55s ease-out infinite; }
+    .link:hover > i:after { animation:electric-ring .4s steps(4,end) infinite; }
+    @media(prefers-reduced-motion:reduce) {
+      .link i, .link > i:after { animation:none !important; }
+      .link i { filter:drop-shadow(0 0 5px var(--accent)); }
+    }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
