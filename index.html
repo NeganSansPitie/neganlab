@@ -441,6 +441,36 @@
     .live-card.is-visible { opacity:1; transform:translateY(0); }
     @media (prefers-reduced-motion: reduce) { .motion-pending, .live-card:not(.is-visible) { opacity:1; transform:none; } }
 
+  
+    /* Boutons de destination par plateforme dans chaque rendez-vous */
+    .live-card { display:flex; flex-direction:column; align-items:stretch; gap:12px; }
+    .live-actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:auto; padding-top:5px; }
+    .live-platform { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-width:112px; padding:10px 15px; border-radius:5px; font-size:.82rem; font-weight:900; text-decoration:none; transition:transform .18s ease,filter .18s ease,box-shadow .18s ease; box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 3px 0 rgba(0,0,0,.6); }
+    .live-platform i { font-size:1.1rem; }
+    .live-youtube { color:#fff; background:linear-gradient(#ff4545,#c90020); border:1px solid #ff6969; }
+    .live-twitch { color:#fff; background:linear-gradient(#a879ff,#6630c8); border:1px solid #c4a7ff; }
+    .live-platform:hover { transform:translateY(-2px); filter:brightness(1.12); box-shadow:0 0 16px rgba(214,166,74,.16),0 4px 0 rgba(0,0,0,.6); }
+    .live-platform:active { transform:translateY(2px); box-shadow:inset 0 2px 5px rgba(0,0,0,.35),0 1px 0 rgba(0,0,0,.6); }
+    .live-platform:focus-visible { outline:2px solid #f6d995; outline-offset:3px; }
+    /* Éclairs stylisés sur les icônes sociales, déclenchés au survol */
+    @keyframes icon-zap {
+      0%,100% { transform:translateY(0) scale(1); filter:drop-shadow(0 0 0 transparent); }
+      18% { transform:translateY(-2px) scale(1.14) rotate(-9deg); filter:drop-shadow(0 0 5px var(--accent)); }
+      35% { transform:translateY(1px) scale(.98) rotate(6deg); }
+      52% { transform:translateY(-3px) scale(1.12) rotate(-5deg); filter:drop-shadow(0 0 12px var(--accent)); }
+      70% { transform:translateY(0) scale(1.02); }
+    }
+    @keyframes icon-lightning {
+      0%,100% { opacity:0; transform:scale(.45) rotate(-18deg); }
+      35%,65% { opacity:1; transform:scale(1) rotate(0); }
+    }
+    .link i { position:relative; transition:transform .22s ease,filter .22s ease; }
+    .link:hover i { animation:icon-zap .55s ease-out; }
+    .link:hover i:after { content:"⚡"; position:absolute; top:-.7em; right:-.7em; color:var(--accent); font-size:.7em; text-shadow:0 0 10px var(--accent); animation:icon-lightning .42s ease-out; pointer-events:none; }
+    .link:focus-visible i { filter:drop-shadow(0 0 9px var(--accent)); }
+    @media(max-width:720px) { .live-actions { gap:8px; } .live-platform { flex:1; min-width:0; padding:10px 9px; } }
+    @media(prefers-reduced-motion:reduce) { .link:hover i, .link:hover i:after { animation:none !important; } }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -454,9 +484,8 @@
 <body>
   <div class="intro" aria-hidden="true"><img src="assets/images/3B3555FA-6755-4576-8D8D-1642F2850C22.png" alt=""></div>
   <main>
-    <nav class="site-nav" aria-label="Navigation principale"><a class="nav-brand" href="#top">NEGAN <span>&amp;</span> COUILLONS</a><div class="nav-items"><a href="#social-links">Communauté</a><a href="#live-planning">Planning des lives</a></div><a class="nav-cta" href="https://www.twitch.tv/neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch"></i> Rejoindre le live</a></nav>
     <div id="top"></div>
-    <section class="hero" aria-label="Negan & Couillons">
+<section class="hero" aria-label="Negan & Couillons">
       <img class="hero-banner" src="assets/images/negan_site_banner_1920x450.png" alt="Bannière Negan & Couillons : gaming, vlog et fun">
     </section>
     <section class="community-section" id="social-links" aria-labelledby="community-title"><div class="section-heading"><span class="section-kicker">RESTONS EN CONTACT</span><h2 id="community-title">LA BANDE DES COUILLONS</h2><p>Des lives, du gaming, des réactions improbables et surtout de bons délires.</p></div>
@@ -510,7 +539,7 @@
           if (!lives.length) return empty("Le prochain planning arrive bientôt.");
           schedule.replaceChildren();
           lives.sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).forEach(live => {
-            const card = document.createElement(live.url ? "a" : "article");
+            const card = document.createElement("article");
             card.className = "live-card";
             if (live.category) card.classList.add("live-" + live.category);
             if (live.status === "off") card.classList.add("is-off");
@@ -518,7 +547,6 @@
               card.classList.add("has-art");
               card.style.backgroundImage = "linear-gradient(135deg, rgba(9,7,14,.15), rgba(9,7,14,.88)), url('" + live.image.replace(/'/g, "%27") + "')";
             }
-            if (live.url) { card.href = live.url; card.target = "_blank"; card.rel = "noopener noreferrer"; }
             const when = new Date(live.date + "T12:00:00").toLocaleDateString("fr-BE", { weekday: "short", day: "numeric", month: "long" });
             const date = document.createElement("div"); date.className = "live-date"; date.textContent = when + (live.time ? " · " + live.time : "");
             const text = document.createElement("div");
@@ -528,7 +556,20 @@
             const title = document.createElement("div"); title.className = "live-title"; title.textContent = live.title;
             text.append(category, title);
             if (live.note) { const note = document.createElement("div"); note.className = "live-note"; note.textContent = live.note; text.append(note); }
-            card.append(date, text); schedule.append(card);
+            const actions = document.createElement("div");
+            actions.className = "live-actions";
+            const youtube = document.createElement("a");
+            youtube.className = "live-platform live-youtube";
+            youtube.href = live.youtubeUrl || "https://www.youtube.com/@neganetcouillons";
+            youtube.target = "_blank"; youtube.rel = "noopener noreferrer";
+            youtube.innerHTML = '<i class="fa-brands fa-youtube" aria-hidden="true"></i><span>YouTube</span>';
+            const twitch = document.createElement("a");
+            twitch.className = "live-platform live-twitch";
+            twitch.href = live.twitchUrl || "https://www.twitch.tv/neganetcouillons";
+            twitch.target = "_blank"; twitch.rel = "noopener noreferrer";
+            twitch.innerHTML = '<i class="fa-brands fa-twitch" aria-hidden="true"></i><span>Twitch</span>';
+            actions.append(youtube, twitch);
+            card.append(date, text, actions); schedule.append(card);
           });
         })
         .catch(() => empty("Le planning est temporairement indisponible."))
