@@ -613,13 +613,23 @@
     <footer>© 2026 Negan & Couillons</footer>
   </main>
 <script>
-  // Forcer l'arrivée en haut de page, y compris après le retour depuis le cache mobile.
+  // Sur mobile Safari, le navigateur peut restaurer l'ancien scroll après le chargement.
   (function () {
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const intro = document.querySelector(".intro");
     const goTop = () => window.scrollTo(0, 0);
+    const settleAtTop = () => {
+      goTop();
+      requestAnimationFrame(() => requestAnimationFrame(goTop));
+      setTimeout(goTop, 250);
+    };
     goTop();
-    window.addEventListener("pageshow", goTop);
-    window.addEventListener("load", () => requestAnimationFrame(goTop), { once: true });
+    window.addEventListener("pageshow", settleAtTop);
+    window.addEventListener("load", () => {
+      settleAtTop();
+      setTimeout(goTop, 2100);
+      if (intro) intro.addEventListener("animationend", goTop, { once: true });
+    }, { once: true });
   }());
 </script>
 <script>
