@@ -655,6 +655,33 @@
     }
     @media(max-width:390px) { .live-card { grid-template-columns:1fr 100px; padding:12px !important; } .live-card .live-art { min-height:112px; } }
 
+  
+    /* Final polish: immersive event artwork with readable text on every screen */
+    .schedule { display:grid; gap:16px; }
+    .live-card { display:grid !important; grid-template-columns:minmax(160px,.72fr) minmax(180px,1fr) minmax(220px,.95fr); align-items:center; gap:18px; min-height:190px; padding:22px !important; position:relative; isolation:isolate; overflow:hidden; background-color:#0a0808 !important; background-image:none !important; border:1px solid rgba(224,177,89,.65) !important; border-radius:15px !important; box-shadow:0 10px 28px rgba(0,0,0,.26); }
+    .live-card::before { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,#0a0808 0%,rgba(10,8,8,.98) 42%,rgba(10,8,8,.68) 65%,rgba(10,8,8,.2) 100%); pointer-events:none; }
+    .live-date { grid-column:1; grid-row:1 / span 2; align-self:start; color:#edc46f !important; font-weight:800; line-height:1.55; }
+    .live-card > div:nth-child(2) { grid-column:2; grid-row:1; }
+    .live-category { display:inline-flex; width:max-content; max-width:100%; padding:5px 9px; margin-bottom:9px; border:1px solid rgba(236,188,91,.75); border-radius:4px; color:#f4c35e !important; font-size:.72rem; font-weight:800; letter-spacing:.08em; }
+    .live-title { color:#fff8ef !important; font-size:clamp(1.2rem,2.1vw,1.8rem) !important; font-weight:900; line-height:1.13; }
+    .live-note { margin-top:8px; color:rgba(255,248,239,.75) !important; line-height:1.45; }
+    .live-card .live-art { grid-column:3; grid-row:1 / span 2; align-self:stretch; min-height:145px; border-radius:9px; background-position:center; background-size:cover; box-shadow:inset 0 0 0 1px rgba(255,255,255,.13); }
+    .live-actions { grid-column:2; grid-row:2; align-self:start; padding-top:0 !important; margin-top:0 !important; }
+    .live-card.live-gaming { border-color:rgba(230,178,78,.72) !important; }
+    .live-card.live-react { border-color:rgba(167,139,250,.72) !important; }
+    .live-card.live-react .live-category { border-color:rgba(167,139,250,.8); color:#c4b5fd !important; }
+    .live-platform { width:30px !important; height:30px !important; font-size:1.28rem !important; }
+    @media(max-width:720px) {
+      .live-card { grid-template-columns:minmax(0,1fr) minmax(105px,.72fr); gap:10px 14px; min-height:160px; padding:15px !important; }
+      .live-date { grid-column:1; grid-row:1; font-size:.86rem; }
+      .live-card > div:nth-child(2) { grid-column:1; grid-row:2; }
+      .live-card .live-art { grid-column:2; grid-row:1 / span 3; min-height:128px; }
+      .live-actions { grid-column:1; grid-row:3; }
+      .live-title { font-size:1.15rem !important; }
+      .live-note { font-size:.84rem; }
+    }
+    @media(max-width:390px) { .live-card { grid-template-columns:minmax(0,1fr) 90px; padding:12px !important; } .live-card .live-art { min-height:115px; } }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -750,7 +777,12 @@
             const art = document.createElement("div");
             art.className = "live-art";
             art.setAttribute("aria-hidden", "true");
-            if (live.image) art.style.backgroundImage = "url('" + live.image.replace(/'/g, "%27") + "')";
+            if (live.image) {
+              const safeImage = live.image.replace(/'/g, "%27");
+              art.style.backgroundImage = "url('" + safeImage + "')";
+            } else {
+              art.style.backgroundImage = "linear-gradient(135deg, rgba(214,166,76,.25), rgba(18,13,8,.8))";
+            }
             const when = new Date(live.date + "T12:00:00").toLocaleDateString("fr-BE", { weekday: "short", day: "numeric", month: "long" });
             const date = document.createElement("div"); date.className = "live-date"; date.textContent = when + (live.time ? " · " + live.time : "");
             const text = document.createElement("div");
