@@ -901,6 +901,42 @@
       .live-card .live-platform { position:relative !important; z-index:4 !important; }
     }
 
+  
+    /* Mobile portrait: preserve full banner and let artwork bleed into card instead of a boxed thumbnail */
+    .hero, .hero-banner { width:100% !important; height:auto !important; max-height:none !important; object-fit:contain !important; object-position:center center !important; }
+    @media (max-width:720px) and (orientation:portrait) {
+      .hero { display:block !important; overflow:visible !important; }
+      .hero-banner { display:block !important; width:100% !important; height:auto !important; max-height:none !important; object-fit:contain !important; }
+      .live-card .live-art {
+        inset:0 !important;
+        width:100% !important;
+        height:100% !important;
+        min-height:100% !important;
+        border-radius:inherit !important;
+        background-size:cover !important;
+        background-position:center !important;
+        opacity:1 !important;
+      }
+      .live-card::before {
+        background:linear-gradient(90deg,
+          #080808 0%,
+          rgba(8,8,8,.99) 26%,
+          rgba(8,8,8,.94) 42%,
+          rgba(8,8,8,.77) 56%,
+          rgba(8,8,8,.35) 74%,
+          rgba(8,8,8,.08) 100%) !important;
+      }
+      .live-card.live-react::before {
+        background:linear-gradient(90deg,
+          #080808 0%,
+          rgba(8,8,8,.99) 26%,
+          rgba(8,8,8,.94) 42%,
+          rgba(8,8,8,.77) 56%,
+          rgba(8,8,8,.35) 74%,
+          rgba(8,8,8,.08) 100%) !important;
+      }
+    }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
