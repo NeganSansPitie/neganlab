@@ -587,6 +587,46 @@
       text-shadow: 0 2px 0 rgba(0,0,0,.65), 0 0 18px rgba(214,166,74,.16);
     }
 
+
+    /* Planning : liens discrets sous forme de logos, et ambiance visuelle par univers */
+    .live-card { position:relative; overflow:hidden; isolation:isolate; }
+    .live-card::before {
+      content:""; position:absolute; z-index:-1; inset:0; pointer-events:none; opacity:.95;
+      background:linear-gradient(90deg,rgba(8,8,8,.98) 0%,rgba(8,8,8,.91) 48%,rgba(8,8,8,.55) 100%);
+    }
+    .live-card.live-gaming {
+      background-image:radial-gradient(ellipse at 88% 22%,rgba(211,157,54,.28),transparent 42%),linear-gradient(135deg,#18130b,#080808 72%);
+      border-color:rgba(214,166,74,.38);
+    }
+    .live-card.live-gaming::after {
+      content:""; position:absolute; z-index:-2; right:-4%; top:-35%; width:55%; height:170%;
+      background:repeating-linear-gradient(132deg,transparent 0 18px,rgba(214,166,74,.08) 19px 21px,transparent 22px 39px);
+      transform:skewX(-8deg); pointer-events:none;
+    }
+    .live-card.live-react {
+      background-image:radial-gradient(ellipse at 88% 22%,rgba(145,70,255,.28),transparent 42%),linear-gradient(135deg,#15101b,#080808 72%);
+      border-color:rgba(145,70,255,.42);
+    }
+    .live-card.live-react::after {
+      content:""; position:absolute; z-index:-2; right:-4%; top:-35%; width:55%; height:170%;
+      background:repeating-linear-gradient(132deg,transparent 0 18px,rgba(145,70,255,.09) 19px 21px,transparent 22px 39px);
+      transform:skewX(-8deg); pointer-events:none;
+    }
+    .live-actions { display:flex; align-items:center; gap:13px; margin-top:auto; padding-top:7px; }
+    .live-platform {
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width:0; width:34px; height:34px; padding:0; border:0; border-radius:50%;
+      color:#fff; background:transparent; box-shadow:none; font-size:1.5rem;
+      transition:transform .18s ease,filter .18s ease;
+    }
+    .live-youtube { color:#ff4b55; }
+    .live-twitch { color:#a78bfa; }
+    .live-platform i { font-size:1.55rem; }
+    .live-platform:hover { transform:translateY(-2px) scale(1.12); filter:drop-shadow(0 0 8px currentColor); box-shadow:none; }
+    .live-platform:active { transform:scale(.96); }
+    @media(prefers-reduced-motion:reduce) { .live-platform { transition:none; } }
+
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -694,17 +734,24 @@
             if (live.note) { const note = document.createElement("div"); note.className = "live-note"; note.textContent = live.note; text.append(note); }
             const actions = document.createElement("div");
             actions.className = "live-actions";
-            const youtube = document.createElement("a");
-            youtube.className = "live-platform live-youtube";
-            youtube.href = live.youtubeUrl || "https://www.youtube.com/@neganetcouillons";
-            youtube.target = "_blank"; youtube.rel = "noopener noreferrer";
-            youtube.innerHTML = '<i class="fa-brands fa-youtube" aria-hidden="true"></i><span>YouTube</span>';
+            if (live.category !== "react") {
+              const youtube = document.createElement("a");
+              youtube.className = "live-platform live-youtube";
+              youtube.href = live.youtubeUrl || "https://www.youtube.com/@neganetcouillons";
+              youtube.target = "_blank"; youtube.rel = "noopener noreferrer";
+              youtube.setAttribute("aria-label", "Voir sur YouTube");
+              youtube.title = "YouTube";
+              youtube.innerHTML = '<i class="fa-brands fa-youtube" aria-hidden="true"></i>';
+              actions.append(youtube);
+            }
             const twitch = document.createElement("a");
             twitch.className = "live-platform live-twitch";
-            twitch.href = live.twitchUrl || "https://www.twitch.tv/neganetcouillons";
+            twitch.href = live.twitchUrl || live.url || "https://www.twitch.tv/neganetcouillons";
             twitch.target = "_blank"; twitch.rel = "noopener noreferrer";
-            twitch.innerHTML = '<i class="fa-brands fa-twitch" aria-hidden="true"></i><span>Twitch</span>';
-            actions.append(youtube, twitch);
+            twitch.setAttribute("aria-label", "Voir sur Twitch");
+            twitch.title = "Twitch";
+            twitch.innerHTML = '<i class="fa-brands fa-twitch" aria-hidden="true"></i>';
+            actions.append(twitch);
             card.append(date, text, actions); schedule.append(card);
           });
         })
