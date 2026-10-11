@@ -471,6 +471,36 @@
     @media(max-width:720px) { .live-actions { gap:8px; } .live-platform { flex:1; min-width:0; padding:10px 9px; } }
     @media(prefers-reduced-motion:reduce) { .link:hover i, .link:hover i:after { animation:none !important; } }
 
+  
+    /* Électricité permanente autour des icônes sociales */
+    @keyframes electric-pulse {
+      0%,100% { opacity:.45; transform:scale(.92) rotate(-2deg); filter:drop-shadow(0 0 3px var(--accent)); }
+      50% { opacity:1; transform:scale(1.08) rotate(2deg); filter:drop-shadow(0 0 9px var(--accent)) drop-shadow(0 0 15px color-mix(in srgb,var(--accent) 65%,transparent)); }
+    }
+    @keyframes lightning-flicker {
+      0%,15%,19%,48%,52%,100% { opacity:.1; }
+      16%,18%,49%,51% { opacity:.95; }
+      70% { opacity:.35; }
+    }
+    .links .link i { isolation:isolate; position:relative; z-index:2; animation:electric-pulse 2s ease-in-out infinite; }
+    .links .link i:after {
+      content:""; position:absolute; z-index:-1; width:1.65em; height:1.65em; left:50%; top:50%;
+      transform:translate(-50%,-50%);
+      background:radial-gradient(circle,color-mix(in srgb,var(--accent) 26%,transparent) 0%,transparent 68%);
+      border:1px solid color-mix(in srgb,var(--accent) 42%,transparent);
+      clip-path:polygon(50% 0%,57% 18%,76% 7%,70% 28%,100% 38%,78% 51%,94% 71%,68% 68%,59% 100%,45% 77%,25% 92%,29% 66%,0 56%,23% 43%,8% 22%,37% 29%);
+      animation:lightning-flicker 1.7s steps(1,end) infinite;
+      pointer-events:none;
+    }
+    .links .link:nth-child(2n) i { animation-delay:-.65s; }
+    .links .link:nth-child(3n) i:after { animation-delay:-.8s; }
+    .links .link:nth-child(4n) i { animation-delay:-1.2s; }
+    .links .link:hover i { animation-duration:.55s; }
+    .links .link:hover i:after { content:""; }
+    @media(prefers-reduced-motion:reduce) {
+      .links .link i,.links .link i:after { animation:none !important; opacity:.8; }
+    }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
