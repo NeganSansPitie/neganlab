@@ -1,11 +1,69 @@
 {
-  "updatedAt": "2026-09-28",
+  "updatedAt": "2026-10-11",
   "lives": [
     {
-      "date": "2026-09-28",
-      "title": "COMING SOON",
-      "note": "Le prochain planning arrive bientôt.",
-      "status": "off"
+      "date": "2026-10-12",
+      "title": "RPG",
+      "time": "19h45–23h00",
+      "note": "YouTube + Twitch",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "gaming"
+    },
+    {
+      "date": "2026-10-16",
+      "title": "Fortnite",
+      "time": "19h45–23h00",
+      "note": "YouTube + Twitch",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "gaming"
+    },
+    {
+      "date": "2026-10-18",
+      "title": "React à la belge · WTF",
+      "time": "19h45–23h00",
+      "note": "En direct sur Twitch",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "react"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "RPG",
+      "time": "19h45–23h00",
+      "note": "YouTube + Twitch",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "gaming"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Fortnite",
+      "time": "19h45–23h00",
+      "note": "YouTube + Twitch",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "gaming"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "React à la belge · WTF",
+      "time": "19h45–23h00",
+      "note": "En direct sur Twitch",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "react"
+    },
+    {
+      "date": "2026-10-26",
+      "title": "RPG",
+      "time": "19h45–23h00",
+      "note": "YouTube + Twitch",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "gaming"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "Fortnite",
+      "time": "19h45–23h00",
+      "note": "YouTube + Twitch",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "gaming"
     }
   ]
 }
