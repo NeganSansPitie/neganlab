@@ -613,6 +613,16 @@
     <footer>© 2026 Negan & Couillons</footer>
   </main>
 <script>
+  // Forcer l'arrivée en haut de page, y compris après le retour depuis le cache mobile.
+  (function () {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const goTop = () => window.scrollTo(0, 0);
+    goTop();
+    window.addEventListener("pageshow", goTop);
+    window.addEventListener("load", () => requestAnimationFrame(goTop), { once: true });
+  }());
+</script>
+<script>
     (function () {
       const count = document.getElementById("discord-count");
       fetch("https://discord.com/api/v10/invites/KsMAQeCkmP?with_counts=true")
