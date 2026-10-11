@@ -770,6 +770,29 @@
       .live-title { font-size:1rem !important; }
     }
 
+  
+    /* Ajustements finaux : bannière entière et logos de plateformes sans pastille */
+    .hero { width:100% !important; overflow:visible !important; border-radius:10px !important; }
+    .hero-banner { width:100% !important; height:auto !important; max-height:none !important; object-fit:contain !important; object-position:center !important; }
+    .live-platform {
+      width:auto !important; min-width:0 !important; height:auto !important; min-height:0 !important;
+      padding:0 !important; border:0 !important; border-radius:0 !important;
+      color:inherit !important; background:transparent !important; box-shadow:none !important;
+      text-shadow:none !important; filter:none !important;
+      display:inline-flex !important; align-items:center !important; justify-content:center !important;
+    }
+    .live-platform i { font-size:1.9rem !important; filter:none !important; text-shadow:none !important; }
+    .live-youtube { color:#ff334f !important; }
+    .live-twitch { color:#b99aff !important; }
+    .live-platform:hover { background:transparent !important; box-shadow:none !important; filter:brightness(1.2) !important; transform:scale(1.08) !important; }
+    .live-actions { display:flex !important; align-items:center !important; justify-content:flex-start !important; gap:20px !important; }
+    @media(max-width:720px) {
+      .hero { overflow:visible !important; }
+      .hero-banner { display:block !important; width:100% !important; height:auto !important; object-fit:contain !important; }
+      .live-platform i { font-size:1.85rem !important; }
+      .live-actions { gap:22px !important; }
+    }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
