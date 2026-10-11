@@ -537,6 +537,43 @@
       .link i { filter:drop-shadow(0 0 5px var(--accent)); }
     }
 
+
+    /* Balayage laser sur la ligne dorée de la bannière */
+    .hero { position:relative; }
+    .hero::after {
+      content:"";
+      position:absolute;
+      z-index:2;
+      left:0;
+      right:0;
+      bottom:8%;
+      height:2px;
+      pointer-events:none;
+      background:linear-gradient(90deg,transparent 0%,rgba(214,166,74,.2) 12%,rgba(214,166,74,.72) 50%,rgba(214,166,74,.2) 88%,transparent 100%);
+      box-shadow:0 0 5px rgba(214,166,74,.45);
+      overflow:hidden;
+    }
+    .hero::before {
+      content:"";
+      position:absolute;
+      z-index:3;
+      top:92%;
+      left:-28%;
+      width:28%;
+      height:3px;
+      pointer-events:none;
+      background:linear-gradient(90deg,transparent,rgba(255,246,205,.95) 45%,#fff 50%,rgba(255,213,115,.95) 58%,transparent);
+      box-shadow:0 0 7px 2px rgba(255,207,91,.9),0 0 18px 5px rgba(214,166,74,.65);
+      animation:banner-laser-sweep 3.2s ease-in-out infinite;
+    }
+    @keyframes banner-laser-sweep {
+      0% { left:-28%; opacity:0; }
+      8% { opacity:1; }
+      88% { opacity:1; }
+      100% { left:100%; opacity:0; }
+    }
+    @media(prefers-reduced-motion:reduce) { .hero::before { animation:none; display:none; } }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
