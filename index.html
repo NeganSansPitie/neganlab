@@ -137,6 +137,73 @@
       .link { min-height:108px; padding:14px; border-radius:13px; }
     }
 
+  
+    /* Univers Negan & Couillons : coloré, vivant et gaming */
+    :root { --ink:#080a12; --pink:#ff4f9a; --cyan:#39e5dc; --yellow:#ffd166; --white:#fff8ef; --line:rgba(255,255,255,.16); }
+    body {
+      background:
+        radial-gradient(ellipse at 8% 20%,rgba(255,79,154,.19),transparent 26rem),
+        radial-gradient(ellipse at 92% 38%,rgba(57,229,220,.16),transparent 30rem),
+        radial-gradient(ellipse at 48% 85%,rgba(255,209,102,.12),transparent 28rem),
+        #080a12;
+    }
+    body:before { opacity:.07; background-size:3px 3px; }
+    main { width:min(1180px,calc(100% - 36px)); }
+    .hero { border:1px solid rgba(255,255,255,.18); border-radius:20px; box-shadow:0 22px 65px rgba(0,0,0,.42),0 0 34px rgba(57,229,220,.08); }
+    .hero-banner { display:block; width:100%; height:auto; }
+    .videos,.planning,.links { margin-top:34px; }
+    .planning {
+      position:relative; overflow:hidden; border:1px solid rgba(57,229,220,.28); border-radius:24px;
+      background:linear-gradient(130deg,rgba(57,229,220,.10),rgba(138,92,246,.10) 48%,rgba(255,79,154,.10));
+      box-shadow:0 18px 45px rgba(0,0,0,.28);
+    }
+    .planning:before { content:""; position:absolute; width:240px; height:240px; right:-100px; top:-140px; border-radius:50%; background:rgba(255,79,154,.13); filter:blur(8px); pointer-events:none; }
+    .planning h2,.videos h2 { color:#fff8ef; font-weight:900; letter-spacing:-.045em; }
+    .planning h2 .fa-youtube { color:#ff4f72; }
+    .planning h2 .fa-twitch { color:#a78bfa; }
+    .planning-head p { color:#bdeee9; }
+    .live-card {
+      border:1px solid rgba(255,255,255,.15); border-radius:17px;
+      background:linear-gradient(145deg,rgba(34,39,57,.94),rgba(13,16,27,.97));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 5px 0 rgba(0,0,0,.32),0 10px 20px rgba(0,0,0,.22);
+      transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+    }
+    .live-date { color:#ffd166; }
+    a.live-card:hover { transform:translateY(-4px); border-color:#39e5dc; box-shadow:0 6px 0 rgba(0,0,0,.28),0 14px 26px rgba(0,0,0,.32),0 0 22px rgba(57,229,220,.1); }
+    .links { grid-template-columns:repeat(auto-fit,minmax(165px,1fr)); gap:14px; }
+    .link {
+      --accent:#fff; min-height:138px; padding:21px; border:1px solid color-mix(in srgb,var(--accent) 42%,transparent);
+      border-radius:18px; overflow:hidden;
+      background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 13%,#20202d),#11131d 70%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.13),inset 0 -3px 0 rgba(0,0,0,.38),0 5px 0 #05060a,0 11px 22px rgba(0,0,0,.32);
+      transition:transform .17s ease,border-color .17s ease,box-shadow .17s ease,filter .17s ease;
+    }
+    .link:before { content:""; position:absolute; inset:1px 1px auto; height:48%; border-radius:16px 16px 55% 55%; background:linear-gradient(180deg,rgba(255,255,255,.08),transparent); pointer-events:none; }
+    .link:after { width:100px; height:100px; right:-36px; bottom:-52px; opacity:.19; background:var(--accent); filter:blur(2px); }
+    .link i { color:var(--accent); font-size:1.85rem; filter:drop-shadow(0 0 8px color-mix(in srgb,var(--accent) 24%,transparent)); }
+    .link strong { color:#fffaf1; font-size:1.18rem; }
+    .link small { color:#c3c5d2; }
+    .link:hover { transform:translateY(-4px); border-color:var(--accent); filter:brightness(1.08); box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 6px 0 #05060a,0 15px 27px rgba(0,0,0,.4),0 0 22px color-mix(in srgb,var(--accent) 17%,transparent); }
+    .link:active { transform:translateY(2px); box-shadow:inset 0 3px 8px rgba(0,0,0,.48),0 1px 0 #05060a; }
+    .tiktok { --accent:#38e8e0; }
+    .twitch { --accent:#a78bfa; }
+    .youtube { --accent:#ff4f72; }
+    .telegram { --accent:#55b9ff; }
+    .discord { --accent:#7888ff; }
+    .tipeee { --accent:#ff9f43; }
+    .paypal { --accent:#5dbdff; }
+    .videos-head a { color:#39e5dc; }
+    .video-frame { border-color:rgba(57,229,220,.25); }
+    footer { color:rgba(255,248,239,.42); }
+    @media(max-width:720px) {
+      main { width:calc(100% - 20px); }
+      .hero { border-radius:13px; }
+      .links { grid-template-columns:repeat(2,minmax(0,1fr)); gap:11px; margin-top:23px; }
+      .link { min-height:112px; padding:15px; border-radius:14px; }
+      .link strong { font-size:1.04rem; }
+      .planning { border-radius:18px; }
+    }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
