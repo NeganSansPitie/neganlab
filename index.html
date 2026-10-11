@@ -594,6 +594,29 @@
       .hero::before,.hero::after { animation:none; transform:scaleX(1); opacity:.7; }
     }
 
+
+    /* Équilibrage vertical de la bannière, du titre et des réseaux */
+    .community-section {
+      margin-top: 8px !important;
+      padding-top: 0 !important;
+    }
+    .community-section .section-heading {
+      margin: 0 0 16px !important;
+      padding: 0 !important;
+      text-align: center !important;
+    }
+    .community-section .section-heading h2 {
+      margin: 0 !important;
+      text-align: center !important;
+    }
+    .community-section .links {
+      margin-top: 0 !important;
+    }
+    @media(max-width:720px) {
+      .community-section { margin-top: 6px !important; }
+      .community-section .section-heading { margin-bottom: 13px !important; }
+    }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
