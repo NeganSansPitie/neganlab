@@ -70,7 +70,35 @@
       .live-card { position:relative; isolation:isolate; background-size:cover; background-position:center; }
     .live-card.has-art::before { content:""; position:absolute; inset:0; z-index:-1; border-radius:inherit; background:linear-gradient(135deg,rgba(9,7,14,.12),rgba(9,7,14,.82)); }
     .live-card.is-off { border-style:dashed; background:rgba(255,255,255,.05); opacity:.74; }
-  </style>
+
+    /* Nouvelle direction artistique : minimalisme cinématique */
+    :root { --ink:#09090c; --pink:#ef78b6; --cyan:#c6a5bd; --yellow:#e8d9e1; --white:#f8f4f7; --line:rgba(255,255,255,.12); }
+    body { background:radial-gradient(ellipse at 50% 0%,rgba(239,120,182,.10),transparent 36rem),#09090c; }
+    body:before { opacity:.08; }
+    .intro { background:#09090c; animation:out 1.9s ease forwards; }
+    .intro img { display:block; width:min(68vw,390px); max-height:62vh; object-fit:contain; filter:drop-shadow(0 0 12px rgba(239,120,182,.55)) drop-shadow(0 0 38px rgba(239,120,182,.28)); animation:logo-arrive 1.5s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes logo-arrive { from { opacity:0; transform:scale(.82); filter:drop-shadow(0 0 0 rgba(239,120,182,0)); } 65% { opacity:1; transform:scale(1.035); } to { opacity:1; transform:scale(1); } }
+    main { width:min(1160px,calc(100% - 40px)); padding:28px 0 54px; }
+    .hero { border:1px solid rgba(255,255,255,.12); border-radius:22px; box-shadow:0 24px 80px rgba(0,0,0,.35); }
+    .videos,.planning,.links { margin-top:30px; }
+    .planning { padding:clamp(22px,4vw,34px); border:1px solid var(--line); border-radius:22px; background:rgba(255,255,255,.025); box-shadow:none; }
+    .videos h2,.planning h2 { font-size:clamp(1.35rem,3vw,2rem); letter-spacing:-.035em; font-style:normal; }
+    .videos h2 i { color:var(--pink); }
+    .planning h2 .fa-youtube { color:#f15c86; } .planning h2 .fa-twitch { color:#bd91e8; }
+    .planning-head p { font-size:.9rem; }
+    .video-frame { border-color:var(--line); border-radius:18px; box-shadow:none; }
+    .live-card { min-height:118px; padding:17px; border-color:var(--line); border-radius:16px; background-color:#111014; box-shadow:none; }
+    a.live-card:hover { transform:translateY(-2px); border-color:rgba(239,120,182,.65); }
+    .live-date { color:#e9a4c7; }
+    .links { grid-template-columns:repeat(auto-fit,minmax(155px,1fr)); gap:12px; }
+    .link { min-height:132px; padding:20px; border-color:var(--line); border-radius:18px; background:rgba(255,255,255,.025); box-shadow:none; }
+    .link:after { width:90px; height:90px; right:-38px; bottom:-48px; opacity:.12; }
+    .link:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.2); }
+    .link i { font-size:1.65rem; }
+    .youtube { --accent:#f15c86; } .tiktok { --accent:#b9a0bd; } .twitch { --accent:#bd91e8; } .telegram { --accent:#e9a4c7; } .tipeee { --accent:#e7b49a; } .discord { --accent:#a8a8ef; } .paypal { --accent:#9fc9e6; }
+    footer { padding-top:30px; color:rgba(248,244,247,.38); }
+    @media(max-width:720px) { main { width:calc(100% - 22px); padding-top:11px; } .hero { border-radius:16px; } .links { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:20px; } .link { min-height:112px; padding:15px; gap:12px; } .link strong { font-size:1.05rem; } .link small { font-size:.8rem; overflow-wrap:anywhere; } .planning-head { align-items:flex-start; flex-direction:column; gap:8px; } }
+\n  </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
   <script>
@@ -81,7 +109,7 @@
   </script>
 </head>
 <body>
-  <div class="intro" aria-hidden="true"><span>Negan &amp; Couillons</span></div>
+  <div class="intro" aria-hidden="true"><img src="assets/images/3B3555FA-6755-4576-8D8D-1642F2850C22.png" alt=""></div>
   <main>
     <section class="hero" aria-label="Negan & Couillons">
       <img class="hero-banner" src="assets/images/negan-couillons-header.jpg" alt="Bannière Negan & Couillons : gaming, vlog et fun">
