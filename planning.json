@@ -7,7 +7,8 @@
       "time": "19h45–23h00",
       "note": "YouTube + Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming"
+      "category": "gaming",
+      "image": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=85"
     },
     {
       "date": "2026-10-16",
@@ -15,7 +16,8 @@
       "time": "19h45–23h00",
       "note": "YouTube + Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming"
+      "category": "gaming",
+      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=900&q=85"
     },
     {
       "date": "2026-10-18",
@@ -23,7 +25,8 @@
       "time": "19h45–23h00",
       "note": "En direct sur Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "react"
+      "category": "react",
+      "image": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=900&q=85"
     },
     {
       "date": "2026-10-19",
@@ -31,7 +34,8 @@
       "time": "19h45–23h00",
       "note": "YouTube + Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming"
+      "category": "gaming",
+      "image": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=85"
     },
     {
       "date": "2026-10-22",
@@ -39,7 +43,8 @@
       "time": "19h45–23h00",
       "note": "YouTube + Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming"
+      "category": "gaming",
+      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=900&q=85"
     },
     {
       "date": "2026-10-23",
@@ -47,7 +52,8 @@
       "time": "19h45–23h00",
       "note": "En direct sur Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "react"
+      "category": "react",
+      "image": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=900&q=85"
     },
     {
       "date": "2026-10-26",
@@ -55,7 +61,8 @@
       "time": "19h45–23h00",
       "note": "YouTube + Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming"
+      "category": "gaming",
+      "image": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=85"
     },
     {
       "date": "2026-10-30",
@@ -63,7 +70,8 @@
       "time": "19h45–23h00",
       "note": "YouTube + Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming"
+      "category": "gaming",
+      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=900&q=85"
     }
   ]
 }
