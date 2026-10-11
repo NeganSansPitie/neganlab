@@ -999,6 +999,62 @@
       .live-card > .live-actions { grid-row:3 !important; }
     }
 
+  
+    /* Bannière : largeur contenue, sans recadrage, avec finition noire douce */
+    @media(max-width:720px) {
+      .hero {
+        width:100% !important;
+        max-width:100% !important;
+        margin-left:0 !important;
+        margin-right:0 !important;
+        padding:0 !important;
+        overflow:hidden !important;
+        border-radius:8px !important;
+        background:#080808 !important;
+      }
+      .hero-banner {
+        display:block !important;
+        width:100% !important;
+        max-width:100% !important;
+        height:auto !important;
+        object-fit:contain !important;
+        object-position:center !important;
+      }
+    }
+    /* Planning en portrait : image sur environ 70 % de la carte et fondu vers le texte */
+    @media(max-width:720px) and (orientation:portrait) {
+      .live-card .live-art {
+        position:absolute !important;
+        inset:0 0 0 auto !important;
+        width:70% !important;
+        height:100% !important;
+        min-height:100% !important;
+        border-radius:0 14px 14px 0 !important;
+        background-size:cover !important;
+        background-position:center !important;
+      }
+      .live-card::before {
+        background:linear-gradient(90deg,
+          #080808 0%,
+          rgba(8,8,8,.99) 20%,
+          rgba(8,8,8,.94) 34%,
+          rgba(8,8,8,.78) 48%,
+          rgba(8,8,8,.40) 62%,
+          rgba(8,8,8,.08) 78%,
+          rgba(8,8,8,0) 100%) !important;
+      }
+      .live-card.live-react::before {
+        background:linear-gradient(90deg,
+          #080808 0%,
+          rgba(8,8,8,.99) 20%,
+          rgba(8,8,8,.94) 34%,
+          rgba(8,8,8,.78) 48%,
+          rgba(8,8,8,.40) 62%,
+          rgba(8,8,8,.08) 78%,
+          rgba(8,8,8,0) 100%) !important;
+      }
+    }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
