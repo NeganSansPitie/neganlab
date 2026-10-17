@@ -1145,6 +1145,14 @@
         object-position:center !important;
       }
     }
+
+    /* Panneaux illustrés des réseaux et de la communauté */
+    .panel-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:30px; }
+    .image-panel { display:block; overflow:hidden; border:1px solid rgba(255,255,255,.12); border-radius:16px; background:rgba(255,255,255,.025); line-height:0; transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+    .image-panel img { display:block; width:100%; height:auto; aspect-ratio: 3 / 1; object-fit:cover; }
+    .image-panel:hover { transform:translateY(-3px); border-color:rgba(239,120,182,.65); box-shadow:0 12px 30px rgba(0,0,0,.25); }
+    @media(min-width:900px) { .panel-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; } }
+    @media(max-width:520px) { .panel-grid { grid-template-columns:1fr; gap:12px; } .image-panel img { aspect-ratio: 3 / 1; } }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -1163,20 +1171,17 @@
       <img class="hero-banner" src="assets/images/EF002C3C-474D-46D5-81A7-D72D3A1E7EF7.jpeg" alt="Bannière Negan & Couillons : gaming, vlog et fun">
     </section>
     <section class="community-section" id="social-links" aria-labelledby="community-title"><div class="section-heading"><h2 id="community-title">L’UNIVERS DES COUILLONS</h2></div>
-    <nav class="links" aria-label="Retrouver Negan & Couillons">
-      <a class="link twitch" href="https://www.twitch.tv/neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch" aria-hidden="true"></i><div><strong>Twitch</strong><small>neganetcouillons</small></div></a>
-      <div class="youtube-hub" aria-label="YouTube — chaîne et communauté">
-        <a class="youtube-hub-main" href="https://www.youtube.com/@neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span><strong>YOUTUBE</strong><small>Negan &amp; Couillons</small></span></a>
-        <div class="youtube-hub-actions">
-          <a class="youtube-hub-join" href="https://youtube.com/sharing/invite/d0E9Byg9X0SR0VAz" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span><strong>REJOINDRE</strong><small>Discuter avec Negan</small></span></a>
-          <a class="youtube-hub-community" href="https://youtube.com/@neganetcouillons/community?si=cq6_JciIyGNHYUj4" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-users" aria-hidden="true"></i><span><strong>COMMUNAUTÉ</strong><small>Poster vidéos et messages</small></span></a>
-        </div>
-      </div>
-      <a class="link suno" href="https://suno.com/@negansanspitie20" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-music" aria-hidden="true"></i><div><strong>Mes musiques</strong><small>Écouter sur Suno</small></div></a>
-      <a class="link telegram" href="https://t.me/+U9xK5w56J3o5MWFk" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram" aria-hidden="true"></i><div><strong>Le coins des Couillons</strong><small>Rejoins la communauté</small></div></a>
-      <a class="link discord" href="https://discord.gg/KsMAQeCkmP" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord" aria-hidden="true"></i><div><strong>Discord</strong><small id="discord-count">Voici le Discord de la communauté, n’hésitez pas à nous rejoindre.</small></div></a>
-      <a class="link tipeee" href="https://fr.tipeee.com/negan-couillons/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-heart" aria-hidden="true"></i><div><strong>Tipeee</strong><small>Soutenir la chaîne</small></div></a>
-      <a class="link paypal" href="https://botrix.live/y/@neganetcouillons/tip" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-paypal" aria-hidden="true"></i><div><strong>Faire un don</strong><small>Un petit coup de pouce, un grand merci ❤️</small></div></a>
+    <nav class="panel-grid" aria-label="Retrouver Negan & Couillons">
+      <a class="image-panel" href="https://discord.gg/KsMAQeCkmP" target="_blank" rel="noopener noreferrer" aria-label="Rejoindre Discord"><img src="assets/images/Discord.png" alt="Rejoindre Discord" loading="lazy"></a>
+      <a class="image-panel" href="#gazette" aria-label="Découvrir La Gazette des Couillons"><img src="assets/images/La%20Gazette.png" alt="La Gazette des Couillons — newsletter" loading="lazy"></a>
+      <a class="image-panel" href="https://suno.com/@negansanspitie20" target="_blank" rel="noopener noreferrer" aria-label="Écouter les musiques"><img src="assets/images/Musique.png" alt="Écouter les musiques de Negan" loading="lazy"></a>
+      <a class="image-panel" href="https://youtube.com/@neganetcouillons/community?si=cq6_JciIyGNHYUj4" target="_blank" rel="noopener noreferrer" aria-label="Communauté YouTube"><img src="assets/images/Panneau%20Communaut%C3%A9%20YT.png" alt="Communauté YouTube" loading="lazy"></a>
+      <a class="image-panel" href="https://youtube.com/sharing/invite/d0E9Byg9X0SR0VAz" target="_blank" rel="noopener noreferrer" aria-label="Rejoindre la communauté YouTube"><img src="assets/images/Panneau%20Rejoins%20YT.png" alt="Rejoins la communauté YouTube" loading="lazy"></a>
+      <a class="image-panel" href="https://www.twitch.tv/neganetcouillons" target="_blank" rel="noopener noreferrer" aria-label="Suivre sur Twitch"><img src="assets/images/Panneau%20Twitch.png" alt="Retrouver Negan sur Twitch" loading="lazy"></a>
+      <a class="image-panel" href="https://www.youtube.com/@neganetcouillons" target="_blank" rel="noopener noreferrer" aria-label="Chaîne YouTube"><img src="assets/images/Panneau%20Youtube.png" alt="Chaîne YouTube Negan et Couillons" loading="lazy"></a>
+      <a class="image-panel" href="https://botrix.live/y/@neganetcouillons/tip" target="_blank" rel="noopener noreferrer" aria-label="Faire un don"><img src="assets/images/Paypal.png" alt="Faire un don via PayPal" loading="lazy"></a>
+      <a class="image-panel" href="https://t.me/+U9xK5w56J3o5MWFk" target="_blank" rel="noopener noreferrer" aria-label="Rejoindre Telegram"><img src="assets/images/Telegram.PNG" alt="Rejoindre Telegram" loading="lazy"></a>
+      <a class="image-panel" href="https://fr.tipeee.com/negan-couillons/" target="_blank" rel="noopener noreferrer" aria-label="Soutenir sur Tipeee"><img src="assets/images/Tipee.png" alt="Soutenir Negan sur Tipeee" loading="lazy"></a>
     </nav></section>
     <section class="gazette" id="gazette" aria-labelledby="gazette-title">
       <div class="gazette-head">
