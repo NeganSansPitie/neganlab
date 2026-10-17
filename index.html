@@ -1149,10 +1149,10 @@
     /* Panneaux illustrés des réseaux et de la communauté */
     .panel-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:30px; }
     .image-panel { display:block; overflow:hidden; border:1px solid rgba(255,255,255,.12); border-radius:16px; background:rgba(255,255,255,.025); line-height:0; transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
-    .gazette-panel { margin-top:18px; width:100%; }\n    .image-panel img { display:block; width:100%; height:auto; aspect-ratio: 3 / 1; object-fit:cover; }
+    .gazette-panel { margin-top:18px; width:100%; }\n    .image-panel img { display:block; width:100%; height:auto; }
     .image-panel:hover { transform:translateY(-3px); border-color:rgba(239,120,182,.65); box-shadow:0 12px 30px rgba(0,0,0,.25); }
     @media(min-width:900px) { .panel-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; } }
-    @media(max-width:520px) { .panel-grid { grid-template-columns:1fr; gap:12px; } .image-panel img { aspect-ratio: 3 / 1; } }
+    @media(max-width:520px) { .panel-grid { grid-template-columns:1fr; gap:12px; } }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
