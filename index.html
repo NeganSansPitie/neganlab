@@ -1064,6 +1064,31 @@
     .youtube-join i { color:#ff0033 !important; }
     .youtube-community { --accent:#ff334f !important; }
     .youtube-community i { color:#ff334f !important; }
+    /* Bloc YouTube regroupé en haut des liens sociaux */
+    .youtube-hub {
+      grid-column:1 / -1; display:grid; grid-template-columns:minmax(180px,.75fr) minmax(0,2fr);
+      gap:12px; padding:12px; border:1px solid rgba(255,0,51,.55); border-radius:20px;
+      background:linear-gradient(120deg,rgba(255,0,51,.16),rgba(17,19,29,.96) 58%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 24px rgba(0,0,0,.28);
+    }
+    .youtube-hub a { display:flex; align-items:center; gap:14px; min-width:0; padding:17px 19px; border:1px solid rgba(255,255,255,.13); border-radius:14px; color:#fffaf1; text-decoration:none; background:rgba(0,0,0,.34); transition:transform .17s ease,border-color .17s ease; }
+    .youtube-hub a:hover { transform:translateY(-2px); border-color:#ff0033; }
+    .youtube-hub i { flex:0 0 auto; color:#ff0033; font-size:1.8rem; }
+    .youtube-hub strong { display:block; font-size:1.05rem; }
+    .youtube-hub small { display:block; margin-top:4px; color:#c3c5d2; font-size:.82rem; line-height:1.35; }
+    .youtube-hub-main { border-color:rgba(255,0,51,.45) !important; }
+    .youtube-hub-main strong { font-size:1.35rem; }
+    .youtube-hub-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .youtube-hub-join { background:linear-gradient(130deg,rgba(255,0,51,.28),rgba(0,0,0,.34)) !important; border-color:rgba(255,0,51,.5) !important; }
+    @media(max-width:720px) {
+      .youtube-hub { grid-template-columns:1fr; gap:9px; padding:9px; border-radius:16px; }
+      .youtube-hub-main { min-height:70px; }
+      .youtube-hub-actions { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+      .youtube-hub a { gap:9px; padding:13px 10px; }
+      .youtube-hub i { font-size:1.45rem; }
+      .youtube-hub strong { font-size:.91rem; }
+      .youtube-hub small { font-size:.72rem; overflow-wrap:anywhere; }
+    }
 
   </style>
   <!-- Google Analytics -->
@@ -1086,9 +1111,13 @@
     <nav class="links" aria-label="Retrouver Negan & Couillons">
       <a class="link tiktok" href="https://www.tiktok.com/@neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok" aria-hidden="true"></i><div><strong>TikTok</strong><small>@neganetcouillons</small></div></a>
       <a class="link twitch" href="https://www.twitch.tv/neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch" aria-hidden="true"></i><div><strong>Twitch</strong><small>neganetcouillons</small></div></a>
-      <a class="link youtube" href="https://www.youtube.com/@neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><div><strong>YouTube</strong><small>Negan & Couillons</small></div></a>
-      <a class="link youtube-join" href="https://youtube.com/sharing/invite/d0E9Byg9X0SR0VAz" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><div><strong>REJOINDRE</strong><small>Discuter directement avec Negan</small></div></a>
-      <a class="link youtube-community" href="https://youtube.com/@neganetcouillons/community?si=cq6_JciIyGNHYUj4" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><div><strong>Communauté YouTube</strong><small>Publier vidéos et messages pour les Couillons</small></div></a>
+      <div class="youtube-hub" aria-label="YouTube — chaîne et communauté">
+        <a class="youtube-hub-main" href="https://www.youtube.com/@neganetcouillons" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span><strong>YOUTUBE</strong><small>Negan &amp; Couillons</small></span></a>
+        <div class="youtube-hub-actions">
+          <a class="youtube-hub-join" href="https://youtube.com/sharing/invite/d0E9Byg9X0SR0VAz" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span><strong>REJOINDRE</strong><small>Discuter avec Negan</small></span></a>
+          <a class="youtube-hub-community" href="https://youtube.com/@neganetcouillons/community?si=cq6_JciIyGNHYUj4" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-users" aria-hidden="true"></i><span><strong>COMMUNAUTÉ</strong><small>Poster vidéos et messages</small></span></a>
+        </div>
+      </div>
       <a class="link suno" href="https://suno.com/@negansanspitie20" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-music" aria-hidden="true"></i><div><strong>Mes musiques</strong><small>Écouter sur Suno</small></div></a>
       <a class="link telegram" href="https://t.me/+U9xK5w56J3o5MWFk" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram" aria-hidden="true"></i><div><strong>Le coins des Couillons</strong><small>Rejoins la communauté</small></div></a>
       <a class="link discord" href="https://discord.gg/KsMAQeCkmP" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord" aria-hidden="true"></i><div><strong>Discord</strong><small id="discord-count">Voici le Discord de la communauté, n’hésitez pas à nous rejoindre.</small></div></a>
