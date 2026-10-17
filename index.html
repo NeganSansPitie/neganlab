@@ -1161,6 +1161,21 @@
     .community-section .gazette-panel { width:100% !important; max-width:1120px !important; margin:18px auto 0 !important; }
     @media(max-width:720px) { .community-section .panel-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:12px !important; } }
     @media(max-width:420px) { .community-section .panel-grid { grid-template-columns:1fr !important; } }
+
+    /* Formulaire intégré au panneau existant de La Gazette */
+    .gazette-integrated { max-width:760px; margin:30px auto 0; padding:14px; border:1px solid rgba(215,181,120,.5); border-radius:18px; background:linear-gradient(145deg,rgba(215,181,120,.08),rgba(12,10,8,.96)); }
+    .gazette-integrated-art { width:100%; line-height:0; overflow:hidden; border-radius:12px; }
+    .gazette-integrated-art img { display:block; width:100%; height:auto; }
+    .gazette-integrated .ml-form-embedContainer { max-width:620px; margin:14px auto 2px; }
+    .gazette-integrated .ml-form-embedBody { padding:0 !important; }
+    .gazette-integrated .ml-form-formContent { margin:0 !important; }
+    .gazette-integrated .ml-form-fieldRow { margin:0 0 10px !important; }
+    .gazette-integrated input.form-control { display:block; width:100%; min-height:48px; padding:12px 15px !important; border:1px solid rgba(215,181,120,.65) !important; border-radius:9px !important; background:#100e0b !important; color:#fff8ef !important; font:inherit !important; box-sizing:border-box; }
+    .gazette-integrated input.form-control::placeholder { color:#bcb2a0 !important; }
+    .gazette-integrated .ml-form-embedSubmit { margin:0 !important; text-align:center; }
+    .gazette-integrated button.primary { width:100%; min-height:48px; padding:12px 18px !important; border:0 !important; border-radius:9px !important; background:#d7b578 !important; color:#17110a !important; font-weight:900 !important; letter-spacing:.04em; cursor:pointer; }
+    .gazette-integrated .ml-form-successContent { padding:16px; text-align:center; color:#f8f4f7; }
+    @media(max-width:520px) { .gazette-integrated { margin:22px 0 0; padding:9px; } .gazette-integrated .ml-form-embedContainer { margin-top:10px; } }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -1191,12 +1206,8 @@
       <a class="image-panel" href="https://fr.tipeee.com/negan-couillons/" target="_blank" rel="noopener noreferrer" aria-label="Soutenir sur Tipeee"><img src="assets/images/Tipee.png" alt="Soutenir Negan sur Tipeee" loading="lazy"></a>
     </nav>
 </section>
-    <section class="gazette" id="gazette" aria-labelledby="gazette-title">
-      <div class="gazette-head">
-        <div class="gazette-kicker"><i class="fa-regular fa-envelope" aria-hidden="true"></i> La newsletter officielle</div>
-        <h2 id="gazette-title">La Gazette <span>des Couillons</span></h2>
-        <p>Les lives, les vidéos, les nouveaux sons et les annonces spéciales de Negan, directement dans ta boîte mail. Pas de blabla inutile : que du neuf !</p>
-      </div>
+    <section class="gazette gazette-integrated" id="gazette" aria-label="Inscription à La Gazette des Couillons">
+      <div class="gazette-integrated-art"><img src="assets/images/La%20Gazette.png" alt="La Gazette des Couillons" loading="lazy"></div>
       <div id="mlb2-47262821" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-47262821">
         <div class="ml-form-align-center">
           <div class="ml-form-embedWrapper embedForm">
