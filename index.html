@@ -1090,6 +1090,27 @@
       .youtube-hub small { font-size:.72rem; overflow-wrap:anywhere; }
     }
 
+  
+    /* Newsletter — La Gazette des Couillons */
+    .gazette { margin-top:30px; padding:clamp(22px,4vw,34px); border:1px solid rgba(215,181,120,.42); border-radius:22px; background:linear-gradient(135deg,rgba(215,181,120,.09),rgba(255,255,255,.018) 58%); box-shadow:0 18px 48px rgba(0,0,0,.22); }
+    .gazette-head { max-width:720px; margin:0 auto 20px; text-align:center; }
+    .gazette-kicker { color:#d7b578; font-size:.76rem; font-weight:900; letter-spacing:.18em; text-transform:uppercase; }
+    .gazette h2 { margin:8px 0 10px; color:#f8f4f7; font-size:clamp(1.6rem,4vw,2.5rem); line-height:1.1; letter-spacing:-.04em; text-transform:uppercase; }
+    .gazette h2 span { color:#d7b578; }
+    .gazette-head p { margin:0; color:rgba(248,244,247,.76); line-height:1.6; }
+    #mlb2-47262821.ml-form-embedContainer { width:100% !important; margin:0 auto; }
+    #mlb2-47262821.ml-form-embedContainer .ml-form-embedWrapper.embedForm { width:100%; max-width:620px; background:rgba(9,9,12,.86); border:1px solid rgba(215,181,120,.25); border-radius:16px; overflow:hidden; }
+    #mlb2-47262821.ml-form-embedContainer .ml-form-embedBody, #mlb2-47262821.ml-form-embedContainer .ml-form-successBody { padding:20px !important; }
+    #mlb2-47262821 .ml-form-embedHeader { display:none !important; }
+    #mlb2-47262821 .ml-form-embedContent { display:none !important; }
+    #mlb2-47262821 .ml-form-fieldRow input { background:#fff !important; color:#171419 !important; border:1px solid #d7b578 !important; border-radius:10px !important; min-height:50px; }
+    #mlb2-47262821 .ml-form-fieldRow input::placeholder { color:#555 !important; }
+    #mlb2-47262821 .ml-form-embedSubmit button { background:#d7193f !important; border:1px solid #d7193f !important; border-radius:10px !important; min-height:50px; color:#fff !important; font-size: .95rem !important; text-transform:uppercase !important; letter-spacing:.05em !important; }
+    #mlb2-47262821 .ml-form-embedSubmit button:hover { background:#a90f2d !important; }
+    #mlb2-47262821 .ml-form-successContent h4 { color:#d7b578 !important; }
+    #mlb2-47262821 .ml-form-successContent p { color:#f8f4f7 !important; }
+    @media(max-width:720px) { .gazette { padding:20px 14px; border-radius:18px; } .gazette-head { margin-bottom:14px; } }
+
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -1124,6 +1145,43 @@
       <a class="link tipeee" href="https://fr.tipeee.com/negan-couillons/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-heart" aria-hidden="true"></i><div><strong>Tipeee</strong><small>Soutenir la chaîne</small></div></a>
       <a class="link paypal" href="https://botrix.live/y/@neganetcouillons/tip" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-paypal" aria-hidden="true"></i><div><strong>Faire un don</strong><small>Un petit coup de pouce, un grand merci ❤️</small></div></a>
     </nav></section>
+    <section class="gazette" id="gazette" aria-labelledby="gazette-title">
+      <div class="gazette-head">
+        <div class="gazette-kicker"><i class="fa-regular fa-envelope" aria-hidden="true"></i> La newsletter officielle</div>
+        <h2 id="gazette-title">La Gazette <span>des Couillons</span></h2>
+        <p>Les lives, les vidéos, les nouveaux sons et les annonces spéciales de Negan, directement dans ta boîte mail. Pas de blabla inutile : que du neuf !</p>
+      </div>
+      <div id="mlb2-47262821" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-47262821">
+        <div class="ml-form-align-center">
+          <div class="ml-form-embedWrapper embedForm">
+            <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2720330/forms/201586376067515458/subscribe" data-code="" method="post" target="_blank">
+                <div class="ml-form-formContent">
+                  <div class="ml-form-fieldRow ml-last-item">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                      <label class="sr-only" for="gazette-email">Adresse e-mail</label>
+                      <input id="gazette-email" aria-label="email" aria-required="true" required type="email" class="form-control" name="fields[email]" placeholder="Ton adresse e-mail" autocomplete="email">
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-form-embedSubmit">
+                  <button type="submit" class="primary">Je m’abonne à la Gazette</button>
+                  <button disabled="disabled" style="display:none" type="button" class="loading"><div class="ml-form-embedSubmitLoad"></div><span class="sr-only">Chargement…</span></button>
+                </div>
+                <input type="hidden" name="anticsrf" value="true">
+              </form>
+            </div>
+            <div class="ml-form-successBody row-success" style="display:none">
+              <div class="ml-form-successContent">
+                <h4>Bienvenue dans la Gazette !</h4>
+                <p>Ton inscription a bien été prise en compte. À très vite, couillon !</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="planning" id="live-planning" aria-labelledby="planning-title">
       <div class="planning-head">
         <h2 id="planning-title"><i class="fa-brands fa-youtube" aria-hidden="true"></i><i class="fa-brands fa-twitch" aria-hidden="true"></i>PLANNING YouTube &amp; Twitch</h2>
@@ -1134,6 +1192,17 @@
       </div>
     </section>
     <footer>© 2026 Negan & Couillons</footer>
+  
+<script>
+  function ml_webform_success_47262821() {
+    var $ = ml_jQuery || jQuery;
+    $('.ml-subscribe-form-47262821 .row-success').show();
+    $('.ml-subscribe-form-47262821 .row-form').hide();
+  }
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>fetch("https://assets.mailerlite.com/jsonp/2720330/forms/201586376067515458/takel")</script>
+
   </main>
 <script>
   // Sur mobile Safari, le navigateur peut restaurer l'ancien scroll après le chargement.
