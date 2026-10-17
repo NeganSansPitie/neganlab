@@ -1111,6 +1111,25 @@
     #mlb2-47262821 .ml-form-successContent p { color:#f8f4f7 !important; }
     @media(max-width:720px) { .gazette { padding:20px 14px; border-radius:18px; } .gazette-head { margin-bottom:14px; } }
 
+  
+    /* Desktop: keep the current banner at or below its 1024px source width. */
+    @media (min-width:721px) {
+      .hero {
+        width:min(100%,1024px) !important;
+        max-width:1024px !important;
+        height:min(423px,41.3086vw) !important;
+        margin:0 auto !important;
+        overflow:hidden !important;
+      }
+      .hero-banner {
+        display:block !important;
+        width:100% !important;
+        height:100% !important;
+        max-height:100% !important;
+        object-fit:contain !important;
+        object-position:center !important;
+      }
+    }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
