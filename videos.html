@@ -33,79 +33,20 @@
   </nav>
     <section class="video-section" aria-labelledby="videos-title">
       <div class="video-copy">
-        <span class="video-kicker">YouTube</span>
-        <h1 id="videos-title">En direct &amp; dernières vidéos</h1>
-        <p>Le direct quand Negan est en ligne, les dernières vidéos le reste du temps.</p>
+        
+        <h1 id="videos-title">DERNIÈRE VIDÉO</h1>
+        <p>Retrouve ici la dernière vidéo de Negan.</p>
       </div>
       <div class="video-frame">
         <iframe id="youtube-player"
-          src="https://www.youtube.com/embed/live_stream?channel=UCo1fpLJbUpLvR3arxXKyn_Q&amp;enablejsapi=1&amp;playsinline=1"
-          title="Direct YouTube ou dernières vidéos de Negan &amp; Couillons"
+          src="https://www.youtube.com/embed/BVqSvm1B8DQ"
+          title="DERNIÈRE VIDÉO de Negan &amp; Couillons"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </section>
     <footer>© 2026 Negan &amp; Couillons</footer>
   </main>
-  <script>
-    (function () {
-      const playerFrame = document.getElementById("youtube-player");
-      const uploadsPlaylist = "UUo1fpLJbUpLvR3arxXKyn_Q";
-      let player;
-      let playlistFallback = false;
-      let playlistIndex = 0;
-      let playlistAttempts = 0;
-      let liveTimeout;
-
-      function showLatestVideo() {
-        if (!player || playlistFallback) return;
-        playlistFallback = true;
-        window.clearTimeout(liveTimeout);
-        player.loadPlaylist({
-          listType: "playlist",
-          list: uploadsPlaylist,
-          index: 1
-        });
-      }
-
-      function skipUnavailableVideo() {
-        if (!playlistFallback || playlistAttempts >= 12) return;
-        playlistAttempts += 1;
-        playlistIndex += 1;
-        player.loadPlaylist({
-          listType: "playlist",
-          list: uploadsPlaylist,
-          index: playlistIndex
-        });
-      }
-
-      window.onYouTubeIframeAPIReady = function () {
-        player = new YT.Player(playerFrame, {
-          events: {
-            onReady: function () {
-              liveTimeout = window.setTimeout(showLatestVideo, 20000);
-            },
-            onStateChange: function (event) {
-              if (event.data === YT.PlayerState.PLAYING && !playlistFallback) {
-                window.clearTimeout(liveTimeout);
-              }
-            },
-            onError: function () {
-              if (!playlistFallback) {
-                showLatestVideo();
-              } else {
-                skipUnavailableVideo();
-              }
-            }
-          }
-        });
-      };
-
-      const api = document.createElement("script");
-      api.src = "https://www.youtube.com/iframe_api";
-      api.async = true;
-      document.head.appendChild(api);
-    }());
-  </script>
+  
 </body>
 </html>
