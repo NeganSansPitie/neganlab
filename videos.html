@@ -39,8 +39,8 @@
       </div>
       <div class="video-frame">
         <iframe id="youtube-player"
-          src="https://www.youtube.com/embed?listType=user_uploads&amp;list=neganetcouillons"
-          title="Live et dernières vidéos de Negan &amp; Couillons sur YouTube"
+          src="https://www.youtube.com/embed/live_stream?channel=UCo1fpLJbUpLvR3arxXKyn_Q&amp;enablejsapi=1&amp;playsinline=1"
+          title="Direct YouTube ou dernières vidéos de Negan &amp; Couillons"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
@@ -49,35 +49,54 @@
   </main>
   <script>
     (function () {
-      const iframe = document.getElementById("youtube-player");
-      const origin = encodeURIComponent(window.location.origin);
-      const latestUrl = "https://www.youtube.com/embed?listType=user_uploads&list=neganetcouillons&enablejsapi=1&origin=" + origin + "&playsinline=1";
-      const liveUrl = "https://www.youtube.com/embed/live_stream?channel=UCo1fpLJbUpLvR3arxXKyn_Q&enablejsapi=1&origin=" + origin + "&playsinline=1";
-      let player = null;
-      let playerReady = false;
-      let fallbackLoaded = false;
-      let fallbackTimer;
+      const playerFrame = document.getElementById("youtube-player");
+      const uploadsPlaylist = "UUo1fpLJbUpLvR3arxXKyn_Q";
+      let player;
+      let playlistFallback = false;
+      let playlistIndex = 0;
+      let playlistAttempts = 0;
+      let liveTimeout;
 
-      function showLatestVideos() {
-        if (fallbackLoaded) return;
-        fallbackLoaded = true;
-        window.clearTimeout(fallbackTimer);
-        iframe.src = latestUrl;
+      function showLatestVideo() {
+        if (!player || playlistFallback) return;
+        playlistFallback = true;
+        window.clearTimeout(liveTimeout);
+        player.loadPlaylist({
+          listType: "playlist",
+          list: uploadsPlaylist,
+          index: 0
+        });
       }
 
-      iframe.src = liveUrl;
-      fallbackTimer = window.setTimeout(function () {
-        if (!playerReady) showLatestVideos();
-      }, 10000);
+      function skipUnavailableVideo() {
+        if (!playlistFallback || playlistAttempts >= 12) return;
+        playlistAttempts += 1;
+        playlistIndex += 1;
+        player.loadPlaylist({
+          listType: "playlist",
+          list: uploadsPlaylist,
+          index: playlistIndex
+        });
+      }
 
       window.onYouTubeIframeAPIReady = function () {
-        player = new YT.Player(iframe, {
+        player = new YT.Player(playerFrame, {
           events: {
             onReady: function () {
-              playerReady = true;
-              window.clearTimeout(fallbackTimer);
+              liveTimeout = window.setTimeout(showLatestVideo, 20000);
             },
-            onError: showLatestVideos
+            onStateChange: function (event) {
+              if (event.data === YT.PlayerState.PLAYING && !playlistFallback) {
+                window.clearTimeout(liveTimeout);
+              }
+            },
+            onError: function () {
+              if (!playlistFallback) {
+                showLatestVideo();
+              } else {
+                skipUnavailableVideo();
+              }
+            }
           }
         });
       };
