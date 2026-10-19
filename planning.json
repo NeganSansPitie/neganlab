@@ -1,63 +1,27 @@
 {
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-10-19",
   "lives": [
     {
-      "date": "2026-10-12",
-      "title": "RPG",
-      "time": "19h45–23h00",
-      "note": "YouTube + Twitch",
-      "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming",
-      "image": "assets/images/976B63B2-7C59-412C-B953-037A0E76C6EB.png"
-    },
-    {
-      "date": "2026-10-16",
-      "title": "Fortnite",
-      "time": "19h45–23h00",
-      "note": "YouTube + Twitch",
-      "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming",
-      "image": "assets/images/A5806021-A2A5-42DE-8E3D-78DB5E709DB9.png"
-    },
-    {
-      "date": "2026-10-18",
-      "title": "React à la belge · WTF",
-      "time": "19h45–23h00",
-      "note": "En direct sur Twitch",
-      "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "react",
-      "image": "assets/images/184AD1F0-D0CD-4CB0-A906-ECCBF93C3733.png"
-    },
-    {
-      "date": "2026-10-19",
-      "title": "RPG",
-      "time": "19h45–23h00",
-      "note": "YouTube + Twitch",
-      "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming",
-      "image": "assets/images/976B63B2-7C59-412C-B953-037A0E76C6EB.png"
-    },
-    {
-      "date": "2026-10-22",
-      "title": "Fortnite",
-      "time": "19h45–23h00",
-      "note": "YouTube + Twitch",
-      "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "gaming",
-      "image": "assets/images/A5806021-A2A5-42DE-8E3D-78DB5E709DB9.png"
-    },
-    {
       "date": "2026-10-23",
-      "title": "React à la belge · WTF",
+      "title": "Fortnite",
       "time": "19h45–23h00",
-      "note": "En direct sur Twitch",
+      "note": "YouTube + Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
-      "category": "react",
-      "image": "assets/images/184AD1F0-D0CD-4CB0-A906-ECCBF93C3733.png"
+      "category": "gaming",
+      "image": "assets/images/A5806021-A2A5-42DE-8E3D-78DB5E709DB9.png"
     },
     {
       "date": "2026-10-26",
-      "title": "RPG",
+      "title": "React à la belge",
+      "time": "19h45–23h00",
+      "note": "Émission Police",
+      "url": "https://www.twitch.tv/neganetcouillons",
+      "category": "react",
+      "image": "assets/images/184AD1F0-D0CD-4CB0-A906-ECCBF93C3733.png"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "Jeu RPG aventure",
       "time": "19h45–23h00",
       "note": "YouTube + Twitch",
       "url": "https://www.twitch.tv/neganetcouillons",
@@ -65,7 +29,7 @@
       "image": "assets/images/976B63B2-7C59-412C-B953-037A0E76C6EB.png"
     },
     {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "title": "Fortnite",
       "time": "19h45–23h00",
       "note": "YouTube + Twitch",
