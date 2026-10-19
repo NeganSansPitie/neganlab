@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09070e">
+  <meta name="description" content="Retrouve le calendrier des lives Twitch et YouTube de Negan & Couillons.">
+  <title>Agenda des lives | Negan & Couillons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="site.css">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-W8XF37D90E");
+  </script>
+</head>
+<body>
+  <main class="agenda-page">
+  <section class="hero" aria-label="Negan & Couillons">
+    <img class="hero-banner" src="assets/images/EF002C3C-474D-46D5-81A7-D72D3A1E7EF7.jpeg" alt="Bannière Negan & Couillons : gaming, vlog et fun">
+  </section>
+  <nav class="site-nav" aria-label="Navigation principale">
+    <a href="index.html">Accueil</a>
+    <a href="videos.html">Vidéos</a>
+    <a href="agenda.html" aria-current="page">Agenda</a>
+  </nav>
+    <section class="planning" id="live-planning" aria-labelledby="planning-title">
+      <div class="planning-head">
+        <h2 id="planning-title"><i class="fa-brands fa-youtube" aria-hidden="true"></i><i class="fa-brands fa-twitch" aria-hidden="true"></i>AGENDA DES LIVES</h2>
+        <p>À très vite en direct !</p>
+      </div>
+      <div class="schedule" id="live-schedule" aria-live="polite">
+        <div class="schedule-empty">Le prochain planning arrive bientôt.</div>
+      </div>
+    </section>
+    <footer>© 2026 Negan &amp; Couillons</footer>
+  </main>
+<script>
+    (function () {
+      const schedule = document.getElementById("live-schedule");
+      const empty = message => {
+        schedule.replaceChildren();
+        const item = document.createElement("div");
+        item.className = "schedule-empty";
+        item.textContent = message;
+        schedule.append(item);
+      };
+      fetch("planning.json?v=" + Date.now(), { cache: "no-store" })
+        .then(response => response.ok ? response.json() : Promise.reject())
+        .then(data => {
+          const lives = Array.isArray(data.lives) ? data.lives.filter(live => live.date && live.title) : [];
+          if (!lives.length) return empty("Le prochain planning arrive bientôt.");
+          schedule.replaceChildren();
+          lives.sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).forEach(live => {
+            const card = document.createElement("article");
+            card.className = "live-card";
+            if (live.category) card.classList.add("live-" + live.category);
+            if (live.status === "off") card.classList.add("is-off");
+            const art = document.createElement("div");
+            art.className = "live-art";
+            art.setAttribute("aria-hidden", "true");
+            if (live.image) {
+              const safeImage = live.image.replace(/'/g, "%27");
+              art.style.backgroundImage = "url('" + safeImage + "')";
+            } else {
+              art.style.backgroundImage = "linear-gradient(135deg, rgba(214,166,76,.25), rgba(18,13,8,.8))";
+            }
+            const when = new Date(live.date + "T12:00:00").toLocaleDateString("fr-BE", { weekday: "short", day: "numeric", month: "long" });
+            const date = document.createElement("div"); date.className = "live-date"; date.textContent = when + (live.time ? " · " + live.time : "");
+            const text = document.createElement("div");
+            const category = document.createElement("span");
+            category.className = "live-category";
+            category.textContent = live.category === "react" ? "RÉACTION · WTF" : "GAMING";
+            const title = document.createElement("div"); title.className = "live-title"; title.textContent = live.title;
+            text.append(category, title);
+            if (live.note) { const note = document.createElement("div"); note.className = "live-note"; note.textContent = live.note; text.append(note); }
+            const actions = document.createElement("div");
+            actions.className = "live-actions";
+            if (live.category !== "react") {
+              const youtube = document.createElement("a");
+              youtube.className = "live-platform live-youtube";
+              youtube.href = live.youtubeUrl || "https://www.youtube.com/@neganetcouillons";
+              youtube.target = "_blank"; youtube.rel = "noopener noreferrer";
+              youtube.setAttribute("aria-label", "Voir sur YouTube");
+              youtube.title = "YouTube";
+              youtube.innerHTML = '<i class="fa-brands fa-youtube" aria-hidden="true"></i>';
+              actions.append(youtube);
+            }
+            const twitch = document.createElement("a");
+            twitch.className = "live-platform live-twitch";
+            twitch.href = live.twitchUrl || live.url || "https://www.twitch.tv/neganetcouillons";
+            twitch.target = "_blank"; twitch.rel = "noopener noreferrer";
+            twitch.setAttribute("aria-label", "Voir sur Twitch");
+            twitch.title = "Twitch";
+            twitch.innerHTML = '<i class="fa-brands fa-twitch" aria-hidden="true"></i>';
+            actions.append(twitch);
+            card.append(date, text, actions, art); schedule.append(card);
+          });
+        })
+        .catch(() => empty("Le planning est temporairement indisponible."))
+        .finally(() => {
+          // Les cartes du planning entrent doucement à l'écran, si le navigateur le permet.
+          const cards = schedule.querySelectorAll(".live-card");
+          if (!("IntersectionObserver" in window)) {
+            cards.forEach(card => card.classList.add("is-visible"));
+            return;
+          }
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12 });
+          cards.forEach((card, index) => {
+            card.style.animationDelay = Math.min(index * 70, 420) + "ms";
+            observer.observe(card);
+          });
+        });
+      // Reveal des sections et des boutons lors du défilement.
+      if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const revealTargets = document.querySelectorAll(".community-section .section-heading, .community-section .link, .planning-head");
+        revealTargets.forEach(el => el.classList.add("motion-pending"));
+        const revealObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("motion-visible");
+              revealObserver.unobserve(entry.target);            }
+          });
+        }, { threshold: 0.12 });
+        revealTargets.forEach(el => revealObserver.observe(el));
+      }
+    }());
+  </script>
+</body>
+</html>

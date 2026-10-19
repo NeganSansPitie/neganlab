@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09070e">
+  <meta name="description" content="Regarde le direct YouTube de Negan & Couillons ou retrouve les dernières vidéos.">
+  <title>Vidéos & Live | Negan & Couillons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="site.css">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-W8XF37D90E");
+  </script>
+</head>
+<body>
+  <main class="videos-page">
+  <section class="hero" aria-label="Negan & Couillons">
+    <img class="hero-banner" src="assets/images/EF002C3C-474D-46D5-81A7-D72D3A1E7EF7.jpeg" alt="Bannière Negan & Couillons : gaming, vlog et fun">
+  </section>
+  <nav class="site-nav" aria-label="Navigation principale">
+    <a href="index.html">Accueil</a>
+    <a href="videos.html" aria-current="page">Vidéos</a>
+    <a href="agenda.html">Agenda</a>
+  </nav>
+    <section class="video-section" aria-labelledby="videos-title">
+      <div class="video-copy">
+        <span class="video-kicker">YouTube</span>
+        <h1 id="videos-title">En direct &amp; dernières vidéos</h1>
+        <p>Le direct quand Negan est en ligne, les dernières vidéos le reste du temps.</p>
+      </div>
+      <div class="video-frame">
+        <iframe id="youtube-player"
+          src="https://www.youtube.com/embed?listType=user_uploads&amp;list=neganetcouillons"
+          title="Live et dernières vidéos de Negan &amp; Couillons sur YouTube"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+    <footer>© 2026 Negan &amp; Couillons</footer>
+  </main>
+  <script>
+    (function () {
+      const iframe = document.getElementById("youtube-player");
+      const origin = encodeURIComponent(window.location.origin);
+      const latestUrl = "https://www.youtube.com/embed?listType=user_uploads&list=neganetcouillons&enablejsapi=1&origin=" + origin + "&playsinline=1";
+      const liveUrl = "https://www.youtube.com/embed/live_stream?channel=UCo1fpLJbUpLvR3arxXKyn_Q&enablejsapi=1&origin=" + origin + "&playsinline=1";
+      let player = null;
+      let playerReady = false;
+      let fallbackLoaded = false;
+      let fallbackTimer;
+
+      function showLatestVideos() {
+        if (fallbackLoaded) return;
+        fallbackLoaded = true;
+        window.clearTimeout(fallbackTimer);
+        iframe.src = latestUrl;
+      }
+
+      iframe.src = liveUrl;
+      fallbackTimer = window.setTimeout(function () {
+        if (!playerReady) showLatestVideos();
+      }, 10000);
+
+      window.onYouTubeIframeAPIReady = function () {
+        player = new YT.Player(iframe, {
+          events: {
+            onReady: function () {
+              playerReady = true;
+              window.clearTimeout(fallbackTimer);
+            },
+            onError: showLatestVideos
+          }
+        });
+      };
+
+      const api = document.createElement("script");
+      api.src = "https://www.youtube.com/iframe_api";
+      api.async = true;
+      document.head.appendChild(api);
+    }());
+  </script>
+</body>
+</html>
