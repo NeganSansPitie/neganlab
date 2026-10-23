@@ -1150,7 +1150,7 @@
     @media(max-width:420px) { .community-section .panel-grid { grid-template-columns:1fr !important; } }
 
     /* Formulaire intégré au panneau existant de La Gazette */
-    .gazette-integrated { max-width:760px; margin:30px auto 0; padding:14px; border:1px solid rgba(215,181,120,.5); border-radius:18px; background:linear-gradient(145deg,rgba(215,181,120,.08),rgba(12,10,8,.96)); }
+    .gazette-integrated { max-width:1120px; margin:30px auto 0; padding:14px; border:1px solid rgba(215,181,120,.5); border-radius:18px; background:linear-gradient(145deg,rgba(215,181,120,.08),rgba(12,10,8,.96)); }
     .gazette-integrated-art { width:100%; line-height:0; overflow:hidden; border-radius:12px; }
     .gazette-integrated-art img { display:block; width:100%; height:auto; }
     .gazette-integrated .ml-form-embedContainer { max-width:620px; margin:14px auto 2px; }
