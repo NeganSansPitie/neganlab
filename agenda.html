@@ -12,6 +12,31 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="site.css">
+  <style>
+    .planning-calendar {
+      width: min(100%, 1100px);
+      margin: 0 auto 24px;
+      overflow: hidden;
+      border: 1px solid rgba(214,166,74,.46);
+      border-radius: 16px;
+      background: #080808;
+      box-shadow: 0 14px 38px rgba(0,0,0,.32);
+    }
+    .planning-calendar img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .planning-calendar figcaption {
+      padding: 9px 12px;
+      color: #c6c0b4;
+      font-size: .82rem;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .planning-calendar { margin-bottom: 18px; border-radius: 11px; }
+    }
+  </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
   <script>
@@ -36,6 +61,12 @@
         <h2 id="planning-title"><i class="fa-brands fa-youtube" aria-hidden="true"></i><i class="fa-brands fa-twitch" aria-hidden="true"></i>AGENDA DES LIVES</h2>
         <p>À très vite en direct !</p>
       </div>
+      <figure class="planning-calendar">
+        <img src="assets/images/Planning%20Live%20_%20Calendrier%20de%20Novembre.png"
+             alt="Planning des lives pour le mois de novembre"
+             loading="lazy" decoding="async">
+        <figcaption>Planning des lives — novembre</figcaption>
+      </figure>
       <div class="schedule" id="live-schedule" aria-live="polite">
         <div class="schedule-empty">Le prochain planning arrive bientôt.</div>
       </div>
