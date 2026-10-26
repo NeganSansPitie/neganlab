@@ -1071,27 +1071,6 @@
     }
 
   
-    /* Newsletter — La Gazette des Couillons */
-    .gazette { margin-top:30px; padding:clamp(22px,4vw,34px); border:1px solid rgba(215,181,120,.42); border-radius:22px; background:linear-gradient(135deg,rgba(215,181,120,.09),rgba(255,255,255,.018) 58%); box-shadow:0 18px 48px rgba(0,0,0,.22); }
-    .gazette-head { max-width:720px; margin:0 auto 20px; text-align:center; }
-    .gazette-kicker { color:#d7b578; font-size:.76rem; font-weight:900; letter-spacing:.18em; text-transform:uppercase; }
-    .gazette h2 { margin:8px 0 10px; color:#f8f4f7; font-size:clamp(1.6rem,4vw,2.5rem); line-height:1.1; letter-spacing:-.04em; text-transform:uppercase; }
-    .gazette h2 span { color:#d7b578; }
-    .gazette-head p { margin:0; color:rgba(248,244,247,.76); line-height:1.6; }
-    #mlb2-47262821.ml-form-embedContainer { width:100% !important; margin:0 auto; }
-    #mlb2-47262821.ml-form-embedContainer .ml-form-embedWrapper.embedForm { width:100%; max-width:620px; background:rgba(9,9,12,.86); border:1px solid rgba(215,181,120,.25); border-radius:16px; overflow:hidden; }
-    #mlb2-47262821.ml-form-embedContainer .ml-form-embedBody, #mlb2-47262821.ml-form-embedContainer .ml-form-successBody { padding:20px !important; }
-    #mlb2-47262821 .ml-form-embedHeader { display:none !important; }
-    #mlb2-47262821 .ml-form-embedContent { display:none !important; }
-    #mlb2-47262821 .ml-form-fieldRow input { background:#fff !important; color:#171419 !important; border:1px solid #d7b578 !important; border-radius:10px !important; min-height:50px; }
-    #mlb2-47262821 .ml-form-fieldRow input::placeholder { color:#555 !important; }
-    #mlb2-47262821 .ml-form-embedSubmit button { background:#d7193f !important; border:1px solid #d7193f !important; border-radius:10px !important; min-height:50px; color:#fff !important; font-size: .95rem !important; text-transform:uppercase !important; letter-spacing:.05em !important; }
-    #mlb2-47262821 .ml-form-embedSubmit button:hover { background:#a90f2d !important; }
-    #mlb2-47262821 .ml-form-successContent h4 { color:#d7b578 !important; }
-    #mlb2-47262821 .ml-form-successContent p { color:#f8f4f7 !important; }
-    @media(max-width:720px) { .gazette { padding:20px 14px; border-radius:18px; } .gazette-head { margin-bottom:14px; } }
-
-  
     /* Desktop: keep the current banner at or below its 1024px source width. */
     @media (min-width:721px) {
       .hero {
@@ -1136,7 +1115,7 @@
     /* Panneaux illustrés des réseaux et de la communauté */
     .panel-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:30px; }
     .image-panel { display:block; overflow:hidden; border:1px solid rgba(255,255,255,.12); border-radius:16px; background:rgba(255,255,255,.025); line-height:0; transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
-    .gazette-panel { margin-top:18px; width:100%; }\n    .image-panel img { display:block; width:100%; height:auto; }
+\n    .image-panel img { display:block; width:100%; height:auto; }
     .image-panel:hover { transform:translateY(-3px); border-color:rgba(239,120,182,.65); box-shadow:0 12px 30px rgba(0,0,0,.25); }
     @media(min-width:900px) { .panel-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; } }
     @media(max-width:520px) { .panel-grid { grid-template-columns:1fr; gap:12px; } }
@@ -1145,24 +1124,8 @@
     .community-section .panel-grid { display:grid !important; width:100% !important; max-width:1120px !important; margin:0 auto !important; padding:0 !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:16px !important; }
     .community-section .image-panel { display:block !important; width:100% !important; min-width:0 !important; max-width:none !important; padding:0 !important; }
     .community-section .image-panel img { display:block !important; width:100% !important; max-width:100% !important; height:auto !important; aspect-ratio:auto !important; object-fit:contain !important; }
-    .community-section .gazette-panel { width:100% !important; max-width:1120px !important; margin:18px auto 0 !important; }
-    @media(max-width:720px) { .community-section .panel-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:12px !important; } }
+@media(max-width:720px) { .community-section .panel-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:12px !important; } }
     @media(max-width:420px) { .community-section .panel-grid { grid-template-columns:1fr !important; } }
-
-    /* Formulaire intégré au panneau existant de La Gazette */
-    .gazette-integrated { max-width:1120px; margin:30px auto 0; padding:14px; border:1px solid rgba(215,181,120,.5); border-radius:18px; background:linear-gradient(145deg,rgba(215,181,120,.08),rgba(12,10,8,.96)); }
-    .gazette-integrated-art { width:100%; line-height:0; overflow:hidden; border-radius:12px; }
-    .gazette-integrated-art img { display:block; width:100%; height:auto; }
-    .gazette-integrated .ml-form-embedContainer { max-width:620px; margin:14px auto 2px; }
-    .gazette-integrated .ml-form-embedBody { padding:0 !important; }
-    .gazette-integrated .ml-form-formContent { margin:0 !important; }
-    .gazette-integrated .ml-form-fieldRow { margin:0 0 10px !important; }
-    .gazette-integrated input.form-control { display:block; width:100%; min-height:48px; padding:12px 15px !important; border:1px solid rgba(215,181,120,.65) !important; border-radius:9px !important; background:#100e0b !important; color:#fff8ef !important; font:inherit !important; box-sizing:border-box; }
-    .gazette-integrated input.form-control::placeholder { color:#bcb2a0 !important; }
-    .gazette-integrated .ml-form-embedSubmit { margin:0 !important; text-align:center; }
-    .gazette-integrated button.primary { width:100%; min-height:48px; padding:12px 18px !important; border:0 !important; border-radius:9px !important; background:#d7b578 !important; color:#17110a !important; font-weight:900 !important; letter-spacing:.04em; cursor:pointer; }
-    .gazette-integrated .ml-form-successContent { padding:16px; text-align:center; color:#f8f4f7; }
-    @media(max-width:520px) { .gazette-integrated { margin:22px 0 0; padding:9px; } .gazette-integrated .ml-form-embedContainer { margin-top:10px; } }
 
 /* Navigation sous la bannière */
 .site-nav {
