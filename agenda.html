@@ -13,10 +13,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="site.css">
   <style>
-    .coming-soon { text-align:center; }
-    .coming-soon .planning-head { justify-content:center; margin-bottom:12px; }
-    .coming-soon h2 { font-size:clamp(2rem,5vw,3rem); letter-spacing:.08em; }
-    .coming-soon-copy { margin:0; color:rgba(255,248,239,.78); font-size:1.05rem; line-height:1.6; }
+    .planning-calendar {
+      width:min(100%,1100px);
+      margin:0 auto;
+      overflow:hidden;
+      border:1px solid rgba(214,166,74,.46);
+      border-radius:16px;
+      background:#080808;
+      box-shadow:0 14px 38px rgba(0,0,0,.32);
+    }
+    .planning-calendar img { display:block; width:100%; height:auto; }
+    @media(max-width:600px) { .planning-calendar { border-radius:11px; } }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8XF37D90E"></script>
@@ -37,11 +44,16 @@
     <a href="videos.html">Vidéos</a>
     <a href="agenda.html" aria-current="page">Agenda</a>
   </nav>
-    <section class="planning coming-soon" id="live-planning" aria-labelledby="coming-soon-title">
+    <section class="planning" id="live-planning" aria-labelledby="planning-title">
       <div class="planning-head">
-        <h2 id="coming-soon-title">COMING SOON</h2>
+        <h2 id="planning-title">AGENDA DE NOVEMBRE</h2>
+        <p>Retrouve ici le planning des lives de novembre.</p>
       </div>
-      <p class="coming-soon-copy">Les lives sont en pause pour le moment. À bientôt !</p>
+      <figure class="planning-calendar">
+        <img src="assets/images/1EB8FB86-D398-4B9F-ABF3-B3B9BF371A93.png"
+             alt="Calendrier des lives de novembre"
+             loading="lazy" decoding="async">
+      </figure>
     </section>
     <footer>© 2026 Negan &amp; Couillons</footer>
   </main>
